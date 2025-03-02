@@ -1,6 +1,8 @@
 package com.alganaut.hominid.registry.entity.custom;
 
+import com.alganaut.hominid.Hominid;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
@@ -17,9 +19,11 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.EntityGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -40,24 +44,23 @@ public class Mellified extends Monster {
                 .add(Attributes.ATTACK_DAMAGE, 2.0);
     }
 
+    @Override
     protected SoundEvent getAmbientSound() {
         return SoundEvents.ZOMBIE_AMBIENT;
     }
 
+    @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
         return SoundEvents.ZOMBIE_HURT;
     }
 
+    @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ZOGLIN_DEATH;
+        return SoundEvents.ZOMBIE_DEATH;
     }
 
-    protected SoundEvent getStepSound() {
-        return SoundEvents.ZOMBIE_STEP;
-    }
 
     @Nullable
-
     private boolean isMoving() {
         return this.getDeltaMovement().horizontalDistance() > 0.01F;
     }
@@ -70,50 +73,52 @@ public class Mellified extends Monster {
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
-
     }
 
     @Override
     public void tick() {
         super.tick();
 
-        if (!level().isClientSide)
+        if (this.level() == null || this.level().isClientSide) {
             return;
+        }
 
         if (isMoving()) {
             walkAnimationState.startIfStopped(tickCount);
             idleAnimationState.stop();
-        }
-        else {
+        } else {
             idleAnimationState.startIfStopped(tickCount);
             walkAnimationState.stop();
         }
     }
 
     @Override
-    public boolean hurt(DamageSource source, float amount) {
-        boolean wasHurt = super.hurt(source, amount);
+    public boolean hurt(@NotNull DamageSource source, float amount) {
+        boolean hurt = super.hurt(source, amount);
 
-        if (wasHurt) {
-            healZombies(); // checks if its hurt and runs the function
+        if (source.getEntity() != null) {
+            healZombies();
         }
 
-        return wasHurt;
+        return hurt;
     }
 
     private void healZombies() {
-        List<Zombie> nearbyZombies = this.level().getEntitiesOfClass(
-                Zombie.class, this.getBoundingBox().inflate(5)); // checks for any zombie in like a 5 block radius you can change the 5 to another number depends
+        if (this.level() == null) {
+            return;
+        }
 
-        for (Zombie zombie : nearbyZombies) {
-            if (zombie != this) {
+        List<Monster> nearbyZombies = this.level().getEntitiesOfClass(
+                Monster.class, this.getBoundingBox().inflate(5));
+
+        for (Monster zombie : nearbyZombies) {
+            if (!zombie.equals(this)) {
                 zombie.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 1));
             }
         }
     }
+
 
     @Override
     public boolean causeFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {

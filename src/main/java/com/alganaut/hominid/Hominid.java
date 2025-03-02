@@ -43,7 +43,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 @Mod(Hominid.MODID)
 public class Hominid {
     public static final String MODID = "hominid";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     // Contains all the registries
     private static final ImmutableList<DeferredRegister<?>> REGISTRIES = ImmutableList.of(
