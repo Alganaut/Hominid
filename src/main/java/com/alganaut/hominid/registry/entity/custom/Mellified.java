@@ -4,34 +4,40 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class Mellified extends Monster {
+import java.util.List;
+
+public class Mellified extends Zombie {
 
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState walkAnimationState = new AnimationState();
 
-    public Mellified(EntityType<? extends Monster> entityType, Level level) {
+    public Mellified(EntityType<? extends Zombie> entityType, Level level) {
         super(entityType, level);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.FOLLOW_RANGE, 35.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.23F)
-                .add(Attributes.ATTACK_DAMAGE, 3.0);
+                .add(Attributes.MOVEMENT_SPEED, 0.2)
+                .add(Attributes.ATTACK_DAMAGE, 2.0);
     }
 
     protected SoundEvent getAmbientSound() {
@@ -64,6 +70,8 @@ public class Mellified extends Monster {
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
 
     }
@@ -82,6 +90,28 @@ public class Mellified extends Monster {
         else {
             idleAnimationState.startIfStopped(tickCount);
             walkAnimationState.stop();
+        }
+    }
+
+    @Override
+    public boolean hurt(DamageSource source, float amount) {
+        boolean wasHurt = super.hurt(source, amount);
+
+        if (wasHurt) {
+            healZombies(); // checks if its hurt and runs the function
+        }
+
+        return wasHurt;
+    }
+
+    private void healZombies() {
+        List<Zombie> nearbyZombies = this.level().getEntitiesOfClass(
+                Zombie.class, this.getBoundingBox().inflate(5)); // checks for any zombie in like a 5 block radius you can change the 5 to another number depends
+
+        for (Zombie zombie : nearbyZombies) {
+            if (zombie != this) { // checks if the zombie isnt the same class doing this, so itll still heal other mellifieds
+                zombie.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 1)); //heals em for 5 secs, if you wanna do more 1 second is 20 minecraft ticks so calculate that
+            }
         }
     }
 
