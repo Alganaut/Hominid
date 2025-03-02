@@ -6,6 +6,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
+import net.neoforged.bus.api.Event;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -37,5 +38,8 @@ public class HominidCreativeModeTabs {
     private static void acceptItems(BuildCreativeModeTabContentsEvent event, ItemLike... items) {
         for (var item : items)
             event.accept(item);
+    }
+
+    public static void addCreative(Event event) {
     }
 }

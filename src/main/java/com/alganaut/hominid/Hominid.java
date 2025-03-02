@@ -1,5 +1,11 @@
 package com.alganaut.hominid;
 
+import com.alganaut.hominid.registry.block.HominidBlocks;
+import com.alganaut.hominid.registry.entity.HominidEntities;
+import com.alganaut.hominid.registry.item.HominidItems;
+import com.alganaut.hominid.registry.sound.HominidSounds;
+import com.google.common.collect.ImmutableList;
+import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -34,51 +40,34 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-// The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(Hominid.MODID)
-public class Hominid
-{
-    // Define mod id in a common place for everything to reference
+public class Hominid {
     public static final String MODID = "hominid";
     private static final Logger LOGGER = LogUtils.getLogger();
-    // The constructor for the mod class is the first code that is run when your mod is loaded.
-    // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
-    public Hominid(IEventBus modEventBus, ModContainer modContainer)
-    {// Register the commonSetup method for modloading
-        modEventBus.addListener(this::commonSetup);
 
-        // Register ourselves for server and other game events we are interested in.
-        // Note that this is necessary if and only if we want *this* class (ExampleMod) to respond directly to events.
-        // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
-        NeoForge.EVENT_BUS.register(this);
+    // Contains all the registries
+    private static final ImmutableList<DeferredRegister<?>> REGISTRIES = ImmutableList.of(
+            HominidItems.ITEMS,
+            HominidBlocks.BLOCKS,
+            HominidSounds.SOUND_EVENTS,
+            HominidEntities.ENTITY_TYPES,
+            HominidCreativeModeTabs.CREATIVE_MODE_TAB
+    );
 
-        // Register the item to a creative tab
-        modEventBus.addListener(this::addCreative);
+    public Hominid(IEventBus modEventBus, ModContainer modContainer) {
+        LOGGER.info("Hello I am Zombie.");
+
+        // Registration, loops through all the registries defined in the REGISTRIES constant
+        for (var registry : REGISTRIES)
+            registry.register(modEventBus);
+
+        modEventBus.addListener(HominidCreativeModeTabs::addCreative);
+
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event) {
-    }
-
-    // Add the example block item to the building blocks tab
-    private void addCreative(BuildCreativeModeTabContentsEvent event) {
-
-    }
-
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event)
-    {
-        // Do something when the server starts
-        LOGGER.info("HELLO from server starting");
-    }
-
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-    @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-        }
+    public static ResourceLocation id(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 }
