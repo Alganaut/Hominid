@@ -24,12 +24,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class Mellified extends Zombie {
+public class Mellified extends Monster {
 
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState walkAnimationState = new AnimationState();
 
-    public Mellified(EntityType<? extends Zombie> entityType, Level level) {
+    public Mellified(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -109,8 +109,8 @@ public class Mellified extends Zombie {
                 Zombie.class, this.getBoundingBox().inflate(5)); // checks for any zombie in like a 5 block radius you can change the 5 to another number depends
 
         for (Zombie zombie : nearbyZombies) {
-            if (zombie != this) { // checks if the zombie isnt the same class doing this, so itll still heal other mellifieds
-                zombie.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 1)); //heals em for 5 secs, if you wanna do more 1 second is 20 minecraft ticks so calculate that
+            if (zombie != this) {
+                zombie.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 1));
             }
         }
     }
