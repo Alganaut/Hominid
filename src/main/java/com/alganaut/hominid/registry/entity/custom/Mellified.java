@@ -29,9 +29,9 @@ public class Mellified extends Monster {
 
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 10.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.6)
-                .add(Attributes.FOLLOW_RANGE, 20.0);
+                .add(Attributes.FOLLOW_RANGE, 35.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.23F)
+                .add(Attributes.ATTACK_DAMAGE, 3.0);
     }
 
     protected SoundEvent getAmbientSound() {

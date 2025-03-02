@@ -1,5 +1,6 @@
 package com.alganaut.hominid.registry.entity.client;
 
+import com.alganaut.hominid.Hominid;
 import com.alganaut.hominid.registry.entity.custom.Mellified;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;

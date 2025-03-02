@@ -18,13 +18,13 @@ public class MellifiedModel<T extends Mellified> extends HierarchicalModel<T> {
             new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Hominid.MODID, "mellified"), "main");
 
     private final ModelPart mellified;
-    private final ModelPart body;
     private final ModelPart head;
+    private final ModelPart body;
 
-    public mellified(ModelPart root) {
+    public MellifiedModel(ModelPart root) {
         this.mellified = root.getChild("mellified");
-        this.body = this.mellified.getChild("body");
         this.head = this.mellified.getChild("head");
+        this.body = this.mellified.getChild("body");
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -52,12 +52,22 @@ public class MellifiedModel<T extends Mellified> extends HierarchicalModel<T> {
     }
 
     @Override
-    public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(Mellified entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        this.root().getAllParts().forEach(ModelPart::resetPose);
+
+
+        this.animateWalk(MellifiedAnimations.ANIM_MELLIFIED_WALK, limbSwing, limbSwingAmount, 4f, 54);
+        this.animate(entity.idleAnimationState, MellifiedAnimations.ANIM_MELLIFIED_IDLE, ageInTicks, 1f);
 
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        mellified.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
+        mellified.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+    }
+
+    @Override
+    public ModelPart root() {
+        return mellified;
     }
 }
