@@ -1,11 +1,14 @@
 package com.alganaut.hominid.registry.entity.custom;
 
 import com.alganaut.hominid.Hominid;
+import com.alganaut.hominid.registry.effect.HominidEffects;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.AnimationState;
@@ -114,7 +117,7 @@ public class Mellified extends Monster {
 
         for (Monster zombie : nearbyZombies) {
             if (!zombie.equals(this)) {
-                zombie.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 1));
+                zombie.addEffect(new MobEffectInstance(Holder.direct(HominidEffects.HONEYED.get()), 200, 1));
             }
         }
     }

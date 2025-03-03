@@ -15,8 +15,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 
 public class MellifiedModel<T extends Mellified> extends HierarchicalModel<T> {
-    public static final ModelLayerLocation LAYER_LOCATION =
-            new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Hominid.MODID, "mellified"), "main");
 
     private final ModelPart mellified;
     private final ModelPart head;
