@@ -28,7 +28,8 @@ public class HominidCreativeModeTabs {
                     .displayItems((itemDisplayParameters, output) -> acceptItems(
                             output,
 
-                            HominidItems.MELLIFIED_SPAWN_EGG
+                            HominidItems.MELLIFIED_SPAWN_EGG,
+                            HominidItems.INCENDIARY_SPAWN_EGG
                     ))
                     .build()
     );
@@ -49,7 +50,8 @@ public class HominidCreativeModeTabs {
         if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
             acceptItems(
                     event,
-                    HominidItems.MELLIFIED_SPAWN_EGG
+                    HominidItems.MELLIFIED_SPAWN_EGG,
+                    HominidItems.INCENDIARY_SPAWN_EGG
             );
         }
 

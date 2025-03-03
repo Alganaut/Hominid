@@ -1,7 +1,9 @@
 {
-  "item.hominid.mellified_spawn_egg": "Mellfied Spawn Egg",
+  "item.hominid.mellified_spawn_egg": "Mellified Spawn Egg",
+  "item.hominid.incendiary_spawn_egg": "Incendiary Spawn Egg",
 
   "entity.hominid.mellified": "Mellified",
+  "entity.hominid.incendiary": "Incendiary",
 
   "creativetab.hominid.hominid": "Hominid"
 }

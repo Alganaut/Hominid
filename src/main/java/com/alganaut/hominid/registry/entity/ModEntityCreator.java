@@ -1,9 +1,12 @@
 package com.alganaut.hominid.registry.entity;
 
 import com.alganaut.hominid.Hominid;
+import com.alganaut.hominid.registry.entity.client.IncendiaryModel;
+import com.alganaut.hominid.registry.entity.client.IncendiaryRenderer;
 import com.alganaut.hominid.registry.entity.client.MellifiedModel;
 import com.alganaut.hominid.registry.entity.client.MellifiedRenderer;
 import com.alganaut.hominid.registry.entity.client.layer.ModModelLayers;
+import com.alganaut.hominid.registry.entity.custom.Incendiary;
 import com.alganaut.hominid.registry.entity.custom.Mellified;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.Entity;
@@ -30,6 +33,12 @@ public class ModEntityCreator {
                     .sized(0.6F, 1.6F)
     );
 
+    public static final Supplier<EntityType<Incendiary>> INCENDIARY = registerEntity(
+            "incendiary",
+            EntityType.Builder.of(Incendiary::new, MobCategory.MONSTER)
+                    .sized(0.6F, 1.99F)
+    );
+
     private static <T extends Entity> Supplier<EntityType<T>> registerEntity(String name, EntityType.Builder<T> builder) {
         return ENTITY_TYPES.register(
                 name,
@@ -42,6 +51,7 @@ public class ModEntityCreator {
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(ModEntityCreator.MELLIFIED.get(), Mellified.createAttributes().build());
+        event.put(ModEntityCreator.INCENDIARY.get(), Incendiary.createAttributes().build());
     }
 
     // RENDERERS
@@ -50,6 +60,7 @@ public class ModEntityCreator {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event)
     {
         event.registerEntityRenderer(ModEntityCreator.MELLIFIED.get(), MellifiedRenderer::new);
+        event.registerEntityRenderer(ModEntityCreator.INCENDIARY.get(), IncendiaryRenderer::new);
     }
 
     // LAYERS
@@ -58,5 +69,6 @@ public class ModEntityCreator {
     public static void registerModelLayers(EntityRenderersEvent.RegisterLayerDefinitions event)
     {
         event.registerLayerDefinition(ModModelLayers.MELLIFIED, MellifiedModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.INCENDIARY, IncendiaryModel::createBodyLayer);
     }
 }
