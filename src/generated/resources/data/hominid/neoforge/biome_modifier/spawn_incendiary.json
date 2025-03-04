@@ -1,0 +1,17 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": [
+    "minecraft:taiga",
+    "minecraft:snowy_taiga",
+    "minecraft:old_growth_spruce_taiga",
+    "minecraft:old_growth_pine_taiga",
+    "minecraft:windswept_hills",
+    "minecraft:grove"
+  ],
+  "spawners": {
+    "type": "hominid:incendiary",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 100
+  }
+}

@@ -19,12 +19,16 @@ import java.util.List;
 
 public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> SPAWN_MELLIFIED = registerKey("spawn_mellified");
+    public static final ResourceKey<BiomeModifier> SPAWN_INCENDIARY = registerKey("spawn_incendiary");
 
     public static void bootstrap(BootstrapContext<BiomeModifier> context) {
         var biomes = context.lookup(Registries.BIOME);
         context.register(SPAWN_MELLIFIED, new BiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(Biomes.FLOWER_FOREST), biomes.getOrThrow(Biomes.MEADOW) , biomes.getOrThrow(Biomes.CHERRY_GROVE)),
-                List.of(new MobSpawnSettings.SpawnerData(ModEntityCreator.MELLIFIED.get(), 50, 1, 2))));
+                List.of(new MobSpawnSettings.SpawnerData(ModEntityCreator.MELLIFIED.get(), 100, 2, 3))));
+        context.register(SPAWN_INCENDIARY, new BiomeModifiers.AddSpawnsBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(Biomes.TAIGA), biomes.getOrThrow(Biomes.SNOWY_TAIGA), biomes.getOrThrow(Biomes.OLD_GROWTH_SPRUCE_TAIGA), biomes.getOrThrow(Biomes.OLD_GROWTH_PINE_TAIGA), biomes.getOrThrow(Biomes.WINDSWEPT_HILLS) , biomes.getOrThrow(Biomes.GROVE)),
+                List.of(new MobSpawnSettings.SpawnerData(ModEntityCreator.INCENDIARY.get(), 100, 1, 3))));
     }
 
     private static ResourceKey<BiomeModifier> registerKey(String name) {

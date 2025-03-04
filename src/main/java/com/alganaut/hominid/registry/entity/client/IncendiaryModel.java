@@ -53,9 +53,12 @@ public class IncendiaryModel<T extends Incendiary> extends HierarchicalModel<T> 
     public void setupAnim(Incendiary entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
         this.applyHeadRotation(netHeadYaw,headPitch);
+        if(entity.isAggressive()){
+            this.animateWalk(IncendiaryAnimations.ANIM_INCENDIARY_WALK, limbSwing, limbSwingAmount, 4f, 54); // CHANGE THIS TO RUN
+        }else{
+            this.animateWalk(IncendiaryAnimations.ANIM_INCENDIARY_WALK, limbSwing, limbSwingAmount, 4f, 54);
+        }
 
-
-        this.animateWalk(IncendiaryAnimations.ANIM_INCENDIARY_WALK, limbSwing, limbSwingAmount, 4f, 54);
         this.animate(entity.idleAnimationState,IncendiaryAnimations.ANIM_INCENDIARY_IDLE,ageInTicks, 1f);
 
     }
