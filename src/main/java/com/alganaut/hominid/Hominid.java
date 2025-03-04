@@ -3,6 +3,7 @@ package com.alganaut.hominid;
 import com.alganaut.hominid.registry.block.HominidBlocks;
 import com.alganaut.hominid.registry.effect.HominidEffects;
 import com.alganaut.hominid.registry.entity.ModEntityCreator;
+import com.alganaut.hominid.registry.event.HominidClientEvents;
 import com.alganaut.hominid.registry.item.HominidItems;
 import com.alganaut.hominid.registry.sound.HominidSounds;
 import com.google.common.collect.ImmutableList;
@@ -35,11 +36,14 @@ public class Hominid {
         LOGGER.info("I... am steve");
 
         // Registration, loops through all the registries defined in the REGISTRIES constant
-        for (var registry : REGISTRIES)
+        for (var registry : REGISTRIES){
             registry.register(modEventBus);
+        }
 
         modEventBus.addListener(HominidCreativeModeTabs::addCreative);
+        HominidClientEvents.register();
         HominidEffects.register(modEventBus);
+
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
