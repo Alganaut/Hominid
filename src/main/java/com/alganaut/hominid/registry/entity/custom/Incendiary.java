@@ -102,6 +102,7 @@ public class Incendiary extends Monster {
         }
     }
 
+
     @Override
     protected SoundEvent getAmbientSound() {
         return SoundEvents.ZOMBIE_AMBIENT;
