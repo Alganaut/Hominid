@@ -29,7 +29,8 @@ public class HominidCreativeModeTabs {
                             output,
 
                             HominidItems.MELLIFIED_SPAWN_EGG,
-                            HominidItems.INCENDIARY_SPAWN_EGG
+                            HominidItems.INCENDIARY_SPAWN_EGG,
+                            HominidItems.FAMISHED_SPAWN_EGG
                     ))
                     .build()
     );
@@ -51,7 +52,8 @@ public class HominidCreativeModeTabs {
             acceptItems(
                     event,
                     HominidItems.MELLIFIED_SPAWN_EGG,
-                    HominidItems.INCENDIARY_SPAWN_EGG
+                    HominidItems.INCENDIARY_SPAWN_EGG,
+                    HominidItems.FAMISHED_SPAWN_EGG
             );
         }
 

@@ -1,11 +1,9 @@
 package com.alganaut.hominid.registry.entity;
 
 import com.alganaut.hominid.Hominid;
-import com.alganaut.hominid.registry.entity.client.IncendiaryModel;
-import com.alganaut.hominid.registry.entity.client.IncendiaryRenderer;
-import com.alganaut.hominid.registry.entity.client.MellifiedModel;
-import com.alganaut.hominid.registry.entity.client.MellifiedRenderer;
+import com.alganaut.hominid.registry.entity.client.*;
 import com.alganaut.hominid.registry.entity.client.layer.ModModelLayers;
+import com.alganaut.hominid.registry.entity.custom.Famished;
 import com.alganaut.hominid.registry.entity.custom.Incendiary;
 import com.alganaut.hominid.registry.entity.custom.Mellified;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -39,6 +37,12 @@ public class ModEntityCreator {
                     .sized(0.6F, 1.99F)
     );
 
+    public static final Supplier<EntityType<Famished>> FAMISHED = registerEntity(
+            "famished",
+            EntityType.Builder.of(Famished::new, MobCategory.MONSTER)
+                    .sized(0.6F, 1.99F)
+    );
+
     private static <T extends Entity> Supplier<EntityType<T>> registerEntity(String name, EntityType.Builder<T> builder) {
         return ENTITY_TYPES.register(
                 name,
@@ -52,6 +56,7 @@ public class ModEntityCreator {
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(ModEntityCreator.MELLIFIED.get(), Mellified.createAttributes().build());
         event.put(ModEntityCreator.INCENDIARY.get(), Incendiary.createAttributes().build());
+        event.put(ModEntityCreator.FAMISHED.get(), Famished.createAttributes().build());
     }
 
     // RENDERERS
@@ -61,6 +66,7 @@ public class ModEntityCreator {
     {
         event.registerEntityRenderer(ModEntityCreator.MELLIFIED.get(), MellifiedRenderer::new);
         event.registerEntityRenderer(ModEntityCreator.INCENDIARY.get(), IncendiaryRenderer::new);
+        event.registerEntityRenderer(ModEntityCreator.FAMISHED.get(), FamishedRenderer::new);
     }
 
     // LAYERS
@@ -70,5 +76,6 @@ public class ModEntityCreator {
     {
         event.registerLayerDefinition(ModModelLayers.MELLIFIED, MellifiedModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.INCENDIARY, IncendiaryModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.FAMISHED, FamishedModel::createBodyLayer);
     }
 }
