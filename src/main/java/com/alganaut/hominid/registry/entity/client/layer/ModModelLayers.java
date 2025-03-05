@@ -7,5 +7,6 @@ import net.minecraft.resources.ResourceLocation;
 public class ModModelLayers {
     public static final ModelLayerLocation MELLIFIED = new ModelLayerLocation(Hominid.id("mellified"), "main");
     public static final ModelLayerLocation INCENDIARY = new ModelLayerLocation(Hominid.id("incendiary"), "main");
+    public static final ModelLayerLocation FAMISHED = new ModelLayerLocation(Hominid.id("famished"), "main");
 
 }
