@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:flint_and_steel",
+          "name": "minecraft:bone",
           "weight": 1,
           "functions": [
             {
@@ -54,7 +54,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:gunpowder",
+          "name": "minecraft:leather",
           "weight": 1,
           "functions": [
             {

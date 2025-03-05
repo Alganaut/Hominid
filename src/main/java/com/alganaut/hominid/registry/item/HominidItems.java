@@ -20,6 +20,10 @@ public class HominidItems {
             () -> new DeferredSpawnEggItem(ModEntityCreator.INCENDIARY, 0x272f27, 0x76201e,
                     new Item.Properties()));
 
+    public static final DeferredItem<Item> FAMISHED_SPAWN_EGG = ITEMS.register("famished_spawn_egg",
+            () -> new DeferredSpawnEggItem(ModEntityCreator.FAMISHED, 0x7a725e, 0x413935,
+                    new Item.Properties()));
+
     public static void register (IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
