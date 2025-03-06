@@ -2,7 +2,8 @@ package com.alganaut.hominid.registry.item;
 
 
 import com.alganaut.hominid.Hominid;
-import com.alganaut.hominid.registry.entity.ModEntityCreator;
+import com.alganaut.hominid.registry.entity.HominidEntityCreator;
+import com.alganaut.hominid.registry.sound.HominidSounds;
 import net.minecraft.world.item.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
@@ -13,16 +14,19 @@ public class HominidItems {
     public static final DeferredRegister.Items  ITEMS = DeferredRegister.createItems(Hominid.MODID);
 
     public static final DeferredItem<Item> MELLIFIED_SPAWN_EGG = ITEMS.register("mellified_spawn_egg",
-            () -> new DeferredSpawnEggItem(ModEntityCreator.MELLIFIED, 0xefe9d1, 0xf3b34a,
+            () -> new DeferredSpawnEggItem(HominidEntityCreator.MELLIFIED, 0xefe9d1, 0xf3b34a,
                     new Item.Properties()));
 
     public static final DeferredItem<Item> INCENDIARY_SPAWN_EGG = ITEMS.register("incendiary_spawn_egg",
-            () -> new DeferredSpawnEggItem(ModEntityCreator.INCENDIARY, 0x272f27, 0x76201e,
+            () -> new DeferredSpawnEggItem(HominidEntityCreator.INCENDIARY, 0x272f27, 0x76201e,
                     new Item.Properties()));
 
     public static final DeferredItem<Item> FAMISHED_SPAWN_EGG = ITEMS.register("famished_spawn_egg",
-            () -> new DeferredSpawnEggItem(ModEntityCreator.FAMISHED, 0x7a725e, 0x413935,
+            () -> new DeferredSpawnEggItem(HominidEntityCreator.FAMISHED, 0x7a725e, 0x413935,
                     new Item.Properties()));
+
+    public static final DeferredItem<Item> CHARRED_MUSIC_DISC = ITEMS.register("charred_music_disc",
+            () -> new Item(new Item.Properties().rarity(Rarity.RARE).jukeboxPlayable(HominidSounds.CHARRED_KEY).stacksTo(1)));
 
     public static void register (IEventBus eventBus) {
         ITEMS.register(eventBus);

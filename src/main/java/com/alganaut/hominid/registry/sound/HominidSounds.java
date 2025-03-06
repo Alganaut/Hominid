@@ -17,12 +17,14 @@ public class HominidSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, Hominid.MODID);
 
-    public static final DeferredHolder<SoundEvent, SoundEvent> BLIGHT_AMBIENT = createSound("blight_ambient");
-
     private static Supplier<SoundEvent> registerSoundEvent(String name) {
         ResourceLocation id = ResourceLocation.fromNamespaceAndPath(Hominid.MODID, name);
         return SOUND_EVENTS.register(name, () ->SoundEvent.createVariableRangeEvent(id));
     }
+
+    public static final Supplier<SoundEvent> CHARRED = registerSoundEvent("charred");
+    public static final ResourceKey<JukeboxSong> CHARRED_KEY = createSong("charred");
+
 
     private static ResourceKey<JukeboxSong> createSong (String name) {
         return ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.fromNamespaceAndPath(Hominid.MODID, name));

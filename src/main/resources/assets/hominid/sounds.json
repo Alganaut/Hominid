@@ -1,0 +1,10 @@
+{
+  "charred": {
+    "sounds": [
+      {
+        "name": "hominid:charred",
+        "stream": true
+      }
+    ]
+  }
+}

@@ -28,6 +28,7 @@ public class HominidCreativeModeTabs {
                     .displayItems((itemDisplayParameters, output) -> acceptItems(
                             output,
 
+                            HominidItems.CHARRED_MUSIC_DISC,
                             HominidItems.MELLIFIED_SPAWN_EGG,
                             HominidItems.INCENDIARY_SPAWN_EGG,
                             HominidItems.FAMISHED_SPAWN_EGG
@@ -59,7 +60,8 @@ public class HominidCreativeModeTabs {
 
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             acceptItems(
-                    event
+                    event,
+                    HominidItems.CHARRED_MUSIC_DISC
             );
         }
 

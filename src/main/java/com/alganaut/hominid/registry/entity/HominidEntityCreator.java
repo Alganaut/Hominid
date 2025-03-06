@@ -19,7 +19,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 @EventBusSubscriber(modid = Hominid.MODID, bus = EventBusSubscriber.Bus.MOD)
-public class ModEntityCreator {
+public class HominidEntityCreator {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(
             BuiltInRegistries.ENTITY_TYPE,
            Hominid.MODID
@@ -54,9 +54,9 @@ public class ModEntityCreator {
 
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
-        event.put(ModEntityCreator.MELLIFIED.get(), Mellified.createAttributes().build());
-        event.put(ModEntityCreator.INCENDIARY.get(), Incendiary.createAttributes().build());
-        event.put(ModEntityCreator.FAMISHED.get(), Famished.createAttributes().build());
+        event.put(HominidEntityCreator.MELLIFIED.get(), Mellified.createAttributes().build());
+        event.put(HominidEntityCreator.INCENDIARY.get(), Incendiary.createAttributes().build());
+        event.put(HominidEntityCreator.FAMISHED.get(), Famished.createAttributes().build());
     }
 
     // RENDERERS
@@ -64,9 +64,9 @@ public class ModEntityCreator {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event)
     {
-        event.registerEntityRenderer(ModEntityCreator.MELLIFIED.get(), MellifiedRenderer::new);
-        event.registerEntityRenderer(ModEntityCreator.INCENDIARY.get(), IncendiaryRenderer::new);
-        event.registerEntityRenderer(ModEntityCreator.FAMISHED.get(), FamishedRenderer::new);
+        event.registerEntityRenderer(HominidEntityCreator.MELLIFIED.get(), MellifiedRenderer::new);
+        event.registerEntityRenderer(HominidEntityCreator.INCENDIARY.get(), IncendiaryRenderer::new);
+        event.registerEntityRenderer(HominidEntityCreator.FAMISHED.get(), FamishedRenderer::new);
     }
 
     // LAYERS
