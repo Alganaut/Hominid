@@ -49,17 +49,17 @@ public class Mellified extends Monster {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.ZOMBIE_AMBIENT;
+        return SoundEvents.DROWNED_AMBIENT;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
-        return SoundEvents.ZOMBIE_HURT;
+        return SoundEvents.DROWNED_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ZOMBIE_DEATH;
+        return SoundEvents.DROWNED_DEATH;
     }
 
 
