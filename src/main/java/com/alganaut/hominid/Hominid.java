@@ -2,7 +2,7 @@ package com.alganaut.hominid;
 
 import com.alganaut.hominid.registry.block.HominidBlocks;
 import com.alganaut.hominid.registry.effect.HominidEffects;
-import com.alganaut.hominid.registry.entity.ModEntityCreator;
+import com.alganaut.hominid.registry.entity.HominidEntityCreator;
 import com.alganaut.hominid.registry.event.HominidClientEvents;
 import com.alganaut.hominid.registry.item.HominidItems;
 import com.alganaut.hominid.registry.sound.HominidSounds;
@@ -28,7 +28,7 @@ public class Hominid {
             HominidItems.ITEMS,
             HominidBlocks.BLOCKS,
             HominidSounds.SOUND_EVENTS,
-            ModEntityCreator.ENTITY_TYPES,
+            HominidEntityCreator.ENTITY_TYPES,
             HominidCreativeModeTabs.CREATIVE_MODE_TAB
     );
 

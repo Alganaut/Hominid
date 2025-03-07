@@ -1,9 +1,8 @@
 package com.alganaut.hominid.registry.event;
 
 import com.alganaut.hominid.Hominid;
-import com.alganaut.hominid.registry.entity.ModEntityCreator;
+import com.alganaut.hominid.registry.entity.HominidEntityCreator;
 import net.minecraft.world.entity.SpawnPlacementTypes;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -14,9 +13,9 @@ import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 public class HominidModEventBusEvents {
     @SubscribeEvent
     public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {
-        event.register(ModEntityCreator.MELLIFIED.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING,
+        event.register(HominidEntityCreator.MELLIFIED.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING,
                 Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
-        event.register(ModEntityCreator.INCENDIARY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING,
+        event.register(HominidEntityCreator.INCENDIARY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING,
                 Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
         event.register(ModEntityCreator.FAMISHED.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING,
                 Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
