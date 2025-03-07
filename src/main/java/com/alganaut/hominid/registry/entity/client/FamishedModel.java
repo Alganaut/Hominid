@@ -51,7 +51,7 @@ public class FamishedModel<T extends Famished> extends HierarchicalModel<T> {
 
         this.animateWalk(FamishedAnimations.ANIM_FAMISHED_WALK, limbSwing, limbSwingAmount, 4f, 54);
         this.animate(entity.idleAnimationState,FamishedAnimations.ANIM_FAMISHED_IDLE,ageInTicks, 1f);
-
+        this.animate(entity.eatingAnimationState,FamishedAnimations.ANIM_FAMISHED_EAT,ageInTicks, 1f);
     }
 
     private void applyHeadRotation(float headYaw, float headPitch) {

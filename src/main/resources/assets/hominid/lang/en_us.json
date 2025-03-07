@@ -9,5 +9,7 @@
 
   "creativetab.hominid.hominid": "Hominid",
 
-  "effect.hominid.honeyed": "Honeyed"
+  "effect.hominid.honeyed": "Honeyed",
+  "advancements.adventure.hungry.title": "How Hungry?...",
+  "advancements.adventure.hungry.description": "Attack and kill a Famished. \nWatch out for your pets, its a bit hungry..."
 }

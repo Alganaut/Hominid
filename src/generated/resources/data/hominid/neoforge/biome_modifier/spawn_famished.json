@@ -1,0 +1,18 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": [
+    "minecraft:dripstone_caves",
+    "minecraft:stony_peaks",
+    "minecraft:jagged_peaks",
+    "minecraft:frozen_peaks",
+    "minecraft:snowy_slopes",
+    "minecraft:desert",
+    "minecraft:badlands"
+  ],
+  "spawners": {
+    "type": "hominid:famished",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 100
+  }
+}
