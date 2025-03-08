@@ -18,7 +18,7 @@ public class HominidItems {
                     new Item.Properties()));
 
     public static final DeferredItem<Item> INCENDIARY_SPAWN_EGG = ITEMS.register("incendiary_spawn_egg",
-            () -> new DeferredSpawnEggItem(HominidEntityCreator.INCENDIARY, 0x272f27, 0x624337,
+            () -> new DeferredSpawnEggItem(HominidEntityCreator.INCENDIARY, 0x624337, 0x862a25,
                     new Item.Properties()));
 
     public static final DeferredItem<Item> FAMISHED_SPAWN_EGG = ITEMS.register("famished_spawn_egg",
