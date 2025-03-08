@@ -26,7 +26,7 @@ public class HominidItems {
                     new Item.Properties()));
 
     public static final DeferredItem<Item> CHARRED_MUSIC_DISC = ITEMS.register("charred_music_disc",
-            () -> new Item(new Item.Properties().rarity(Rarity.RARE).jukeboxPlayable(HominidSounds.CHARRED_KEY).stacksTo(1)));
+            () -> new Item(new Item.Properties().jukeboxPlayable(HominidSounds.CHARRED_KEY).stacksTo(1)));
 
     public static void register (IEventBus eventBus) {
         ITEMS.register(eventBus);

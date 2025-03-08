@@ -18,6 +18,7 @@ import java.util.List;
 public class HominidBiomeModifiers {
     public static final ResourceKey<BiomeModifier> SPAWN_MELLIFIED = registerKey("spawn_mellified");
     public static final ResourceKey<BiomeModifier> SPAWN_INCENDIARY = registerKey("spawn_incendiary");
+    public static final ResourceKey<BiomeModifier> SPAWN_FAMISHED = registerKey("spawn_famished");
 
     public static void bootstrap(BootstrapContext<BiomeModifier> context) {
         var biomes = context.lookup(Registries.BIOME);
@@ -27,6 +28,9 @@ public class HominidBiomeModifiers {
         context.register(SPAWN_INCENDIARY, new BiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(Biomes.TAIGA), biomes.getOrThrow(Biomes.SNOWY_TAIGA), biomes.getOrThrow(Biomes.OLD_GROWTH_SPRUCE_TAIGA), biomes.getOrThrow(Biomes.OLD_GROWTH_PINE_TAIGA), biomes.getOrThrow(Biomes.WINDSWEPT_HILLS) , biomes.getOrThrow(Biomes.GROVE)),
                 List.of(new MobSpawnSettings.SpawnerData(HominidEntityCreator.INCENDIARY.get(), 100, 1, 3))));
+        context.register(SPAWN_FAMISHED, new BiomeModifiers.AddSpawnsBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(Biomes.DRIPSTONE_CAVES), biomes.getOrThrow(Biomes.STONY_PEAKS), biomes.getOrThrow(Biomes.JAGGED_PEAKS), biomes.getOrThrow(Biomes.FROZEN_PEAKS), biomes.getOrThrow(Biomes.SNOWY_SLOPES), biomes.getOrThrow(Biomes.DESERT), biomes.getOrThrow(Biomes.BADLANDS)),
+                List.of(new MobSpawnSettings.SpawnerData(HominidEntityCreator.FAMISHED.get(), 100, 1, 2))));
     }
 
     private static ResourceKey<BiomeModifier> registerKey(String name) {
