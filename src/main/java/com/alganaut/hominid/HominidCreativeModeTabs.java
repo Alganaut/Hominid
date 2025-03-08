@@ -31,7 +31,8 @@ public class HominidCreativeModeTabs {
                             HominidItems.CHARRED_MUSIC_DISC,
                             HominidItems.MELLIFIED_SPAWN_EGG,
                             HominidItems.INCENDIARY_SPAWN_EGG,
-                            HominidItems.FAMISHED_SPAWN_EGG
+                            HominidItems.FAMISHED_SPAWN_EGG,
+                            HominidItems.JUGGERNAUT_SPAWN_EGG
                     ))
                     .build()
     );
@@ -54,7 +55,8 @@ public class HominidCreativeModeTabs {
                     event,
                     HominidItems.MELLIFIED_SPAWN_EGG,
                     HominidItems.INCENDIARY_SPAWN_EGG,
-                    HominidItems.FAMISHED_SPAWN_EGG
+                    HominidItems.FAMISHED_SPAWN_EGG,
+                    HominidItems.JUGGERNAUT_SPAWN_EGG
             );
         }
 

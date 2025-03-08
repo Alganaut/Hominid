@@ -18,11 +18,15 @@ public class HominidItems {
                     new Item.Properties()));
 
     public static final DeferredItem<Item> INCENDIARY_SPAWN_EGG = ITEMS.register("incendiary_spawn_egg",
-            () -> new DeferredSpawnEggItem(HominidEntityCreator.INCENDIARY, 0x272f27, 0x76201e,
+            () -> new DeferredSpawnEggItem(HominidEntityCreator.INCENDIARY, 0x272f27, 0x624337,
                     new Item.Properties()));
 
     public static final DeferredItem<Item> FAMISHED_SPAWN_EGG = ITEMS.register("famished_spawn_egg",
             () -> new DeferredSpawnEggItem(HominidEntityCreator.FAMISHED, 0x7a725e, 0x413935,
+                    new Item.Properties()));
+
+    public static final DeferredItem<Item> JUGGERNAUT_SPAWN_EGG = ITEMS.register("juggernaut_spawn_egg",
+            () -> new DeferredSpawnEggItem(HominidEntityCreator.JUGGERNAUT, 0x6f625d, 0x541635,
                     new Item.Properties()));
 
     public static final DeferredItem<Item> CHARRED_MUSIC_DISC = ITEMS.register("charred_music_disc",

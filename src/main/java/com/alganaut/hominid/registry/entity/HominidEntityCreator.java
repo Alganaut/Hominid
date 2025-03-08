@@ -2,9 +2,10 @@ package com.alganaut.hominid.registry.entity;
 
 import com.alganaut.hominid.Hominid;
 import com.alganaut.hominid.registry.entity.client.*;
-import com.alganaut.hominid.registry.entity.client.layer.ModModelLayers;
+import com.alganaut.hominid.registry.entity.client.layer.HominidModelLayers;
 import com.alganaut.hominid.registry.entity.custom.Famished;
 import com.alganaut.hominid.registry.entity.custom.Incendiary;
+import com.alganaut.hominid.registry.entity.custom.Juggernaut;
 import com.alganaut.hominid.registry.entity.custom.Mellified;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.Entity;
@@ -43,6 +44,13 @@ public class HominidEntityCreator {
                     .sized(0.6F, 1.99F)
     );
 
+    public static final Supplier<EntityType<Juggernaut>> JUGGERNAUT = registerEntity(
+            "juggernaut",
+            EntityType.Builder.of(Juggernaut::new, MobCategory.MONSTER)
+                    .sized(0.6F, 1.99F)
+    );
+
+
     private static <T extends Entity> Supplier<EntityType<T>> registerEntity(String name, EntityType.Builder<T> builder) {
         return ENTITY_TYPES.register(
                 name,
@@ -57,6 +65,7 @@ public class HominidEntityCreator {
         event.put(HominidEntityCreator.MELLIFIED.get(), Mellified.createAttributes().build());
         event.put(HominidEntityCreator.INCENDIARY.get(), Incendiary.createAttributes().build());
         event.put(HominidEntityCreator.FAMISHED.get(), Famished.createAttributes().build());
+        event.put(HominidEntityCreator.JUGGERNAUT.get(), Juggernaut.createAttributes().build());
     }
 
     // RENDERERS
@@ -67,6 +76,7 @@ public class HominidEntityCreator {
         event.registerEntityRenderer(HominidEntityCreator.MELLIFIED.get(), MellifiedRenderer::new);
         event.registerEntityRenderer(HominidEntityCreator.INCENDIARY.get(), IncendiaryRenderer::new);
         event.registerEntityRenderer(HominidEntityCreator.FAMISHED.get(), FamishedRenderer::new);
+        event.registerEntityRenderer(HominidEntityCreator.JUGGERNAUT.get(), JuggernautRenderer::new);
     }
 
     // LAYERS
@@ -74,8 +84,9 @@ public class HominidEntityCreator {
     @SubscribeEvent
     public static void registerModelLayers(EntityRenderersEvent.RegisterLayerDefinitions event)
     {
-        event.registerLayerDefinition(ModModelLayers.MELLIFIED, MellifiedModel::createBodyLayer);
-        event.registerLayerDefinition(ModModelLayers.INCENDIARY, IncendiaryModel::createBodyLayer);
-        event.registerLayerDefinition(ModModelLayers.FAMISHED, FamishedModel::createBodyLayer);
+        event.registerLayerDefinition(HominidModelLayers.MELLIFIED, MellifiedModel::createBodyLayer);
+        event.registerLayerDefinition(HominidModelLayers.INCENDIARY, IncendiaryModel::createBodyLayer);
+        event.registerLayerDefinition(HominidModelLayers.FAMISHED, FamishedModel::createBodyLayer);
+        event.registerLayerDefinition(HominidModelLayers.JUGGERNAUT, JuggernautModel::createBodyLayer);
     }
 }
