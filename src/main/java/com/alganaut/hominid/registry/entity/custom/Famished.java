@@ -1,4 +1,5 @@
 package com.alganaut.hominid.registry.entity.custom;
+import net.minecraft.advancements.critereon.TameAnimalTrigger;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -10,6 +11,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -20,8 +22,12 @@ import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.animal.horse.SkeletonHorse;
 import net.minecraft.world.entity.animal.horse.ZombieHorse;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.npc.AbstractVillager;
+import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -29,6 +35,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.level.NoteBlockEvent;
+import net.minecraft.world.entity.EquipmentSlot;
 
 import java.util.Comparator;
 import java.util.EnumSet;
@@ -52,6 +59,33 @@ public class Famished extends Monster {
                 .add(Attributes.ATTACK_DAMAGE, 5.0);
     }
 
+    public void aiStep() {
+        if (this.isAlive()) {
+            boolean flag = this.isSunSensitive() && this.isSunBurnTick();
+            if (flag) {
+                ItemStack itemstack = this.getItemBySlot(EquipmentSlot.HEAD);
+                if (!itemstack.isEmpty()) {
+                    if (itemstack.isDamageableItem()) {
+                        Item item = itemstack.getItem();
+                        itemstack.setDamageValue(itemstack.getDamageValue() + this.random.nextInt(2));
+                        if (itemstack.getDamageValue() >= itemstack.getMaxDamage()) {
+                            this.onEquippedItemBroken(item, EquipmentSlot.HEAD);
+                            this.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
+                        }
+                    }
+
+                    flag = false;
+                }
+
+                if (flag) {
+                    this.igniteForSeconds(8.0F);
+                }
+            }
+        }
+
+        super.aiStep();
+    }
+
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
@@ -63,6 +97,7 @@ public class Famished extends Monster {
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
     }
 
     @Override
@@ -85,6 +120,10 @@ public class Famished extends Monster {
                 }
             }
         }
+    }
+
+    protected boolean isSunSensitive() {
+        return true;
     }
 
     @Override
@@ -200,6 +239,7 @@ public class Famished extends Monster {
                     this.famished.getBoundingBox().inflate(30), entity -> entity instanceof Animal);
 
             animals.removeIf(entity -> entity instanceof SkeletonHorse);
+            animals.removeIf(entity -> entity instanceof TamableAnimal && ((TamableAnimal) entity).isTame());
 
             if (!animals.isEmpty()) {
                 animals.sort(Comparator.comparingDouble(animal -> this.famished.distanceToSqr(animal)));

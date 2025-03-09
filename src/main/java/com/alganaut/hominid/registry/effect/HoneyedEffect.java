@@ -33,7 +33,6 @@ public class HoneyedEffect extends MobEffect {
                 MobEffects.BAD_OMEN, MobEffects.DARKNESS, MobEffects.INFESTED
         );
 
-        // Remove negative effects
         for (Holder<MobEffect> effect : negativeEffects) {
             if (entity.hasEffect(effect)) {
                 entity.removeEffect(effect);

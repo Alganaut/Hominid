@@ -49,4 +49,18 @@ public class IncendiaryAnimations {
                     new Keyframe(2.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM)
             ))
             .build();
+
+    public static final AnimationDefinition ANIM_INCENDIARY_SET = AnimationDefinition.Builder.withLength(0f)
+            .addAnimation("head",
+                    new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                            new Keyframe(0f, KeyframeAnimations.degreeVec(-40f, 0f, 0f),
+                                    AnimationChannel.Interpolations.LINEAR)))
+            .addAnimation("left_arm",
+                    new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                            new Keyframe(0f, KeyframeAnimations.degreeVec(-95.39f, -1.34f, 32.48f),
+                                    AnimationChannel.Interpolations.LINEAR)))
+            .addAnimation("right_arm",
+                    new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                            new Keyframe(0f, KeyframeAnimations.degreeVec(-85.5f, 9.07f, -36.55f),
+                                    AnimationChannel.Interpolations.LINEAR))).build();
 }

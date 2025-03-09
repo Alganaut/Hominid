@@ -17,23 +17,29 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.entity.EquipmentSlot;
 
 import java.util.List;
 
 public class Incendiary extends Monster {
 
     public final AnimationState idleAnimationState = new AnimationState();
-
     private boolean isEnraged = false;
+    public boolean isIgniting = false;
     private static final double NORMAL_SPEED = 0.2;
-    private static final double ENRAGED_SPEED = 0.32;
+    private static final double ENRAGED_SPEED = 0.35;
     private static final int FIRE_DURATION = 500;
+    private static final int IGNITION_DELAY = 100;
+    private int ignitionTimer = 0;
 
     public Incendiary(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
@@ -45,6 +51,33 @@ public class Incendiary extends Monster {
                 .add(Attributes.MAX_HEALTH, 15.0)
                 .add(Attributes.MOVEMENT_SPEED, NORMAL_SPEED)
                 .add(Attributes.ATTACK_DAMAGE, 4.0);
+    }
+
+    public void aiStep() {
+        if (this.isAlive()) {
+            boolean flag = this.isSunSensitive() && this.isSunBurnTick();
+            if (flag) {
+                ItemStack itemstack = this.getItemBySlot(EquipmentSlot.HEAD);
+                if (!itemstack.isEmpty()) {
+                    if (itemstack.isDamageableItem()) {
+                        Item item = itemstack.getItem();
+                        itemstack.setDamageValue(itemstack.getDamageValue() + this.random.nextInt(2));
+                        if (itemstack.getDamageValue() >= itemstack.getMaxDamage()) {
+                            this.onEquippedItemBroken(item, EquipmentSlot.HEAD);
+                            this.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
+                        }
+                    }
+
+                    flag = false;
+                }
+
+                if (flag) {
+                    this.igniteForSeconds(8.0F);
+                }
+            }
+        }
+
+        super.aiStep();
     }
 
     @Override
@@ -59,6 +92,10 @@ public class Incendiary extends Monster {
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
 
+    protected boolean isSunSensitive() {
+        return true;
+    }
+
     @Override
     public void tick() {
         super.tick();
@@ -70,39 +107,50 @@ public class Incendiary extends Monster {
         LivingEntity target = this.getTarget();
 
         if (target != null) {
-            if (!isEnraged) {
-                this.setRemainingFireTicks(FIRE_DURATION);
-                this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(ENRAGED_SPEED);
-                isEnraged = true;
+            if (!isIgniting) {
+                ignitionTimer = IGNITION_DELAY;
+                isIgniting = true;
             }
         } else {
             if (isEnraged) {
                 this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(NORMAL_SPEED);
                 isEnraged = false;
             }
+
+            if (isIgniting) {
+                isIgniting = false;
+                ignitionTimer = 0;
+            }
         }
 
+        if (isIgniting) {
+            if (ignitionTimer > 0) {
+                ignitionTimer--;
+                if (ignitionTimer == 0) {
+                    if (!isEnraged) {
+                        isEnraged = true;
+                        this.setRemainingFireTicks(FIRE_DURATION);
+                        this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(ENRAGED_SPEED);
+                    }
+                }
+            }
+        }
         igniteNearbyMobs();
     }
 
-    /**
-     * **Checks for any mobs (except itself) in a 1-block radius and sets them on fire.**
-     */
     private void igniteNearbyMobs() {
-        List<LivingEntity> nearbyEntities = this.level().getEntitiesOfClass(
-                LivingEntity.class,
-                this.getBoundingBox().inflate(0.5),
-                entity -> entity != this
-        );
+        if (this.isOnFire()) {
+            List<LivingEntity> nearbyEntities = this.level().getEntitiesOfClass(
+                    LivingEntity.class,
+                    this.getBoundingBox().inflate(0.5),
+                    entity -> entity != this
+            );
 
-        for (LivingEntity entity : nearbyEntities) {
-            if(this.isOnFire()){
+            for (LivingEntity entity : nearbyEntities) {
                 entity.setRemainingFireTicks(200);
             }
         }
     }
-    // testing thing for github commit thingy
-
 
     @Override
     protected SoundEvent getAmbientSound() {
