@@ -23,12 +23,14 @@ public class HominidCreativeModeTabs {
     public static final Supplier<CreativeModeTab> ELEMENTALIS_TAB = CREATIVE_MODE_TAB.register(
             "elementalis_tab",
             () -> CreativeModeTab.builder()
-                    .icon(() -> new ItemStack(Items.ZOMBIE_HEAD))
+                    .icon(() -> new ItemStack(HominidItems.GASOLINE_TANK.get()))
                     .title(Component.translatable("creativetab.hominid.hominid"))
                     .displayItems((itemDisplayParameters, output) -> acceptItems(
                             output,
 
                             HominidItems.CHARRED_MUSIC_DISC,
+                            HominidItems.GASOLINE_TANK,
+                            Items.HONEY_BOTTLE,
                             HominidItems.MELLIFIED_SPAWN_EGG,
                             HominidItems.INCENDIARY_SPAWN_EGG,
                             HominidItems.FAMISHED_SPAWN_EGG,
@@ -63,7 +65,8 @@ public class HominidCreativeModeTabs {
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             acceptItems(
                     event,
-                    HominidItems.CHARRED_MUSIC_DISC
+                    HominidItems.CHARRED_MUSIC_DISC,
+                    HominidItems.GASOLINE_TANK
             );
         }
 

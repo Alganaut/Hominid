@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:flint_and_steel",
+          "name": "hominid:gasoline_tank",
           "weight": 1,
           "functions": [
             {
