@@ -2,12 +2,22 @@ package com.alganaut.hominid.registry.event;
 
 import com.alganaut.hominid.Hominid;
 import com.alganaut.hominid.registry.entity.HominidEntityCreator;
+import com.alganaut.hominid.registry.entity.custom.Incendiary;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.SpawnPlacementTypes;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+import net.neoforged.neoforge.event.level.ExplosionEvent;
+
+import java.util.List;
 
 @EventBusSubscriber(modid = Hominid.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class HominidModEventBusEvents {

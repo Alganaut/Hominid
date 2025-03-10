@@ -181,6 +181,7 @@ public class Famished extends Monster {
                         } else {
                             particleType = new ItemParticleOption(ParticleTypes.ITEM, Items.BEEF.getDefaultInstance());
                         }
+                        this.playSound(SoundEvents.GENERIC_EAT);
                         spawnParticles(target, particleType);
                         target.discard();
                     }

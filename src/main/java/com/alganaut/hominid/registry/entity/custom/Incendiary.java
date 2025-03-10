@@ -16,6 +16,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
@@ -28,10 +29,13 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import net.minecraft.world.entity.EquipmentSlot;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 public class Incendiary extends Monster {
-
+    public final Set<UUID> ignitedCreepers = new HashSet<>();
     public final AnimationState idleAnimationState = new AnimationState();
     private boolean isEnraged = false;
     public boolean isIgniting = false;
@@ -139,7 +143,22 @@ public class Incendiary extends Monster {
     }
 
     private void igniteNearbyMobs() {
-        if (this.isOnFire()) {
+        if (this.isOnFire() && this.isAggressive()) {
+            List<LivingEntity> nearbyEntities = this.level().getEntitiesOfClass(
+                    LivingEntity.class,
+                    this.getBoundingBox().inflate(0.5),
+                    entity -> entity instanceof Creeper
+            );
+
+            for (LivingEntity entity : nearbyEntities) {
+                if (entity instanceof Creeper creeper) {
+                    creeper.setRemainingFireTicks(200);
+                    creeper.ignite();
+                    ignitedCreepers.add(creeper.getUUID());
+                }
+            }
+        }
+        if (this.isOnFire() && this.isAggressive()) {
             List<LivingEntity> nearbyEntities = this.level().getEntitiesOfClass(
                     LivingEntity.class,
                     this.getBoundingBox().inflate(0.5),
@@ -148,6 +167,11 @@ public class Incendiary extends Monster {
 
             for (LivingEntity entity : nearbyEntities) {
                 entity.setRemainingFireTicks(200);
+                if (entity instanceof Creeper creeper) {
+                    creeper.setRemainingFireTicks(200);
+                    creeper.ignite();
+                    ignitedCreepers.add(creeper.getUUID());
+                }
             }
         }
     }

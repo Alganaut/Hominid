@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "charred": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hominid:charred_music_disc"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.adventure.charred.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "hominid:charred_music_disc"
+    },
+    "title": {
+      "translate": "advancements.adventure.charred.title"
+    }
+  },
+  "requirements": [
+    [
+      "charred"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
