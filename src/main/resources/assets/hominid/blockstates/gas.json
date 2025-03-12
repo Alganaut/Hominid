@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=up":    { "model": "hominid:block/gas_block_up" },
+    "facing=down":  { "model": "hominid:block/gas_block_down" },
+    "facing=north": { "model": "hominid:block/gas_block_north" },
+    "facing=south": { "model": "hominid:block/gas_block_south" },
+    "facing=east":  { "model": "hominid:block/gas_block_east" },
+    "facing=west":  { "model": "hominid:block/gas_block_west" }
+  }
+}

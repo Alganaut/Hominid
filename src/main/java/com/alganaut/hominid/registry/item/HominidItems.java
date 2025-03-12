@@ -9,6 +9,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
 
 public class HominidItems {
     public static final DeferredRegister.Items  ITEMS = DeferredRegister.createItems(Hominid.MODID);
@@ -33,7 +34,7 @@ public class HominidItems {
             () -> new Item(new Item.Properties().jukeboxPlayable(HominidSounds.CHARRED_KEY).stacksTo(1)));
 
     public static final DeferredItem<Item> GASOLINE_TANK = ITEMS.register("gasoline_tank",
-            () -> new Item(new Item.Properties()));
+            () -> new GasTank(new Item.Properties(), 1200));
 
     public static void register (IEventBus eventBus) {
         ITEMS.register(eventBus);
