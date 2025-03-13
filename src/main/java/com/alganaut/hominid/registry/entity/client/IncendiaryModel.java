@@ -60,7 +60,6 @@ public class IncendiaryModel<T extends Incendiary> extends HierarchicalModel<T> 
         if(!entity.isIgniting()){
             if(entity.getAttribute(Attributes.MOVEMENT_SPEED).getBaseValue() == 0.35){
                 this.animateWalk(IncendiaryAnimations.ANIM_AGGRESSIVE_INCENDIARY_WALK, limbSwing, limbSwingAmount, 2f, 54);
-                this.animate(entity.idleAnimationState,IncendiaryAnimations.ANIM_AGGRESSIVE_INCENDIARY_IDLE,ageInTicks, 1f);
                 this.animate(entity.attackAnimationState,IncendiaryAnimations.ANIM_AGGRESSIVE_INCENDIARY_ATTACK,ageInTicks, 2f);
             }else{
                 this.animateWalk(IncendiaryAnimations.ANIM_INCENDIARY_WALK, limbSwing, limbSwingAmount, 2f, 54);
@@ -68,6 +67,7 @@ public class IncendiaryModel<T extends Incendiary> extends HierarchicalModel<T> 
                 this.animate(entity.attackAnimationState,IncendiaryAnimations.ANIM_INCENDIARY_ATTACK,ageInTicks, 2f);
             }
         }
+        this.animate(entity.idleAnimationState,IncendiaryAnimations.ANIM_AGGRESSIVE_INCENDIARY_IDLE,ageInTicks, 1f);
         this.animate(entity.igniteAnimationState,IncendiaryAnimations.ANIM_INCENDIARY_IGNITE,ageInTicks, 1f);
     }
 

@@ -1,26 +1,20 @@
 package com.alganaut.hominid.registry.entity.custom;
 
-import com.alganaut.hominid.registry.entity.ai.JuggernautAttackGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.entity.AnimationState;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -28,17 +22,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.EquipmentSlot;
-import java.util.EnumSet;
-import net.minecraft.world.level.pathfinder.Path;
-
-import java.util.EnumSet;
-import java.util.List;
 
 public class Juggernaut extends Monster {
-    private static final EntityDataAccessor<Boolean> ATTACKING =
-            SynchedEntityData.defineId(Juggernaut.class, EntityDataSerializers.BOOLEAN);
     public final AnimationState attackAnimationState = new AnimationState();
-    public int attackAnimationTimeout = 0;
     public final AnimationState idleAnimationState = new AnimationState();
 
     public Juggernaut(EntityType<? extends Monster> entityType, Level level) {
@@ -52,28 +38,6 @@ public class Juggernaut extends Monster {
                 .add(Attributes.MOVEMENT_SPEED, 0.15)
                 .add(Attributes.ATTACK_DAMAGE, 6.0)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0);
-    }
-
-    private void setupAnimationStates() {
-        if(this.isAttacking() && attackAnimationTimeout <= 0) {
-            attackAnimationTimeout = 80;
-            attackAnimationState.start(this.tickCount);
-        } else {
-            --this.attackAnimationTimeout;
-        }
-
-        if(!this.isAttacking()) {
-            attackAnimationState.stop();
-        }
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-
-        if (this.level().isClientSide()) {
-            this.setupAnimationStates();
-        }
     }
 
     @Override
@@ -159,25 +123,22 @@ public class Juggernaut extends Monster {
         }
         return super.hurt(source, amount);
     }
-
-    public void setAttacking(boolean attacking) {
-        this.entityData.set(ATTACKING, attacking);
-    }
-
-    public boolean isAttacking() {
-        return this.entityData.get(ATTACKING);
-    }
-
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
-        builder.define(ATTACKING, false);
     }
 
     @Override
-    public boolean isWithinMeleeAttackRange(LivingEntity target) {
-        double distanceSq = this.distanceToSqr(target.getX(), target.getY(), target.getZ());
-        double attackRadius = 2.0D * 2.0D;
-        return distanceSq <= attackRadius;
+    public void handleEntityEvent(byte state) {
+        if (state == 60) this.attackAnimationState.startIfStopped(this.tickCount);
+        else super.handleEntityEvent(state);
+    }
+
+    @Override
+    public boolean doHurtTarget(Entity entity) {
+        if(!level().isClientSide){
+            this.level().broadcastEntityEvent(this, (byte) 60);
+        }
+        return super.doHurtTarget(entity);
     }
 }
