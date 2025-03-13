@@ -55,16 +55,14 @@ public class FamishedModel<T extends Famished> extends HierarchicalModel<T> {
     public void setupAnim(Famished entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
         this.applyHeadRotation(netHeadYaw,headPitch);
-
-
-        this.animateWalk(FamishedAnimations.ANIM_FAMISHED_WALK, limbSwing, limbSwingAmount, 4f, 54);
-        this.animate(entity.idleAnimationState,FamishedAnimations.ANIM_FAMISHED_IDLE,ageInTicks, 1f);
-        this.animate(entity.eatingAnimationState,FamishedAnimations.ANIM_FAMISHED_EAT,ageInTicks, 1f);
-
         if (entity.getAttributeValue(Attributes.MOVEMENT_SPEED) == 0.27) {
+            this.animateWalk(FamishedAnimations.ANIM_HUNGRY_FAMISHED_WALK, limbSwing, limbSwingAmount, 4f, 54);
+            this.animate(entity.idleAnimationState,FamishedAnimations.ANIM_HUNGRY_FAMISHED_IDLE,ageInTicks, 1f);
             head.visible = false;
             head_hungry.visible = true;
         } else {
+            this.animateWalk(FamishedAnimations.ANIM_FAMISHED_WALK, limbSwing, limbSwingAmount, 4f, 54);
+            this.animate(entity.idleAnimationState,FamishedAnimations.ANIM_FAMISHED_IDLE,ageInTicks, 1f);
             head.visible = true;
             head_hungry.visible = false;
         }

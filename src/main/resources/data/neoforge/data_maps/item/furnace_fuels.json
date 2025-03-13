@@ -1,7 +1,7 @@
 {
   "values": {
     "hominid:gasoline_tank": {
-      "burn_time": 1200
+      "burn_time": 6400
     }
   }
 }

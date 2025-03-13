@@ -61,6 +61,7 @@ public class JuggernautModel<T extends Juggernaut> extends HierarchicalModel<T> 
 
         this.animateWalk(JuggernautAnimations.ANIM_JUGGERNAUT_WALK, limbSwing, limbSwingAmount, 4f, 54);
         this.animate(entity.idleAnimationState,JuggernautAnimations.ANIM_JUGGERNAUT_IDLE,ageInTicks, 1f);
+        this.animate(entity.attackAnimationState,JuggernautAnimations.ANIM_JUGGERNAUT_ATTACK,ageInTicks, 1f);
 
     }
 

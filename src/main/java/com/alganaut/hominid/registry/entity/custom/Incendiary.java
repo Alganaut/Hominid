@@ -1,32 +1,30 @@
 package com.alganaut.hominid.registry.entity.custom;
 
-import com.alganaut.hominid.registry.effect.HominidEffects;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.behavior.warden.SonicBoom;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import net.minecraft.world.entity.EquipmentSlot;
 
 import java.util.HashSet;
@@ -35,14 +33,17 @@ import java.util.Set;
 import java.util.UUID;
 
 public class Incendiary extends Monster {
+    private static final EntityDataAccessor<Boolean> IGNITING =
+            SynchedEntityData.defineId(Incendiary.class, EntityDataSerializers.BOOLEAN);
     public final Set<UUID> ignitedCreepers = new HashSet<>();
     public final AnimationState idleAnimationState = new AnimationState();
+    public final AnimationState igniteAnimationState = new AnimationState();
+    public final AnimationState attackAnimationState = new AnimationState();
     private boolean isEnraged = false;
-    public boolean isIgniting = false;
     private static final double NORMAL_SPEED = 0.2;
     private static final double ENRAGED_SPEED = 0.35;
     private static final int FIRE_DURATION = 500;
-    private static final int IGNITION_DELAY = 100;
+    private static final int IGNITION_DELAY = 60;
     private int ignitionTimer = 0;
 
     public Incendiary(EntityType<? extends Monster> entityType, Level level) {
@@ -55,6 +56,20 @@ public class Incendiary extends Monster {
                 .add(Attributes.MAX_HEALTH, 15.0)
                 .add(Attributes.MOVEMENT_SPEED, NORMAL_SPEED)
                 .add(Attributes.ATTACK_DAMAGE, 4.0);
+    }
+
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(IGNITING, false);
+    }
+
+    public void setIgniting(boolean attacking) {
+        this.entityData.set(IGNITING, attacking);
+    }
+
+    public boolean isIgniting() {
+        return this.entityData.get(IGNITING);
     }
 
     public void aiStep() {
@@ -103,17 +118,15 @@ public class Incendiary extends Monster {
     @Override
     public void tick() {
         super.tick();
-
-        if (this.level().isClientSide) {
-            return;
-        }
-
         LivingEntity target = this.getTarget();
 
         if (target != null) {
-            if (!isIgniting) {
+            if (!isIgniting()) {
                 ignitionTimer = IGNITION_DELAY;
-                isIgniting = true;
+                setIgniting(true);
+                if(!level().isClientSide){
+                    this.level().broadcastEntityEvent(this, (byte) 70);
+                }
             }
         } else {
             if (isEnraged) {
@@ -121,13 +134,16 @@ public class Incendiary extends Monster {
                 isEnraged = false;
             }
 
-            if (isIgniting) {
-                isIgniting = false;
+            if (isIgniting()) {
+                setIgniting(false);
                 ignitionTimer = 0;
             }
         }
 
-        if (isIgniting) {
+        if (isIgniting()) {
+            if(!level().isClientSide){
+                this.level().broadcastEntityEvent(this, (byte) 70);
+            }
             if (ignitionTimer > 0) {
                 ignitionTimer--;
                 if (ignitionTimer == 0) {
@@ -135,6 +151,7 @@ public class Incendiary extends Monster {
                         isEnraged = true;
                         this.setRemainingFireTicks(FIRE_DURATION);
                         this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(ENRAGED_SPEED);
+                        setIgniting(false);
                     }
                 }
             }
@@ -208,5 +225,20 @@ public class Incendiary extends Monster {
 
     public boolean isInvertedHealAndHarm() {
         return true;
+    }
+
+    @Override
+    public void handleEntityEvent(byte state) {
+        if (state == 70) this.igniteAnimationState.startIfStopped(this.tickCount);
+        if (state == 60) this.attackAnimationState.startIfStopped(this.tickCount);
+        else super.handleEntityEvent(state);
+    }
+
+    @Override
+    public boolean doHurtTarget(Entity entity) {
+        if(!level().isClientSide){
+            this.level().broadcastEntityEvent(this, (byte) 60);
+        }
+        return super.doHurtTarget(entity);
     }
 }

@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 
 public class IncendiaryRenderer  extends MobRenderer<Incendiary, IncendiaryModel<Incendiary>> {
     private static final ResourceLocation BASE = ResourceLocation.fromNamespaceAndPath(Hominid.MODID, "textures/entity/incendiary/incendiary.png");
@@ -24,7 +25,7 @@ public class IncendiaryRenderer  extends MobRenderer<Incendiary, IncendiaryModel
 
     @Override
     public ResourceLocation getTextureLocation(Incendiary incendiary) {
-        return incendiary.isOnFire() && incendiary.isAggressive() ? FIRE : BASE;
+        return incendiary.getAttribute(Attributes.MOVEMENT_SPEED).getBaseValue() == 0.35 ? FIRE : BASE;
     }
 
     @Override

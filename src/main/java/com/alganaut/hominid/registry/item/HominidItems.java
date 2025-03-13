@@ -34,7 +34,7 @@ public class HominidItems {
             () -> new Item(new Item.Properties().jukeboxPlayable(HominidSounds.CHARRED_KEY).stacksTo(1)));
 
     public static final DeferredItem<Item> GASOLINE_TANK = ITEMS.register("gasoline_tank",
-            () -> new GasTank(new Item.Properties(), 1200));
+            () -> new GasTank(new Item.Properties(), 6400));
 
     public static void register (IEventBus eventBus) {
         ITEMS.register(eventBus);
