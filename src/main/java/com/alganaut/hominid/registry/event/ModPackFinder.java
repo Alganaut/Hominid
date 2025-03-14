@@ -33,7 +33,7 @@ public class ModPackFinder implements RepositorySource {
         Path packPath = getPackPath();
         PackLocationInfo packInfo = new PackLocationInfo(
                 "builtin_hominid",
-                Component.literal("Hominid Retextures for undead mobs"),
+                Component.literal("Hominid Retextures"),
                 PackSource.BUILT_IN,
                 Optional.empty()
         );
