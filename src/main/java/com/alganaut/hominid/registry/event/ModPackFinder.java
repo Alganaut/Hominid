@@ -31,11 +31,6 @@ public class ModPackFinder implements RepositorySource {
     @Override
     public void loadPacks(Consumer<Pack> consumer) {
         Path packPath = getPackPath();
-        System.out.println("checking path: " + packPath.toAbsolutePath());
-        System.out.println("directory " + Files.exists(packPath));
-
-
-
         PackLocationInfo packInfo = new PackLocationInfo(
                 "builtin_hominid",
                 Component.literal("Hominid Retextures for undead mobs"),
@@ -44,7 +39,7 @@ public class ModPackFinder implements RepositorySource {
         );
         PackResources resources = new PathPackResources(packInfo, packPath);
 
-        PackSelectionConfig selectionConfig = new PackSelectionConfig(true, Pack.Position.TOP, false);
+        PackSelectionConfig selectionConfig = new PackSelectionConfig(false, Pack.Position.TOP, false);
         Pack.ResourcesSupplier resourceSupplier = new Pack.ResourcesSupplier() {
             @Override
             public PackResources openPrimary(PackLocationInfo packLocationInfo) {
@@ -59,22 +54,11 @@ public class ModPackFinder implements RepositorySource {
 
         Pack pack = Pack.readMetaAndCreate(packInfo, resourceSupplier, PackType.CLIENT_RESOURCES, selectionConfig);
 
-        Minecraft.getInstance().getResourcePackRepository()
-                .addPackFinder((packConsumer) -> {
-                    packConsumer.accept(Pack.readMetaAndCreate(
-                            packInfo,
-                            resourceSupplier,
-                            PackType.CLIENT_RESOURCES,
-                            selectionConfig
-                    ));
-                });
 
         if (pack == null) {
-            System.out.println("failed to make built-in resource pack for " + modId);
             return;
         }
 
-        System.out.println("registered built-in resource pack for " + modId);
         consumer.accept(pack);
     }
 
@@ -85,7 +69,6 @@ public class ModPackFinder implements RepositorySource {
             return modFile.findResource("resourcepacks/builtin_hominid");
         }
 
-        System.err.println("couldnt find mod container for 'hominid'");
         return Path.of("");
     }
 }
