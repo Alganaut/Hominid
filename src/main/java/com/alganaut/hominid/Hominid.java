@@ -34,8 +34,7 @@ public class Hominid {
             HominidItems.ITEMS,
             HominidBlocks.BLOCKS,
             HominidSounds.SOUND_EVENTS,
-            HominidEntityCreator.ENTITY_TYPES,
-            HominidCreativeModeTabs.CREATIVE_MODE_TAB
+            HominidEntityCreator.ENTITY_TYPES
     );
 
     public Hominid(IEventBus modEventBus, ModContainer modContainer) {
@@ -46,7 +45,6 @@ public class Hominid {
             registry.register(modEventBus);
         }
 
-        modEventBus.addListener(HominidCreativeModeTabs::addCreative);
         HominidClientEvents.register();
         HominidEffects.register(modEventBus);
 
