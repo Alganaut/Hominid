@@ -1,4 +1,4 @@
-package com.alganaut.hominid.registry.entity.client;
+package com.alganaut.hominid.registry.entity.client.animations;
 
 import net.minecraft.client.animation.AnimationChannel;
 import net.minecraft.client.animation.AnimationDefinition;

@@ -3,7 +3,8 @@
   "biomes": [
     "minecraft:flower_forest",
     "minecraft:meadow",
-    "minecraft:cherry_grove"
+    "minecraft:cherry_grove",
+    "minecraft:birch_forest"
   ],
   "spawners": {
     "type": "hominid:mellified",

@@ -1,7 +1,7 @@
 package com.alganaut.hominid.registry.entity.client;
 
+import com.alganaut.hominid.registry.entity.client.animations.JuggernautAnimations;
 import com.alganaut.hominid.registry.entity.custom.Juggernaut;
-import com.alganaut.hominid.registry.entity.custom.Mellified;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HierarchicalModel;

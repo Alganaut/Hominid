@@ -1,6 +1,7 @@
 package com.alganaut.hominid.registry.entity.custom;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -17,8 +18,10 @@ import net.minecraft.world.entity.ai.behavior.warden.SonicBoom;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -45,6 +48,7 @@ public class Incendiary extends Monster {
     private static final int FIRE_DURATION = 500;
     private static final int IGNITION_DELAY = 60;
     private int ignitionTimer = 0;
+    public int idleAnimationTimeout = 0;
 
     public Incendiary(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
@@ -109,17 +113,28 @@ public class Incendiary extends Monster {
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
     }
 
     protected boolean isSunSensitive() {
         return true;
     }
 
+    private void setupAnimationStates() {
+        if (this.idleAnimationTimeout <= 0) {
+            this.idleAnimationTimeout = 80;
+            this.idleAnimationState.start(this.tickCount);
+        } else {
+            --this.idleAnimationTimeout;
+        }
+    }
     @Override
     public void tick() {
-        super.tick();
         LivingEntity target = this.getTarget();
-
+        if (this.level().isClientSide()) {
+            this.setupAnimationStates();
+        }
         if (target != null) {
             if (!isIgniting()) {
                 ignitionTimer = IGNITION_DELAY;
@@ -157,6 +172,7 @@ public class Incendiary extends Monster {
             }
         }
         igniteNearbyMobs();
+        super.tick();
     }
 
     private void igniteNearbyMobs() {
@@ -229,9 +245,15 @@ public class Incendiary extends Monster {
 
     @Override
     public void handleEntityEvent(byte state) {
-        if (state == 70) this.igniteAnimationState.startIfStopped(this.tickCount);
-        if (state == 60) this.attackAnimationState.startIfStopped(this.tickCount);
-        else super.handleEntityEvent(state);
+        if (state == 70){
+            this.igniteAnimationState.startIfStopped(this.tickCount);
+        }
+        if (state == 60){
+            this.attackAnimationState.stop();
+            this.attackAnimationState.startIfStopped(this.tickCount);
+        }else{
+            super.handleEntityEvent(state);
+        }
     }
 
     @Override

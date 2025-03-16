@@ -26,6 +26,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 public class Juggernaut extends Monster {
     public final AnimationState attackAnimationState = new AnimationState();
     public final AnimationState idleAnimationState = new AnimationState();
+    public int idleAnimationTimeout = 0;
 
     public Juggernaut(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
@@ -37,7 +38,8 @@ public class Juggernaut extends Monster {
                 .add(Attributes.MAX_HEALTH, 30.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.15)
                 .add(Attributes.ATTACK_DAMAGE, 6.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0);
+                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 1.0);
     }
 
     @Override
@@ -80,6 +82,23 @@ public class Juggernaut extends Monster {
         }
 
         super.aiStep();
+    }
+
+    private void setupAnimationStates() {
+        if (this.idleAnimationTimeout <= 0) {
+            this.idleAnimationTimeout = 160;
+            this.idleAnimationState.start(this.tickCount);
+        } else {
+            --this.idleAnimationTimeout;
+        }
+    }
+
+    @Override
+    public void tick() {
+        if (this.level().isClientSide()) {
+            this.setupAnimationStates();
+        }
+        super.tick();
     }
 
     @Override
@@ -130,7 +149,10 @@ public class Juggernaut extends Monster {
 
     @Override
     public void handleEntityEvent(byte state) {
-        if (state == 60) this.attackAnimationState.startIfStopped(this.tickCount);
+        if (state == 60){
+            this.attackAnimationState.stop();
+            this.attackAnimationState.startIfStopped(this.tickCount);
+        }
         else super.handleEntityEvent(state);
     }
 

@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "gas": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hominid:gasoline_tank"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.adventure.gasoline.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "hominid:gasoline_tank"
+    },
+    "title": {
+      "translate": "advancements.adventure.gasoline.title"
+    }
+  },
+  "requirements": [
+    [
+      "gas"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

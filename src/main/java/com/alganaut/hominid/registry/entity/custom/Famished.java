@@ -8,10 +8,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.AnimationState;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -42,10 +39,12 @@ import java.util.EnumSet;
 import java.util.List;
 
 public class Famished extends Monster {
+    public final AnimationState attackAnimationState = new AnimationState();
     public final AnimationState eatingAnimationState = new AnimationState();
     private boolean isEating = false;
     public final AnimationState idleAnimationState = new AnimationState();
     private int cooldownTicks = 0;
+    public int idleAnimationTimeout = 0;
 
     public Famished(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
@@ -100,8 +99,20 @@ public class Famished extends Monster {
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
     }
 
+    private void setupAnimationStates() {
+        if (this.idleAnimationTimeout <= 0) {
+            this.idleAnimationTimeout = 80;
+            this.idleAnimationState.start(this.tickCount);
+        } else {
+            --this.idleAnimationTimeout;
+        }
+    }
+
     @Override
     public void tick() {
+        if (this.level().isClientSide()) {
+            this.setupAnimationStates();
+        }
         super.tick();
         if (cooldownTicks > 0) {
             cooldownTicks--;
@@ -278,5 +289,22 @@ public class Famished extends Monster {
             this.famished.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.2);
             target = null;
         }
+    }
+
+    @Override
+    public void handleEntityEvent(byte state) {
+        if (state == 60){
+            this.attackAnimationState.stop();
+            this.attackAnimationState.startIfStopped(this.tickCount);
+        }
+        else super.handleEntityEvent(state);
+    }
+
+    @Override
+    public boolean doHurtTarget(Entity entity) {
+        if(!level().isClientSide){
+            this.level().broadcastEntityEvent(this, (byte) 60);
+        }
+        return super.doHurtTarget(entity);
     }
 }

@@ -38,7 +38,7 @@ import java.util.EnumSet;
 import java.util.List;
 
 public class Mellified extends Monster {
-
+    public int idleAnimationTimeout = 0;
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState walkAnimationState = new AnimationState();
 
@@ -80,7 +80,7 @@ public class Mellified extends Monster {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new FollowPlayerGoal(this, 1.0, 1.0F, 15.0F));
+        this.goalSelector.addGoal(1, new FollowPlayerGoal(this, 1.0, 1.0F, 10.0F));
         this.goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0, 0.0F));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
@@ -89,8 +89,19 @@ public class Mellified extends Monster {
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
 
+    private void setupAnimationStates() {
+        if (this.idleAnimationTimeout <= 0) {
+            this.idleAnimationTimeout = 120;
+            this.idleAnimationState.start(this.tickCount);
+        } else {
+            --this.idleAnimationTimeout;
+        }
+    }
     @Override
     public void tick() {
+        if (this.level().isClientSide()) {
+            this.setupAnimationStates();
+        }
         super.tick();
 
         if (this.level() == null || this.level().isClientSide) {
@@ -197,7 +208,7 @@ public class Mellified extends Monster {
 
             this.targetPlayer = this.entity.level().getNearestPlayer(this.entity, maxDistance);
 
-            return this.targetPlayer != null && this.targetPlayer.distanceTo(this.entity) >= minDistance && this.targetPlayer.distanceTo(this.entity) <= maxDistance;
+            return this.targetPlayer != null && !targetPlayer.isCreative() && this.targetPlayer.distanceTo(this.entity) >= minDistance && this.targetPlayer.distanceTo(this.entity) <= maxDistance;
         }
 
         @Override

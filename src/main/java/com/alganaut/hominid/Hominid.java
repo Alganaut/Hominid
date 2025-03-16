@@ -6,6 +6,7 @@ import com.alganaut.hominid.registry.entity.HominidEntityCreator;
 import com.alganaut.hominid.registry.event.HominidClientEvents;
 import com.alganaut.hominid.registry.event.ModPackFinder;
 import com.alganaut.hominid.registry.item.HominidItems;
+import com.alganaut.hominid.registry.item.ModCreativeModeTab;
 import com.alganaut.hominid.registry.sound.HominidSounds;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.Minecraft;
@@ -47,6 +48,7 @@ public class Hominid {
 
         HominidClientEvents.register();
         HominidEffects.register(modEventBus);
+        ModCreativeModeTab.register(modEventBus);
 
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us

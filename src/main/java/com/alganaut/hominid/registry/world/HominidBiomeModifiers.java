@@ -23,7 +23,7 @@ public class HominidBiomeModifiers {
     public static void bootstrap(BootstrapContext<BiomeModifier> context) {
         var biomes = context.lookup(Registries.BIOME);
         context.register(SPAWN_MELLIFIED, new BiomeModifiers.AddSpawnsBiomeModifier(
-                HolderSet.direct(biomes.getOrThrow(Biomes.FLOWER_FOREST), biomes.getOrThrow(Biomes.MEADOW) , biomes.getOrThrow(Biomes.CHERRY_GROVE)),
+                HolderSet.direct(biomes.getOrThrow(Biomes.FLOWER_FOREST), biomes.getOrThrow(Biomes.MEADOW), biomes.getOrThrow(Biomes.CHERRY_GROVE), biomes.getOrThrow(Biomes.BIRCH_FOREST)),
                 List.of(new MobSpawnSettings.SpawnerData(HominidEntityCreator.MELLIFIED.get(), 100, 2, 3))));
         context.register(SPAWN_INCENDIARY, new BiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(Biomes.TAIGA), biomes.getOrThrow(Biomes.SNOWY_TAIGA), biomes.getOrThrow(Biomes.OLD_GROWTH_SPRUCE_TAIGA), biomes.getOrThrow(Biomes.OLD_GROWTH_PINE_TAIGA), biomes.getOrThrow(Biomes.WINDSWEPT_HILLS) , biomes.getOrThrow(Biomes.GROVE)),
