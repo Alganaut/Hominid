@@ -35,11 +35,11 @@ public class Juggernaut extends Monster {
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.FOLLOW_RANGE, 40.0)
-                .add(Attributes.MAX_HEALTH, 30.0)
+                .add(Attributes.MAX_HEALTH, 40.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.15)
                 .add(Attributes.ATTACK_DAMAGE, 6.0)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
-                .add(Attributes.ATTACK_KNOCKBACK, 1.0);
+                .add(Attributes.ATTACK_KNOCKBACK, 1.5);
     }
 
     @Override
