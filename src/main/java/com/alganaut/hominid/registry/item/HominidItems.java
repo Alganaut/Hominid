@@ -29,12 +29,24 @@ public class HominidItems {
     public static final DeferredItem<Item> JUGGERNAUT_SPAWN_EGG = ITEMS.register("juggernaut_spawn_egg",
             () -> new DeferredSpawnEggItem(HominidEntityCreator.JUGGERNAUT, 0x6f625d, 0x541635,
                     new Item.Properties()));
+    public static final DeferredItem<Item> FOSSLISED_SPAWN_EGG = ITEMS.register("fossilised_spawn_egg",
+            () -> new DeferredSpawnEggItem(HominidEntityCreator.FOSSILISED, 0x9a9c7a, 0x5b5344,
+                    new Item.Properties()));
 
     public static final DeferredItem<Item> CHARRED_MUSIC_DISC = ITEMS.register("charred_music_disc",
             () -> new Item(new Item.Properties().jukeboxPlayable(HominidSounds.CHARRED_KEY).stacksTo(1)));
 
     public static final DeferredItem<Item> GASOLINE_TANK = ITEMS.register("gasoline_tank",
             () -> new GasTank(new Item.Properties().durability(3).stacksTo(1)));
+
+
+
+
+
+
+    // DONT EDIT
+    public static final DeferredItem<Item> SLAB = ITEMS.register("slab",
+            () -> new Item(new Item.Properties().durability(3).stacksTo(1)));
 
     public static void register (IEventBus eventBus) {
         ITEMS.register(eventBus);

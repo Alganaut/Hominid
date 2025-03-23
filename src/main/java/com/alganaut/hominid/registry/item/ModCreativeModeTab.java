@@ -20,7 +20,11 @@ public class ModCreativeModeTab {
                     .icon(() -> new ItemStack(HominidItems.GASOLINE_TANK.get()))
                     .title(Component.translatable("creativetab.hominid.hominid"))
                     .displayItems((displayParameters, output) -> {
-                        HominidItems.ITEMS.getEntries().forEach(item -> output.accept(item.get()));
+                        HominidItems.ITEMS.getEntries().forEach(item -> {
+                            if (item.get() != HominidItems.SLAB.get()) {
+                                output.accept(item.get());
+                            }
+                        });
                         HominidBlocks.BLOCKS.getEntries().forEach(block -> output.accept(block.get()));
                     })
                     .build()

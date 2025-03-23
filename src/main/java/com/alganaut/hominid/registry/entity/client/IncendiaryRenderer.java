@@ -31,7 +31,7 @@ public class IncendiaryRenderer  extends MobRenderer<Incendiary, IncendiaryModel
     @Override
     public void render(Incendiary entity, float entityYaw, float partialTicks, PoseStack matrixStack, MultiBufferSource buffer, int packedLight) {
         super.render(entity, entityYaw, partialTicks, matrixStack, buffer, packedLight);
-        if(entity.isAggressive() && entity.isOnFire()){
+        if(entity.getAttribute(Attributes.MOVEMENT_SPEED).getBaseValue() == 0.35){
             this.addLayer(new IncendiaryGlowLayer<>(this));
         }else{
             this.layers.clear();

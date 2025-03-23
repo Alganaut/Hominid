@@ -6,6 +6,7 @@
   "item.hominid.incendiary_spawn_egg": "Incendiary Spawn Egg",
   "item.hominid.famished_spawn_egg": "Famished Spawn Egg",
   "item.hominid.juggernaut_spawn_egg": "Juggernaut Spawn Egg",
+  "item.hominid.fossilised_spawn_egg": "Fossilised Spawn Egg",
 
   "item.hominid.gasoline_tank": "Gasoline Tank",
 
@@ -13,6 +14,7 @@
   "entity.hominid.incendiary": "Incendiary",
   "entity.hominid.famished": "Famished",
   "entity.hominid.juggernaut": "Juggernaut",
+  "entity.hominid.fossilised": "Fossilised",
 
   "creativetab.hominid.hominid": "Hominid",
 

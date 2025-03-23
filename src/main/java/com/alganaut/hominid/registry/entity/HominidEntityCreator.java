@@ -3,14 +3,14 @@ package com.alganaut.hominid.registry.entity;
 import com.alganaut.hominid.Hominid;
 import com.alganaut.hominid.registry.entity.client.*;
 import com.alganaut.hominid.registry.entity.client.layer.HominidModelLayers;
-import com.alganaut.hominid.registry.entity.custom.Famished;
-import com.alganaut.hominid.registry.entity.custom.Incendiary;
-import com.alganaut.hominid.registry.entity.custom.Juggernaut;
-import com.alganaut.hominid.registry.entity.custom.Mellified;
+import com.alganaut.hominid.registry.entity.custom.*;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.projectile.Arrow;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
@@ -50,6 +50,18 @@ public class HominidEntityCreator {
                     .sized(0.6F, 1.99F)
     );
 
+    public static final Supplier<EntityType<Fossilised>> FOSSILISED = registerEntity(
+            "fossilised",
+            EntityType.Builder.of(Fossilised::new, MobCategory.MONSTER)
+                    .sized(0.65F, 2.3F)
+    );
+
+    public static final Supplier<EntityType<FossilisedRock>> ROCK = registerEntity(
+            "rock",
+            EntityType.Builder.<FossilisedRock>of(FossilisedRock::new, MobCategory.MISC)
+                    .sized(0.65F, 0.65F)
+    );
+
 
     private static <T extends Entity> Supplier<EntityType<T>> registerEntity(String name, EntityType.Builder<T> builder) {
         return ENTITY_TYPES.register(
@@ -66,6 +78,7 @@ public class HominidEntityCreator {
         event.put(HominidEntityCreator.INCENDIARY.get(), Incendiary.createAttributes().build());
         event.put(HominidEntityCreator.FAMISHED.get(), Famished.createAttributes().build());
         event.put(HominidEntityCreator.JUGGERNAUT.get(), Juggernaut.createAttributes().build());
+        event.put(HominidEntityCreator.FOSSILISED.get(), Fossilised.createAttributes().build());
     }
 
     // RENDERERS
@@ -77,6 +90,8 @@ public class HominidEntityCreator {
         event.registerEntityRenderer(HominidEntityCreator.INCENDIARY.get(), IncendiaryRenderer::new);
         event.registerEntityRenderer(HominidEntityCreator.FAMISHED.get(), FamishedRenderer::new);
         event.registerEntityRenderer(HominidEntityCreator.JUGGERNAUT.get(), JuggernautRenderer::new);
+        event.registerEntityRenderer(HominidEntityCreator.FOSSILISED.get(), FossilisedRenderer::new);
+        event.registerEntityRenderer(HominidEntityCreator.ROCK.get(), ThrownItemRenderer::new);
     }
 
     // LAYERS
@@ -88,5 +103,6 @@ public class HominidEntityCreator {
         event.registerLayerDefinition(HominidModelLayers.INCENDIARY, IncendiaryModel::createBodyLayer);
         event.registerLayerDefinition(HominidModelLayers.FAMISHED, FamishedModel::createBodyLayer);
         event.registerLayerDefinition(HominidModelLayers.JUGGERNAUT, JuggernautModel::createBodyLayer);
+        event.registerLayerDefinition(HominidModelLayers.FOSSILISED, FossilisedModel::createBodyLayer);
     }
 }

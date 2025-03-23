@@ -1,0 +1,25 @@
+{
+  "item.hominid.charred_music_disc": "Disque de Musique",
+  "item.hominid.charred_music_disc.desc": "Quizzly - Charred",
+
+  "item.hominid.mellified_spawn_egg": "Oeuf d'apparition de Mellifiée",
+  "item.hominid.incendiary_spawn_egg": "Oeuf d'apparition d'Incendiaire",
+  "item.hominid.famished_spawn_egg": "Oeuf d'apparition d'Affamé",
+  "item.hominid.juggernaut_spawn_egg": "Oeuf d'apparition de mastodonte",
+
+  "item.hominid.gasoline_tank": "Réservoir à Essence",
+  "entity.hominid.mellified": "Mellifiée",
+  "entity.hominid.incendiary": "Incendiaire",
+  "entity.hominid.famished": "Affamé",
+  "entity.hominid.juggernaut": "Mastodonte",
+
+  "creativetab.hominid.hominid": "Homininid",
+
+  "effect.hominid.honeyed": "Mielleux",
+  "advancements.adventure.hungry.title": "Un Petit Creux",
+  "advancements.adventure.hungry.description": "Attaquer et tuer un Affamé",
+  "advancements.adventure.charred.title": "Creeper Fumé",
+  "advancements.adventure.charred.description": "Force une Incendiaire à allumer un Creeper pour une récompense spéciale",
+  "advancements.adventure.gasoline.title": "Ça Carbure !",
+  "advancements.adventure.gasoline.description": "Acquérir un Réservoir à Essence, qui est une forme de carburant réutilisable"
+}
