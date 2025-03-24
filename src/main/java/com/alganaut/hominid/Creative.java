@@ -52,6 +52,10 @@ public class Creative {
                     Items.MAGMA_CUBE_SPAWN_EGG,
                     HominidItems.MELLIFIED_SPAWN_EGG
             );
+            insertItems(
+                    Items.EVOKER_SPAWN_EGG,
+                    HominidItems.FOSSLISED_SPAWN_EGG
+            );
         }
     }
 
