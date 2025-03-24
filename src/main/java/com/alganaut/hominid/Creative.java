@@ -60,7 +60,7 @@ public class Creative {
                     HominidItems.MELLIFIED_SPAWN_EGG
             );
             insertItems(
-                    Items.EVOKER_SPAWN_EGG,
+                    HominidItems.FAMISHED_SPAWN_EGG,
                     HominidItems.FOSSLISED_SPAWN_EGG
             );
         }
