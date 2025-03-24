@@ -4,17 +4,11 @@ import com.alganaut.hominid.registry.block.HominidBlocks;
 import com.alganaut.hominid.registry.effect.HominidEffects;
 import com.alganaut.hominid.registry.entity.HominidEntityCreator;
 import com.alganaut.hominid.registry.event.HominidClientEvents;
-import com.alganaut.hominid.registry.event.ModPackFinder;
 import com.alganaut.hominid.registry.item.HominidItems;
-import com.alganaut.hominid.registry.item.ModCreativeModeTab;
+import com.alganaut.hominid.registry.item.HominidCreativeModeTab;
 import com.alganaut.hominid.registry.sound.HominidSounds;
 import com.google.common.collect.ImmutableList;
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.repository.Pack;
-import net.minecraft.server.packs.repository.PackSource;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -48,7 +42,7 @@ public class Hominid {
 
         HominidClientEvents.register();
         HominidEffects.register(modEventBus);
-        ModCreativeModeTab.register(modEventBus);
+        HominidCreativeModeTab.register(modEventBus);
 
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us

@@ -8,6 +8,9 @@
   "item.hominid.juggernaut_spawn_egg": "Juggernaut Spawn Egg",
   "item.hominid.fossilised_spawn_egg": "Fossilised Spawn Egg",
 
+  "item.hominid.remains_armor_trim_smithing_template": "Smithing Template",
+  "trim_pattern.hominid.remains": "Remains Armor Trim",
+
   "item.hominid.gasoline_tank": "Gasoline Tank",
 
   "entity.hominid.mellified": "Mellified",

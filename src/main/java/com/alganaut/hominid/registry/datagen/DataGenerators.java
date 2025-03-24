@@ -17,15 +17,40 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+import static com.ibm.icu.impl.CurrencyData.provider;
+
 @EventBusSubscriber(modid = Hominid.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
-        DataGenerator generator = event.getGenerator();
-        PackOutput packOutput = generator.getPackOutput();
-        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        var generator = event.getGenerator();
+        var output = generator.getPackOutput();
+        var helper = event.getExistingFileHelper();
+        var provider = event.getLookupProvider();
 
-        generator.addProvider(event.includeServer(), new ModDatapackProvider(packOutput, lookupProvider));
+
+        generator.addProvider(
+                event.includeServer(),
+                new HominidRecipeProvider(output, provider)
+        );
+
+        var blockTagsProvider = new HominidBlockTagProvider(output, provider, helper);
+
+        generator.addProvider(event.includeServer(), blockTagsProvider);
+
+        generator.addProvider(
+                event.includeServer(),
+                new HominidItemTagProvider(
+                        output,
+                        provider,
+                        blockTagsProvider.contentsGetter(),
+                        helper
+                )
+        );
+
+        generator.addProvider(
+                event.includeServer(),
+                new HominidDatapackProvider(output, provider)
+        );
     }
 }

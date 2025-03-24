@@ -4,6 +4,7 @@ package com.alganaut.hominid.registry.item;
 import com.alganaut.hominid.Hominid;
 import com.alganaut.hominid.registry.entity.HominidEntityCreator;
 import com.alganaut.hominid.registry.sound.HominidSounds;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
@@ -38,6 +39,9 @@ public class HominidItems {
 
     public static final DeferredItem<Item> GASOLINE_TANK = ITEMS.register("gasoline_tank",
             () -> new GasTank(new Item.Properties().durability(3).stacksTo(1)));
+
+    public static final DeferredItem<Item> REMAINS_SMITHING_TEMPLATE = ITEMS.register("remains_armor_trim_smithing_template",
+            () -> SmithingTemplateItem.createArmorTrimTemplate(ResourceLocation.fromNamespaceAndPath(Hominid.MODID, "remains")));
 
 
 

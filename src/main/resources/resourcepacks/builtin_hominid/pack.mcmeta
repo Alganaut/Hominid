@@ -1,12 +1,12 @@
 {
   "pack": {
     "description": "Retextures for undead mobs",
-    "pack_format": 15,
+    "pack_format": 34,
     "supported_formats": [
-      57,
-      41,
-      26,
-      48
+      15,
+      34,
+      42,
+      46
     ]
   }
 }

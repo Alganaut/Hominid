@@ -35,6 +35,13 @@ public class Creative {
             );
         }
 
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            insertItems(
+                    Items.BOLT_ARMOR_TRIM_SMITHING_TEMPLATE,
+                    HominidItems.REMAINS_SMITHING_TEMPLATE
+            );
+        }
+
         if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
             insertItems(
                     Items.EVOKER_SPAWN_EGG,
