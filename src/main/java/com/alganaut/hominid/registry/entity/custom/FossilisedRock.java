@@ -56,7 +56,7 @@ public class FossilisedRock extends ThrowableItemProjectile {
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
         Entity entity = result.getEntity();
-        int i = 6;
+        int i = 8;
         entity.hurt(this.damageSources().thrown(this, this.getOwner()), (float)i);
     }
 

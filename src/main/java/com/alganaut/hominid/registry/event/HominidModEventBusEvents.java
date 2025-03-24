@@ -2,6 +2,7 @@ package com.alganaut.hominid.registry.event;
 
 import com.alganaut.hominid.Hominid;
 import com.alganaut.hominid.registry.entity.HominidEntityCreator;
+import com.alganaut.hominid.registry.entity.custom.Fossilised;
 import com.alganaut.hominid.registry.entity.custom.Incendiary;
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.packs.repository.PackRepository;
@@ -33,6 +34,8 @@ public class HominidModEventBusEvents {
         event.register(HominidEntityCreator.INCENDIARY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING,
                 Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
         event.register(HominidEntityCreator.FAMISHED.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING,
+                Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
+        event.register(HominidEntityCreator.FOSSILISED.get(), SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING,
                 Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
     }
 

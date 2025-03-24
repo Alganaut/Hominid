@@ -1,0 +1,13 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": [
+    "minecraft:desert",
+    "minecraft:swamp"
+  ],
+  "spawners": {
+    "type": "hominid:fossilised",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 100
+  }
+}
