@@ -1,0 +1,8 @@
+{
+  "asset_id": "hominid:remains",
+  "decal": false,
+  "description": {
+    "translate": "trim_pattern.hominid.remains"
+  },
+  "template_item": "hominid:remains_armor_trim_smithing_template"
+}
