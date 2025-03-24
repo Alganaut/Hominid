@@ -59,7 +59,7 @@ public class HominidEntityCreator {
     public static final Supplier<EntityType<FossilisedRock>> ROCK = registerEntity(
             "rock",
             EntityType.Builder.<FossilisedRock>of(FossilisedRock::new, MobCategory.MISC)
-                    .sized(0.65F, 0.65F)
+                    .sized(0.6F, 0.2F)
     );
 
 
