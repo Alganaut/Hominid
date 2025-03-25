@@ -39,7 +39,7 @@ public class ModPackFinder implements RepositorySource {
         );
         PackResources resources = new PathPackResources(packInfo, packPath);
 
-        PackSelectionConfig selectionConfig = new PackSelectionConfig(false, Pack.Position.TOP, false);
+        PackSelectionConfig selectionConfig = new PackSelectionConfig(true, Pack.Position.TOP, false);
         Pack.ResourcesSupplier resourceSupplier = new Pack.ResourcesSupplier() {
             @Override
             public PackResources openPrimary(PackLocationInfo packLocationInfo) {

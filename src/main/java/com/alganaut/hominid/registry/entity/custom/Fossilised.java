@@ -1,9 +1,18 @@
 package com.alganaut.hominid.registry.entity.custom;
 
+import com.alganaut.hominid.registry.item.HominidItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
@@ -21,6 +30,9 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.LlamaSpit;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.item.BrushItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -36,6 +48,9 @@ public class Fossilised extends Monster {
     public final AnimationState walkAnimationState = new AnimationState();
     public final AnimationState throwAnimationState = new AnimationState();
     public int attackState;
+    private static final EntityDataAccessor<Integer> BRUSH_COOLDOWN = SynchedEntityData.defineId(Fossilised.class, EntityDataSerializers.INT);
+    private static final int COOLDOWN_TICKS = 200;
+    private static final double DROP_CHANCE = 0.1;
 
     public Fossilised(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
@@ -110,6 +125,9 @@ public class Fossilised extends Monster {
         } else {
             idleAnimationState.startIfStopped(tickCount);
             walkAnimationState.stop();
+        }
+        if (this.entityData.get(BRUSH_COOLDOWN) > 0) {
+            this.entityData.set(BRUSH_COOLDOWN, this.entityData.get(BRUSH_COOLDOWN) - 1);
         }
     }
 
@@ -200,7 +218,7 @@ public class Fossilised extends Monster {
 
             rock.setPos(this.fossilised.getX(), this.fossilised.getEyeY(), this.fossilised.getZ());
             rock.setOwner(this.fossilised);
-            rock.shoot(dx, dy, dz, 2F, 0.2F);
+            rock.shoot(dx, dy, dz, 2.2F, 0.2F);
 
             rock.setInvisible(false);
 
@@ -222,5 +240,38 @@ public class Fossilised extends Monster {
             this.throwAnimationState.stop();
         }
         else super.handleEntityEvent(state);
+    }
+
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(BRUSH_COOLDOWN, 0);
+    }
+    @Override
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack itemStack = player.getItemInHand(hand);
+
+        if (itemStack.getItem() instanceof BrushItem && this.entityData.get(BRUSH_COOLDOWN) == 0) {
+            this.setBrushCooldown();
+            itemStack.use(player.level(), player, hand);
+
+            if (this.random.nextDouble() < DROP_CHANCE) {
+                this.dropLoot();
+            }
+
+            this.level().playSound(null, this.blockPosition(), SoundEvents.BRUSH_GENERIC, player.getSoundSource(), 1.0F, 1.0F);
+            return InteractionResult.SUCCESS;
+        }
+
+        return super.mobInteract(player, hand);
+    }
+
+    private void setBrushCooldown() {
+        this.entityData.set(BRUSH_COOLDOWN, COOLDOWN_TICKS);
+    }
+
+    private void dropLoot() {
+        ItemStack reward = new ItemStack(HominidItems.REMAINS_SMITHING_TEMPLATE.get());
+        this.spawnAtLocation(reward);
     }
 }

@@ -31,16 +31,20 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.EventHooks;
 
 public class FossilisedRock extends ThrowableItemProjectile {
+    private int lifetime;
     public FossilisedRock(EntityType<? extends FossilisedRock> entityType, Level level) {
         super(entityType, level);
+        this.lifetime = 0;
     }
 
     public FossilisedRock(Level level, LivingEntity shooter) {
         super(HominidEntityCreator.ROCK.get(), shooter, level);
+        this.lifetime = 0;
     }
 
     public FossilisedRock(Level level, double x, double y, double z) {
         super(HominidEntityCreator.ROCK.get(), x, y, z, level);
+        this.lifetime = 0;
     }
 
     protected Item getDefaultItem() {
@@ -51,19 +55,22 @@ public class FossilisedRock extends ThrowableItemProjectile {
         super.tick();
         this.setNoGravity(true);
         this.setDeltaMovement(this.getDeltaMovement().x, 0, this.getDeltaMovement().z);
+        this.lifetime++;
+
+        if (this.lifetime >= 180) {
+            this.discard();
+        }
     }
 
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
         Entity entity = result.getEntity();
-        int i = 8;
-        entity.hurt(this.damageSources().thrown(this, this.getOwner()), (float)i);
+        entity.hurt(this.damageSources().thrown(this, this.getOwner()), 12);
     }
 
     protected void onHit(HitResult result) {
         super.onHit(result);
         if (!this.level().isClientSide) {
-            this.level().broadcastEntityEvent(this, (byte)3);
             this.discard();
         }
 
