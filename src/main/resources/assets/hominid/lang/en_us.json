@@ -27,5 +27,7 @@
   "advancements.adventure.charred.title": "Charred Creeper",
   "advancements.adventure.charred.description": "Make an Incendiary ignite a Creeper for a special reward",
   "advancements.adventure.gasoline.title": "Incredible Gasoline",
-  "advancements.adventure.gasoline.description": "Acquire a Gasoline tank, which can be used as a reusable fuel source"
+  "advancements.adventure.gasoline.description": "Acquire a Gasoline tank, which can be used as a reusable fuel source",
+  "advancements.adventure.fossilised.title": "Return the Slab",
+  "advancements.adventure.fossilised.description": "Brush a fossilised skeleton to take a piece of its body"
 }
