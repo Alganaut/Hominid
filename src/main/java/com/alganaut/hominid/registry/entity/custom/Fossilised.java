@@ -22,8 +22,11 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BrushItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.neoforged.neoforge.common.ItemAbilities;
 import org.jetbrains.annotations.Nullable;
 
 public class Fossilised extends Monster {
@@ -166,7 +169,6 @@ public class Fossilised extends Monster {
                         this.fossilised.attackState = 2;
                         this.animationTimer = 18;
                         if (!this.fossilised.level().isClientSide) {
-                            this.fossilised.level().broadcastEntityEvent(this.fossilised, (byte) 80);
                             this.fossilised.level().broadcastEntityEvent(this.fossilised, (byte) 70);
                         }
                         this.fossilised.getNavigation().stop();
@@ -202,7 +204,7 @@ public class Fossilised extends Monster {
 
             rock.setPos(this.fossilised.getX(), this.fossilised.getEyeY(), this.fossilised.getZ());
             rock.setOwner(this.fossilised);
-            rock.shoot(dx, dy, dz, 2.2F, 0.2F);
+            rock.shoot(dx, dy, dz, 2.5F, 0.2F);
 
             rock.setInvisible(false);
 
@@ -221,9 +223,8 @@ public class Fossilised extends Monster {
         }
         if (state == 90) {
             this.throwAnimationState.stop();
-        } else {
-            super.handleEntityEvent(state);
         }
+        super.handleEntityEvent(state);
     }
 
     @Override
@@ -233,22 +234,20 @@ public class Fossilised extends Monster {
     }
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
-        ItemStack itemStack = player.getItemInHand(hand);
-
-        if (itemStack.getItem() instanceof BrushItem && this.entityData.get(BRUSH_COOLDOWN) == 0) {
-            this.setBrushCooldown();
-            player.getCooldowns().addCooldown(itemStack.getItem(), 100);
-            itemStack.use(player.level(), player, hand);
-
-            if (this.random.nextDouble() < DROP_CHANCE) {
-                this.dropLoot();
-            }
-
-            this.level().playSound(null, this.blockPosition(), SoundEvents.BRUSH_GENERIC, player.getSoundSource(), 1.0F, 1.0F);
-            return InteractionResult.SUCCESS;
+        ItemStack itemstack = player.getItemInHand(hand);
+        if (itemstack.canPerformAction(ItemAbilities.BRUSH_BRUSH) && this.brushOffScute()) {
+            itemstack.hurtAndBreak(16, player, getSlotForHand(hand));
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
+        } else {
+            return super.mobInteract(player, hand);
         }
+    }
 
-        return super.mobInteract(player, hand);
+    public boolean brushOffScute() {
+        this.spawnAtLocation(new ItemStack(HominidItems.REMAINS_SMITHING_TEMPLATE.get()));
+        this.gameEvent(GameEvent.ENTITY_INTERACT);
+        this.playSound(SoundEvents.BRUSH_GENERIC);
+        return true;
     }
 
     private void setBrushCooldown() {

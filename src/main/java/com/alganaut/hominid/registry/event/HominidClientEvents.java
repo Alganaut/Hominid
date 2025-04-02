@@ -5,14 +5,9 @@ import com.alganaut.hominid.registry.entity.HominidEntityCreator;
 import com.alganaut.hominid.registry.entity.custom.Incendiary;
 import com.alganaut.hominid.registry.entity.custom.Juggernaut;
 import com.alganaut.hominid.registry.item.HominidItems;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.packs.repository.PackRepository;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Zombie;
@@ -23,17 +18,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
-import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
-import net.neoforged.neoforge.event.entity.living.MobSpawnEvent;
 import net.neoforged.neoforge.event.level.ExplosionEvent;
-
-import java.util.List;
-
-import static com.alganaut.hominid.Hominid.MODID;
 
 public class HominidClientEvents {
     public static void register() {
@@ -49,7 +37,7 @@ public class HominidClientEvents {
             Level world = player.level();
 
             if (!world.isClientSide && itemStack.getItem() == Items.HONEY_BOTTLE) {
-                player.addEffect(new MobEffectInstance(Holder.direct(HominidEffects.HONEYED.get()), 400, 0));
+                player.addEffect(new MobEffectInstance(HominidEffects.HONEYED, 400, 0));
             }
         }
     }

@@ -1,0 +1,13 @@
+{
+  "values": [
+    "#minecraft:skeletons",
+    "#minecraft:zombies",
+    "minecraft:wither",
+    "minecraft:phantom",
+    "hominid:mellified",
+    "hominid:famished",
+    "hominid:incendiary",
+    "hominid:juggernaut",
+    "hominid:fossilised"
+  ]
+}

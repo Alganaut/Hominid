@@ -212,11 +212,13 @@ public class FossilisedAnimations {
                                         AnimationChannel.Interpolations.CATMULLROM)))
                 .addAnimation("slab",
                         new AnimationChannel(AnimationChannel.Targets.SCALE,
-                                new Keyframe(0f, KeyframeAnimations.scaleVec(0f, 0f, 0f),
+                                new Keyframe(-0.1f, KeyframeAnimations.scaleVec(0f, 0f, 0f),
                                         AnimationChannel.Interpolations.CATMULLROM),
                                 new Keyframe(0.5f, KeyframeAnimations.scaleVec(1f, 1f, 1f),
                                         AnimationChannel.Interpolations.CATMULLROM),
-                                new Keyframe(1.83333f, KeyframeAnimations.scaleVec(0f, 0f, 0f),
+                                new Keyframe(1.79f, KeyframeAnimations.scaleVec(1f, 1f, 1f),
+                                        AnimationChannel.Interpolations.CATMULLROM),
+                                new Keyframe(1.83f, KeyframeAnimations.scaleVec(0f, 0f, 0f),
                                         AnimationChannel.Interpolations.CATMULLROM)))
                 .addAnimation("left_leg",
                         new AnimationChannel(AnimationChannel.Targets.ROTATION,

@@ -51,12 +51,14 @@ public class FossilisedRock extends ThrowableItemProjectile {
         return HominidItems.SLAB.get();
     }
 
-    public void tick(){
+    @Override
+    public void tick() {
         super.tick();
-        this.setNoGravity(true);
-        this.setDeltaMovement(this.getDeltaMovement().x, 0, this.getDeltaMovement().z);
-        this.lifetime++;
 
+        this.setNoGravity(true);
+        this.setDeltaMovement(this.getDeltaMovement());
+
+        this.lifetime++;
         if (this.lifetime >= 180) {
             this.discard();
         }
@@ -65,7 +67,7 @@ public class FossilisedRock extends ThrowableItemProjectile {
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
         Entity entity = result.getEntity();
-        entity.hurt(this.damageSources().thrown(this, this.getOwner()), 12);
+        entity.hurt(this.damageSources().thrown(this, this.getOwner()), 9);
     }
 
     protected void onHit(HitResult result) {

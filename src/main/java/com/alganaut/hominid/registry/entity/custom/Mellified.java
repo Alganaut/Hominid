@@ -149,7 +149,7 @@ public class Mellified extends Monster {
 
         for (Monster zombie : nearbyZombies) {
             if (!zombie.equals(this)) {
-                zombie.addEffect(new MobEffectInstance(Holder.direct(HominidEffects.HONEYED.get()), 200, 1));
+                zombie.addEffect(new MobEffectInstance(HominidEffects.HONEYED, 200, 1));
             }
         }
     }

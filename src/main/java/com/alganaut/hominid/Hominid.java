@@ -41,8 +41,8 @@ public class Hominid {
         }
 
         HominidClientEvents.register();
-        HominidEffects.register(modEventBus);
         HominidCreativeModeTab.register(modEventBus);
+        HominidEffects.register(modEventBus);
 
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
