@@ -6,5 +6,23 @@
         "stream": true
       }
     ]
+  },
+  "vampire_idle": {
+    "subtitle": "sounds.hominid.vampire_idle",
+    "sounds": [
+      "hominid:vampire_idle"
+    ]
+  },
+  "vampire_hurt": {
+    "subtitle": "sounds.hominid.vampire_hurt",
+    "sounds": [
+      "hominid:vampire_hurt"
+    ]
+  },
+  "vampire_death": {
+    "subtitle": "sounds.hominid.vampire_death",
+    "sounds": [
+      "hominid:vampire_death"
+    ]
   }
 }

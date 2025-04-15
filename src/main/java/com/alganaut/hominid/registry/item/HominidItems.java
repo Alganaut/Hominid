@@ -33,6 +33,10 @@ public class HominidItems {
     public static final DeferredItem<Item> FOSSLISED_SPAWN_EGG = ITEMS.register("fossilised_spawn_egg",
             () -> new DeferredSpawnEggItem(HominidEntityCreator.FOSSILISED, 0x9a9c7a, 0x5b5344,
                     new Item.Properties()));
+    public static final DeferredItem<Item> VAMPIRE_SPAWN_EGG = ITEMS.register("vampire_spawn_egg",
+            () -> new DeferredSpawnEggItem(HominidEntityCreator.VAMPIRE, 0x6e211f, 0x4d4129,
+                    new Item.Properties()));
+
 
     public static final DeferredItem<Item> CHARRED_MUSIC_DISC = ITEMS.register("charred_music_disc",
             () -> new Item(new Item.Properties().jukeboxPlayable(HominidSounds.CHARRED_KEY).stacksTo(1)));

@@ -7,6 +7,7 @@
   "item.hominid.famished_spawn_egg": "Famished Spawn Egg",
   "item.hominid.juggernaut_spawn_egg": "Juggernaut Spawn Egg",
   "item.hominid.fossilised_spawn_egg": "Fossilised Spawn Egg",
+  "item.hominid.vampire_spawn_egg": "Vampire Spawn Egg",
 
   "item.hominid.remains_armor_trim_smithing_template": "Smithing Template",
   "trim_pattern.hominid.remains": "Remains Armor Trim",
@@ -18,10 +19,13 @@
   "entity.hominid.famished": "Famished",
   "entity.hominid.juggernaut": "Juggernaut",
   "entity.hominid.fossilised": "Fossilised",
+  "entity.hominid.vampire": "Vampire",
 
   "creativetab.hominid.hominid": "Hominid",
 
   "effect.hominid.honeyed": "Honeyed",
+  "effect.hominid.paranoia": "Paranoia",
+
   "advancements.adventure.hungry.title": "How Hungry...?",
   "advancements.adventure.hungry.description": "Attack and kill a Famished",
   "advancements.adventure.charred.title": "Charred Creeper",

@@ -63,6 +63,10 @@ public class Creative {
                     HominidItems.FAMISHED_SPAWN_EGG,
                     HominidItems.FOSSLISED_SPAWN_EGG
             );
+            insertItems(
+                    Items.TURTLE_SPAWN_EGG,
+                    HominidItems.VAMPIRE_SPAWN_EGG
+            );
         }
     }
 

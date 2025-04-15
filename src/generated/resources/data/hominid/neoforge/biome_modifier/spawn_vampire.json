@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "minecraft:dark_forest",
+  "spawners": {
+    "type": "hominid:vampire",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 80
+  }
+}

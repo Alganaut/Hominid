@@ -1,14 +1,28 @@
 package com.alganaut.hominid.registry.event;
 
 import com.alganaut.hominid.registry.effect.HominidEffects;
+import com.alganaut.hominid.registry.effect.renderer.ParanoiaOverlayRenderer;
 import com.alganaut.hominid.registry.entity.HominidEntityCreator;
 import com.alganaut.hominid.registry.entity.custom.Incendiary;
 import com.alganaut.hominid.registry.entity.custom.Juggernaut;
+import com.alganaut.hominid.registry.entity.custom.Vampire;
 import com.alganaut.hominid.registry.item.HominidItems;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.*;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.AbstractIllager;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
@@ -18,16 +32,28 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.level.ExplosionEvent;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 public class HominidClientEvents {
+    private static final Map<UUID, Float> lastYawMap = new HashMap<>();
+    private static final Map<UUID, Float> lastPitchMap = new HashMap<>();
+    private static final Map<UUID, Integer> soundTimerMap = new HashMap<>();
+
     public static void register() {
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onPlayerDrinkHoney);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onExplosionDetonate);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onEntityJoinWorld);
+        NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onRenderGuiOverlay);
+        //NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onClientTick);
     }
 
     @SubscribeEvent
@@ -73,5 +99,56 @@ public class HominidClientEvents {
             customMob.setPos(wolf.position().x, wolf.position().y, wolf.position().z);
             wolf.level().addFreshEntity(customMob);
         }
+        if (event.getEntity() != null && event.getEntity() instanceof AbstractIllager) {
+            AbstractIllager illager = (AbstractIllager) event.getEntity();
+            illager.targetSelector.addGoal(3, new AvoidEntityGoal<>(illager, Vampire.class, 6.0F, 1.0D, 1.2D));
+        }
     }
+
+    @SubscribeEvent
+    public static void onRenderGuiOverlay(RenderGuiLayerEvent.Post event) {
+        Minecraft mc = Minecraft.getInstance();
+        LocalPlayer player = mc.player;
+
+        if (player != null && player.hasEffect(HominidEffects.PARANOIA)) {
+            ParanoiaOverlayRenderer.renderTextureOverlay(event.getGuiGraphics(), ParanoiaOverlayRenderer.PARANOIA_OVERLAY, 0.5F);
+        }
+    }
+
+//    @SubscribeEvent
+//    public static void onClientTick(ClientTickEvent.Pre event) {
+//        Minecraft mc = Minecraft.getInstance();
+//        if (mc.player == null || mc.level == null) return;
+//
+//        Player player = mc.player;
+//
+//        if (!player.hasEffect(HominidEffects.PARANOIA)) return;
+//
+//        UUID uuid = player.getUUID();
+//        float currentYaw = player.getYRot();
+//        float currentPitch = player.getXRot();
+//
+//        float lastYaw = lastYawMap.getOrDefault(uuid, currentYaw);
+//        float lastPitch = lastPitchMap.getOrDefault(uuid, currentPitch);
+//
+//        boolean isCameraStill = Math.abs(currentYaw - lastYaw) < 0.1F && Math.abs(currentPitch - lastPitch) < 0.1F;
+//
+//        int timer = soundTimerMap.getOrDefault(uuid, 0);
+//
+//        if (isCameraStill) {
+//            if (timer <= 0) {
+//                player.playSound(SoundEvents.GRASS_STEP, 0.5F, 1.0F);
+//                timer = 30;
+//            } else {
+//                timer--;
+//            }
+//        } else {
+//            timer = 0;
+//        }
+//
+//        lastYawMap.put(uuid, currentYaw);
+//        lastPitchMap.put(uuid, currentPitch);
+//        soundTimerMap.put(uuid, timer);
+//    }
+
 }

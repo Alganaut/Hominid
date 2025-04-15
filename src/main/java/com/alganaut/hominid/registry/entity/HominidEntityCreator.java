@@ -62,6 +62,12 @@ public class HominidEntityCreator {
                     .sized(0.8F, 0.2F)
     );
 
+    public static final Supplier<EntityType<Vampire>> VAMPIRE = registerEntity(
+            "vampire",
+            EntityType.Builder.of(Vampire::new, MobCategory.MONSTER)
+                    .sized(0.6F, 2.0F)
+    );
+
 
     private static <T extends Entity> Supplier<EntityType<T>> registerEntity(String name, EntityType.Builder<T> builder) {
         return ENTITY_TYPES.register(
@@ -79,6 +85,7 @@ public class HominidEntityCreator {
         event.put(HominidEntityCreator.FAMISHED.get(), Famished.createAttributes().build());
         event.put(HominidEntityCreator.JUGGERNAUT.get(), Juggernaut.createAttributes().build());
         event.put(HominidEntityCreator.FOSSILISED.get(), Fossilised.createAttributes().build());
+        event.put(HominidEntityCreator.VAMPIRE.get(), Vampire.createAttributes().build());
     }
 
     // RENDERERS
@@ -92,6 +99,7 @@ public class HominidEntityCreator {
         event.registerEntityRenderer(HominidEntityCreator.JUGGERNAUT.get(), JuggernautRenderer::new);
         event.registerEntityRenderer(HominidEntityCreator.FOSSILISED.get(), FossilisedRenderer::new);
         event.registerEntityRenderer(HominidEntityCreator.ROCK.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(HominidEntityCreator.VAMPIRE.get(), VampireRenderer::new);
     }
 
     // LAYERS
@@ -104,5 +112,6 @@ public class HominidEntityCreator {
         event.registerLayerDefinition(HominidModelLayers.FAMISHED, FamishedModel::createBodyLayer);
         event.registerLayerDefinition(HominidModelLayers.JUGGERNAUT, JuggernautModel::createBodyLayer);
         event.registerLayerDefinition(HominidModelLayers.FOSSILISED, FossilisedModel::createBodyLayer);
+        event.registerLayerDefinition(HominidModelLayers.VAMPIRE, VampireModel::createBodyLayer);
     }
 }

@@ -25,6 +25,9 @@ public class HominidSounds {
     public static final Supplier<SoundEvent> CHARRED = registerSoundEvent("charred");
     public static final ResourceKey<JukeboxSong> CHARRED_KEY = createSong("charred");
 
+    public static final Supplier<SoundEvent> VAMPIRE_IDLE = registerSoundEvent("vampire_idle");
+    public static final Supplier<SoundEvent> VAMPIRE_HURT = registerSoundEvent("vampire_hurt");
+    public static final Supplier<SoundEvent> VAMPIRE_DEATH = registerSoundEvent("vampire_death");
 
     private static ResourceKey<JukeboxSong> createSong (String name) {
         return ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.fromNamespaceAndPath(Hominid.MODID, name));

@@ -21,6 +21,7 @@ public class HominidBiomeModifiers {
     public static final ResourceKey<BiomeModifier> SPAWN_INCENDIARY = registerKey("spawn_incendiary");
     public static final ResourceKey<BiomeModifier> SPAWN_FAMISHED = registerKey("spawn_famished");
     public static final ResourceKey<BiomeModifier> SPAWN_FOSSILISED = registerKey("spawn_fossilised");
+    public static final ResourceKey<BiomeModifier> SPAWN_VAMPIRE = registerKey("spawn_vampire");
 
     public static void bootstrap(BootstrapContext<BiomeModifier> context) {
         var biomes = context.lookup(Registries.BIOME);
@@ -36,6 +37,9 @@ public class HominidBiomeModifiers {
         context.register(SPAWN_FOSSILISED, new BiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(Biomes.DESERT), biomes.getOrThrow(Biomes.SWAMP), biomes.getOrThrow(Biomes.DRIPSTONE_CAVES), biomes.getOrThrow(Biomes.LUSH_CAVES), biomes.getOrThrow(Biomes.MANGROVE_SWAMP), biomes.getOrThrow(Biomes.BADLANDS), biomes.getOrThrow(Biomes.ERODED_BADLANDS), biomes.getOrThrow(Biomes.WOODED_BADLANDS)),
                 List.of(new MobSpawnSettings.SpawnerData(HominidEntityCreator.FOSSILISED.get(), 100, 1, 2))));
+        context.register(SPAWN_VAMPIRE, new BiomeModifiers.AddSpawnsBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(Biomes.DARK_FOREST)),
+                List.of(new MobSpawnSettings.SpawnerData(HominidEntityCreator.VAMPIRE.get(), 80, 1, 1))));
     }
 
     private static ResourceKey<BiomeModifier> registerKey(String name) {
