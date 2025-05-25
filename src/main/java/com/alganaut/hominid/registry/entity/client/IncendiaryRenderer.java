@@ -2,7 +2,6 @@ package com.alganaut.hominid.registry.entity.client;
 
 import com.alganaut.hominid.Hominid;
 import com.alganaut.hominid.registry.entity.client.layer.HominidModelLayers;
-import com.alganaut.hominid.registry.entity.client.layer.IncendiaryGlowLayer;
 import com.alganaut.hominid.registry.entity.custom.Incendiary;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -31,10 +30,5 @@ public class IncendiaryRenderer  extends MobRenderer<Incendiary, IncendiaryModel
     @Override
     public void render(Incendiary entity, float entityYaw, float partialTicks, PoseStack matrixStack, MultiBufferSource buffer, int packedLight) {
         super.render(entity, entityYaw, partialTicks, matrixStack, buffer, packedLight);
-        if(entity.getAttribute(Attributes.MOVEMENT_SPEED).getBaseValue() == 0.35){
-            this.addLayer(new IncendiaryGlowLayer<>(this));
-        }else{
-            this.layers.clear();
-        }
     }
 }
