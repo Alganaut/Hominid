@@ -52,7 +52,6 @@ public class HominidClientEvents {
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onPlayerDrinkHoney);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onExplosionDetonate);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onEntityJoinWorld);
-        NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onRenderGuiOverlay);
         //NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onClientTick);
     }
 

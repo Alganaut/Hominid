@@ -65,7 +65,7 @@ public class HominidEntityCreator {
     public static final Supplier<EntityType<Vampire>> VAMPIRE = registerEntity(
             "vampire",
             EntityType.Builder.of(Vampire::new, MobCategory.MONSTER)
-                    .sized(0.6F, 2.0F)
+                    .sized(0.6F, 1.9F)
     );
 
 
