@@ -70,11 +70,16 @@ public class Famished extends Monster {
     }
 
     private void setupAnimationStates() {
-        if (this.idleAnimationTimeout <= 0) {
-            this.idleAnimationTimeout = 80;
-            this.idleAnimationState.start(this.tickCount);
+        if (this.getDeltaMovement().horizontalDistance() <= 0.001F) {
+            if (this.idleAnimationTimeout <= 0) {
+                this.idleAnimationTimeout = 220;
+                this.idleAnimationState.start(this.tickCount);
+            } else {
+                --this.idleAnimationTimeout;
+            }
         } else {
-            --this.idleAnimationTimeout;
+            this.idleAnimationTimeout = 0;
+            this.idleAnimationState.stop();
         }
     }
 

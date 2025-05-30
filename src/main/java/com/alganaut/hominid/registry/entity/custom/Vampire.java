@@ -41,7 +41,6 @@ public class Vampire extends Monster {
 
     public Vampire(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
-        this.scream();
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -93,11 +92,16 @@ public class Vampire extends Monster {
     }
 
     private void setupAnimationStates() {
-        if (this.idleAnimationTimeout <= 0) {
-            this.idleAnimationTimeout = 80;
-            this.idleAnimationState.start(this.tickCount);
+        if (this.getDeltaMovement().horizontalDistance() <= 0.001F) {
+            if (this.idleAnimationTimeout <= 0) {
+                this.idleAnimationTimeout = 120;
+                this.idleAnimationState.start(this.tickCount);
+            } else {
+                --this.idleAnimationTimeout;
+            }
         } else {
-            --this.idleAnimationTimeout;
+            this.idleAnimationTimeout = 0;
+            this.idleAnimationState.stop();
         }
     }
     @Override
@@ -225,7 +229,6 @@ public class Vampire extends Monster {
             if (isInDirectSunlight()) {
                 if (sunTimer == 0) {
                     entity.level().broadcastEntityEvent(entity, (byte) 85);
-                    entity.scream();
                     entity.setRemainingFireTicks(100);
                 }
 
@@ -295,6 +298,7 @@ public class Vampire extends Monster {
         @Override
         public void tick() {
             if (targetPlayer != null) {
+                targetPlayer.addEffect(new MobEffectInstance(HominidEffects.PARANOIA, 80, 0));
                 double distanceToPlayer = entity.distanceTo(targetPlayer);
 
                 if (distanceToPlayer <= stopDistance) {
@@ -314,9 +318,5 @@ public class Vampire extends Monster {
 
     public void scream(){
         this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.WITHER_DEATH, this.getSoundSource(), 1.0F, 1.0F);
-        List<Player> players = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(20));
-        for (Player player : players) {
-            player.addEffect(new MobEffectInstance(HominidEffects.PARANOIA, 400, 0));
-        }
     }
 }

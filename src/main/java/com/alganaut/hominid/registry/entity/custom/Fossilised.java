@@ -36,6 +36,7 @@ public class Fossilised extends Monster {
     public final AnimationState throwAnimationState = new AnimationState();
     public int attackState;
     private static final EntityDataAccessor<Integer> BRUSH_COOLDOWN = SynchedEntityData.defineId(Fossilised.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> HAS_BEEN_BRUSHED = SynchedEntityData.defineId(Fossilised.class, EntityDataSerializers.BOOLEAN);
     private static final int COOLDOWN_TICKS = 200;
     private static final double DROP_CHANCE = 0.1;
 
@@ -88,11 +89,16 @@ public class Fossilised extends Monster {
     }
 
     private void setupAnimationStates() {
-        if (this.idleAnimationTimeout <= 0) {
-            this.idleAnimationTimeout = 120;
-            this.idleAnimationState.start(this.tickCount);
+        if (this.getDeltaMovement().horizontalDistance() <= 0.001F) {
+            if (this.idleAnimationTimeout <= 0) {
+                this.idleAnimationTimeout = 120;
+                this.idleAnimationState.start(this.tickCount);
+            } else {
+                --this.idleAnimationTimeout;
+            }
         } else {
-            --this.idleAnimationTimeout;
+            this.idleAnimationTimeout = 0;
+            this.idleAnimationState.stop();
         }
     }
     @Override
@@ -231,16 +237,25 @@ public class Fossilised extends Monster {
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
         builder.define(BRUSH_COOLDOWN, 0);
+        builder.define(HAS_BEEN_BRUSHED, false);
     }
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        if (itemstack.canPerformAction(ItemAbilities.BRUSH_BRUSH) && this.brushOffScute()) {
-            itemstack.hurtAndBreak(16, player, getSlotForHand(hand));
-            return InteractionResult.sidedSuccess(this.level().isClientSide);
-        } else {
-            return super.mobInteract(player, hand);
+
+        if (itemstack.canPerformAction(ItemAbilities.BRUSH_BRUSH)) {
+            if (this.entityData.get(HAS_BEEN_BRUSHED)) {
+                return InteractionResult.PASS;
+            }
+
+            if (this.brushOffScute()) {
+                this.entityData.set(HAS_BEEN_BRUSHED, true);
+                itemstack.hurtAndBreak(16, player, getSlotForHand(hand));
+                return InteractionResult.sidedSuccess(this.level().isClientSide);
+            }
         }
+
+        return super.mobInteract(player, hand);
     }
 
     public boolean brushOffScute() {
