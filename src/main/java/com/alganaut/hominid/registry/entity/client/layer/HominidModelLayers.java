@@ -11,4 +11,6 @@ public class HominidModelLayers {
     public static final ModelLayerLocation FOSSILISED = new ModelLayerLocation(Hominid.id("fossilised"), "main");
     public static final ModelLayerLocation VAMPIRE = new ModelLayerLocation(Hominid.id("vampire"), "main");
     public static final ModelLayerLocation SIREN = new ModelLayerLocation(Hominid.id("siren"), "main");
+    public static final ModelLayerLocation HUSK = new ModelLayerLocation(Hominid.id("husk"), "main");
+    public static final ModelLayerLocation STRAY = new ModelLayerLocation(Hominid.id("stray"), "main");
 }

@@ -3,9 +3,7 @@ package com.alganaut.hominid.registry.event;
 import com.alganaut.hominid.registry.effect.HominidEffects;
 import com.alganaut.hominid.registry.effect.renderer.ParanoiaOverlayRenderer;
 import com.alganaut.hominid.registry.entity.HominidEntityCreator;
-import com.alganaut.hominid.registry.entity.custom.Incendiary;
-import com.alganaut.hominid.registry.entity.custom.Juggernaut;
-import com.alganaut.hominid.registry.entity.custom.Vampire;
+import com.alganaut.hominid.registry.entity.custom.*;
 import com.alganaut.hominid.registry.item.HominidItems;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
@@ -22,9 +20,7 @@ import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.monster.AbstractIllager;
-import net.minecraft.world.entity.monster.Creeper;
-import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -95,6 +91,22 @@ public class HominidClientEvents {
             event.getEntity().discard();
 
             Juggernaut customMob = new Juggernaut(HominidEntityCreator.JUGGERNAUT.get(), wolf.level());
+            customMob.setPos(wolf.position().x, wolf.position().y, wolf.position().z);
+            wolf.level().addFreshEntity(customMob);
+        }
+        if (event.getEntity().getClass() == Husk.class) {
+            Husk wolf = (Husk) event.getEntity();
+            event.getEntity().discard();
+
+            HuskEntity customMob = new HuskEntity(HominidEntityCreator.HUSK.get(), wolf.level());
+            customMob.setPos(wolf.position().x, wolf.position().y, wolf.position().z);
+            wolf.level().addFreshEntity(customMob);
+        }
+        if (event.getEntity().getClass() == Stray.class) {
+            Stray wolf = (Stray) event.getEntity();
+            event.getEntity().discard();
+
+            StrayEntity customMob = new StrayEntity(HominidEntityCreator.STRAY.get(), wolf.level());
             customMob.setPos(wolf.position().x, wolf.position().y, wolf.position().z);
             wolf.level().addFreshEntity(customMob);
         }

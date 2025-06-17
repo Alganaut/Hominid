@@ -47,8 +47,8 @@ public class HominidItems {
     public static final DeferredItem<Item> REMAINS_SMITHING_TEMPLATE = ITEMS.register("remains_armor_trim_smithing_template",
             () -> SmithingTemplateItem.createArmorTrimTemplate(ResourceLocation.fromNamespaceAndPath(Hominid.MODID, "remains")));
 
-
-
+    public static final DeferredItem<Item> DRIED_ROTTEN_FLESH = ITEMS.register("dried_rotten_flesh",
+            () -> new Item(new Item.Properties().food(FoodItems.DRIED_ROTTEN_FLESH)));
 
 
 
