@@ -42,6 +42,13 @@ public class Creative {
             );
         }
 
+        if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
+            insertItems(
+                    Items.ROTTEN_FLESH,
+                    HominidItems.DRIED_ROTTEN_FLESH
+            );
+        }
+
         if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
             insertItems(
                     Items.EVOKER_SPAWN_EGG,

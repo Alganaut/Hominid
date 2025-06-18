@@ -37,18 +37,17 @@ public class HominidItems {
             () -> new DeferredSpawnEggItem(HominidEntityCreator.VAMPIRE, 0x6e211f, 0x4d4129,
                     new Item.Properties()));
 
-
-    public static final DeferredItem<Item> CHARRED_MUSIC_DISC = ITEMS.register("charred_music_disc",
-            () -> new Item(new Item.Properties().jukeboxPlayable(HominidSounds.CHARRED_KEY).stacksTo(1)));
+    public static final DeferredItem<Item> DRIED_ROTTEN_FLESH = ITEMS.register("dried_rotten_flesh",
+            () -> new Item(new Item.Properties().food(FoodItems.DRIED_ROTTEN_FLESH)));
 
     public static final DeferredItem<Item> GASOLINE_TANK = ITEMS.register("gasoline_tank",
             () -> new GasTank(new Item.Properties().durability(3).stacksTo(1)));
 
+    public static final DeferredItem<Item> CHARRED_MUSIC_DISC = ITEMS.register("charred_music_disc",
+            () -> new Item(new Item.Properties().jukeboxPlayable(HominidSounds.CHARRED_KEY).stacksTo(1)));
+
     public static final DeferredItem<Item> REMAINS_SMITHING_TEMPLATE = ITEMS.register("remains_armor_trim_smithing_template",
             () -> SmithingTemplateItem.createArmorTrimTemplate(ResourceLocation.fromNamespaceAndPath(Hominid.MODID, "remains")));
-
-    public static final DeferredItem<Item> DRIED_ROTTEN_FLESH = ITEMS.register("dried_rotten_flesh",
-            () -> new Item(new Item.Properties().food(FoodItems.DRIED_ROTTEN_FLESH)));
 
 
 
