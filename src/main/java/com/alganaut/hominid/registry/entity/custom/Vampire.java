@@ -48,7 +48,7 @@ public class Vampire extends Monster {
                 .add(Attributes.MAX_HEALTH, 30.0)
                 .add(Attributes.FOLLOW_RANGE, 35.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.25)
-                .add(Attributes.ATTACK_DAMAGE, 10.0);
+                .add(Attributes.ATTACK_DAMAGE, 16.0);
     }
 
     @Override

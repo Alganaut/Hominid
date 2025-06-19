@@ -54,7 +54,7 @@ public class Fossilised extends Monster {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.HUSK_AMBIENT;
+        return SoundEvents.STONE_PLACE;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class Fossilised extends Monster {
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.HUSK_DEATH;
+        return SoundEvents.STONE_BREAK;
     }
 
 
