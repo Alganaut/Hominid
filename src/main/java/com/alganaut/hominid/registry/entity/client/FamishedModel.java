@@ -53,7 +53,6 @@ public class FamishedModel<T extends Famished> extends HierarchicalModel<T> {
         if (entity.getAttributeValue(Attributes.MOVEMENT_SPEED) == 0.27) {
             this.animateWalk(FamishedAnimations.ANIM_FAMISHED_AGGRO_WALK, limbSwing, limbSwingAmount, 1f, 54);
             this.animate(entity.idleAnimationState,FamishedAnimations.ANIM_FAMISHED_AGGRO_IDLE,ageInTicks, 1f);
-            this.animate(entity.attackAnimationState,FamishedAnimations.ANIM_FAMISHED_AGGRO_ATTACK,ageInTicks, 1f);
         } else {
             this.animateWalk(FamishedAnimations.ANIM_FAMISHED_WALK, limbSwing, limbSwingAmount, 4f, 54);
             this.animate(entity.idleAnimationState,FamishedAnimations.ANIM_FAMISHED_IDLE,ageInTicks, 1f);

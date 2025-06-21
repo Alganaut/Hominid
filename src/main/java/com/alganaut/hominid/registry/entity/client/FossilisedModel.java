@@ -45,8 +45,8 @@ public class FossilisedModel<T extends Fossilised> extends HierarchicalModel<T> 
 
         PartDefinition right_arm = body.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(0, 30).addBox(-6.0F, -6.0F, -1.0F, 6.0F, 22.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-6.0F, -15.0F, 0.0F));
 
-        PartDefinition frisbee = right_arm.addOrReplaceChild("frisbee", CubeListBuilder.create().texOffs(30, 0).addBox(-6.0F, -4.0F, -1.5F, 12.0F, 10.0F, 3.0F, new CubeDeformation(0.0F))
-                .texOffs(42, 13).addBox(0.0F, -6.0F, -1.5F, 6.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-6.0F, 22.0F, 0.5F));
+        PartDefinition frisbee = right_arm.addOrReplaceChild("frisbee", CubeListBuilder.create().texOffs(30, 0).addBox(-6.0F, -4.0F, -1.0F, 12.0F, 10.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(42, 13).addBox(0.0F, -6.0F, -1.0F, 6.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.0F, 20.0F, -1.0F, 0.0F, 1.5708F, 0.0F));
 
         PartDefinition left_leg = fossilised.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(36, 36).addBox(-3.0F, 0.0F, -1.0F, 6.0F, 15.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(3.0F, -14.0F, 0.0F));
 
