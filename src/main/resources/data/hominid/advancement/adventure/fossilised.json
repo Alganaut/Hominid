@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:adventure/root",
+  "parent": "minecraft:adventure/trim_with_any_armor_pattern",
   "criteria": {
     "charred": {
       "conditions": {
