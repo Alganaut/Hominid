@@ -129,7 +129,7 @@ public class Famished extends Monster {
                 if(this.getTarget().getMainHandItem() != null && this.getTarget().getMainHandItem().is(ItemTags.MEAT)){
                     this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.27);
                 }else{
-                    this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.2);
+                    this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.17);
                 }
             }
         }
@@ -279,7 +279,7 @@ public class Famished extends Monster {
 
         @Override
         public void stop() {
-            this.famished.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.2);
+            this.famished.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.17);
             target = null;
         }
     }

@@ -6,7 +6,7 @@
   "item.hominid.incendiary_spawn_egg": "Incendiary Spawn Egg",
   "item.hominid.famished_spawn_egg": "Famished Spawn Egg",
   "item.hominid.juggernaut_spawn_egg": "Juggernaut Spawn Egg",
-  "item.hominid.fossilised_spawn_egg": "Fossilised Spawn Egg",
+  "item.hominid.fossilised_spawn_egg": "Fossilized Spawn Egg",
   "item.hominid.vampire_spawn_egg": "Vampire Spawn Egg",
 
   "item.hominid.remains_armor_trim_smithing_template": "Smithing Template",
@@ -19,7 +19,7 @@
   "entity.hominid.incendiary": "Incendiary",
   "entity.hominid.famished": "Famished",
   "entity.hominid.juggernaut": "Juggernaut",
-  "entity.hominid.fossilised": "Fossilised",
+  "entity.hominid.fossilised": "Fossilized",
   "entity.hominid.vampire": "Vampire",
 
   "creativetab.hominid.hominid": "Hominid",
@@ -34,7 +34,7 @@
   "advancements.adventure.gasoline.title": "Incredible Gasoline",
   "advancements.adventure.gasoline.description": "Acquire a Gasoline tank, which can be used as a reusable fuel source",
   "advancements.adventure.fossilised.title": "Return the Slab",
-  "advancements.adventure.fossilised.description": "Brush a fossilised skeleton to take a piece of its body",
+  "advancements.adventure.fossilised.description": "Brush a Fossilized Skeleton to take a piece of its body",
 
   "sounds.hominid.vampire_idle": "Vampire Groans",
   "sounds.hominid.vampire_hurt": "Vampire Hurts",
