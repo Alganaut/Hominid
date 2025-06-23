@@ -46,9 +46,9 @@ public class Vampire extends Monster {
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MAX_HEALTH, 30.0)
-                .add(Attributes.FOLLOW_RANGE, 35.0)
+                .add(Attributes.FOLLOW_RANGE, 50.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.25)
-                .add(Attributes.ATTACK_DAMAGE, 16.0);
+                .add(Attributes.ATTACK_DAMAGE, 12.0);
     }
 
     @Override
