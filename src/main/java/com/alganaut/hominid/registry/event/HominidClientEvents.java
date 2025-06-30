@@ -5,20 +5,11 @@ import com.alganaut.hominid.registry.effect.renderer.ParanoiaOverlayRenderer;
 import com.alganaut.hominid.registry.entity.HominidEntityCreator;
 import com.alganaut.hominid.registry.entity.custom.*;
 import com.alganaut.hominid.registry.item.HominidItems;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.player.Player;
@@ -28,7 +19,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
@@ -74,7 +64,7 @@ public class HominidClientEvents {
                     if (incendiary.ignitedCreepers.contains(creeper.getUUID())) {
                         incendiary.ignitedCreepers.remove(creeper.getUUID());
 
-                        ItemStack droppedItem = new ItemStack(HominidItems.CHARRED_MUSIC_DISC.get(), 1);
+                        ItemStack droppedItem = new ItemStack(HominidItems.MUSIC_DISC_CHARRED.get(), 1);
                         ItemEntity itemEntity = new ItemEntity((ServerLevel) world, explosionPos.x, explosionPos.y, explosionPos.z, droppedItem);
                         world.addFreshEntity(itemEntity);
                         break;

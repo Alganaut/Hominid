@@ -10,6 +10,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.animal.Animal;
 
 public class FamishedModel<T extends Famished> extends HierarchicalModel<T> {
 
@@ -50,7 +51,7 @@ public class FamishedModel<T extends Famished> extends HierarchicalModel<T> {
     public void setupAnim(Famished entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
         this.applyHeadRotation(netHeadYaw,headPitch);
-        if (entity.getAttributeValue(Attributes.MOVEMENT_SPEED) == 0.27) {
+        if (entity.getAttributeValue(Attributes.MOVEMENT_SPEED) == 0.27 || (entity.isAggressive() && entity.getTarget() instanceof Animal)) {
             this.animateWalk(FamishedAnimations.ANIM_FAMISHED_AGGRO_WALK, limbSwing, limbSwingAmount, 2f, 54);
             this.animate(entity.idleAnimationState,FamishedAnimations.ANIM_FAMISHED_AGGRO_IDLE,ageInTicks, 1f);
             this.animate(entity.attackAnimationState,FamishedAnimations.ANIM_FAMISHED_ATTACK,ageInTicks, 1f);

@@ -10,7 +10,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
 
 public class HominidItems {
     public static final DeferredRegister.Items  ITEMS = DeferredRegister.createItems(Hominid.MODID);
@@ -43,7 +42,7 @@ public class HominidItems {
     public static final DeferredItem<Item> GASOLINE_TANK = ITEMS.register("gasoline_tank",
             () -> new GasTank(new Item.Properties().durability(3).stacksTo(1)));
 
-    public static final DeferredItem<Item> CHARRED_MUSIC_DISC = ITEMS.register("charred_music_disc",
+    public static final DeferredItem<Item> MUSIC_DISC_CHARRED = ITEMS.register("music_disc_charred",
             () -> new Item(new Item.Properties().rarity(Rarity.RARE).jukeboxPlayable(HominidSounds.CHARRED_KEY).stacksTo(1)));
 
     public static final DeferredItem<Item> REMAINS_SMITHING_TEMPLATE = ITEMS.register("remains_armor_trim_smithing_template",

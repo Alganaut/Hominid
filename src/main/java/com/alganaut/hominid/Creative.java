@@ -10,8 +10,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
-import static com.alganaut.hominid.Config.items;
-
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = Hominid.MODID)
 public class Creative {
     private final BuildCreativeModeTabContentsEvent event;
@@ -27,7 +25,7 @@ public class Creative {
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             insertItems(
                     Items.MUSIC_DISC_PRECIPICE,
-                    HominidItems.CHARRED_MUSIC_DISC
+                    HominidItems.MUSIC_DISC_CHARRED
             );
             insertItems(
                     Items.FLINT_AND_STEEL,

@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "hominid:charred_music_disc"
+            "items": "hominid:music_disc_charred"
           }
         ]
       },
@@ -19,7 +19,7 @@
     "frame": "goal",
     "icon": {
       "count": 1,
-      "id": "hominid:charred_music_disc"
+      "id": "hominid:music_disc_charred"
     },
     "title": {
       "translate": "advancements.adventure.charred.title"
