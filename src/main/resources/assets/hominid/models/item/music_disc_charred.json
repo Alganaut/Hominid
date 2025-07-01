@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hominid:item/charred_music_disc"
+    "layer0": "hominid:item/music_disc_charred"
   }
 }
