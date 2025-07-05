@@ -18,7 +18,6 @@ public class FossilisedModel<T extends Fossilised> extends HierarchicalModel<T> 
     private final ModelPart body;
     private final ModelPart left_arm;
     private final ModelPart right_arm;
-    private final ModelPart frisbee;
     private final ModelPart left_leg;
     private final ModelPart right_leg;
 
@@ -27,7 +26,6 @@ public class FossilisedModel<T extends Fossilised> extends HierarchicalModel<T> 
         this.body = this.fossilised.getChild("body");
         this.left_arm = this.body.getChild("left_arm");
         this.right_arm = this.body.getChild("right_arm");
-        this.frisbee = this.right_arm.getChild("frisbee");
         this.left_leg = this.fossilised.getChild("left_leg");
         this.right_leg = this.fossilised.getChild("right_leg");
     }
@@ -45,9 +43,6 @@ public class FossilisedModel<T extends Fossilised> extends HierarchicalModel<T> 
 
         PartDefinition right_arm = body.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(0, 30).addBox(-6.0F, -6.0F, -1.0F, 6.0F, 22.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-6.0F, -15.0F, 0.0F));
 
-        PartDefinition frisbee = right_arm.addOrReplaceChild("frisbee", CubeListBuilder.create().texOffs(30, 0).addBox(-6.0F, -4.0F, -1.0F, 12.0F, 10.0F, 3.0F, new CubeDeformation(0.0F))
-                .texOffs(42, 13).addBox(0.0F, -6.0F, -1.0F, 6.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.0F, 20.0F, -1.0F, 0.0F, 1.5708F, 0.0F));
-
         PartDefinition left_leg = fossilised.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(36, 36).addBox(-3.0F, 0.0F, -1.0F, 6.0F, 15.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(3.0F, -14.0F, 0.0F));
 
         PartDefinition right_leg = fossilised.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(36, 18).addBox(-3.0F, 0.0F, -1.0F, 6.0F, 15.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-3.0F, -14.0F, 0.0F));
@@ -63,8 +58,6 @@ public class FossilisedModel<T extends Fossilised> extends HierarchicalModel<T> 
         this.animateWalk(FossilisedAnimations.ANIM_FOSSILISED_WALK, limbSwing, limbSwingAmount, 4f, 54);
         this.animate(entity.idleAnimationState,FossilisedAnimations.ANIM_FOSSILISED_IDLE,ageInTicks, 1f);
         this.animate(entity.throwAnimationState,FossilisedAnimations.ANIMATION_FOSSILISED_ATTACK,ageInTicks, 1f);
-
-        this.frisbee.visible = (entity.throwAnimationState.isStarted());
     }
 
     @Override
