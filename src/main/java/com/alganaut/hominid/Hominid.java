@@ -33,7 +33,7 @@ public class Hominid {
     );
 
     public Hominid(IEventBus modEventBus, ModContainer modContainer) {
-        LOGGER.info("I... am steve");
+        LOGGER.info("Elk_Hastiness");
 
         // Registration, loops through all the registries defined in the REGISTRIES constant
         for (var registry : REGISTRIES){

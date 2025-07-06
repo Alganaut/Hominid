@@ -84,22 +84,6 @@ public class HominidClientEvents {
             customMob.setPos(wolf.position().x, wolf.position().y, wolf.position().z);
             wolf.level().addFreshEntity(customMob);
         }
-        if (event.getEntity().getClass() == Husk.class) {
-            Husk wolf = (Husk) event.getEntity();
-            event.getEntity().discard();
-
-            HuskEntity customMob = new HuskEntity(HominidEntityCreator.HUSK.get(), wolf.level());
-            customMob.setPos(wolf.position().x, wolf.position().y, wolf.position().z);
-            wolf.level().addFreshEntity(customMob);
-        }
-        if (event.getEntity().getClass() == Stray.class) {
-            Stray wolf = (Stray) event.getEntity();
-            event.getEntity().discard();
-
-            StrayEntity customMob = new StrayEntity(HominidEntityCreator.STRAY.get(), wolf.level());
-            customMob.setPos(wolf.position().x, wolf.position().y, wolf.position().z);
-            wolf.level().addFreshEntity(customMob);
-        }
         if (event.getEntity() != null && event.getEntity() instanceof AbstractIllager) {
             AbstractIllager illager = (AbstractIllager) event.getEntity();
             illager.targetSelector.addGoal(3, new AvoidEntityGoal<>(illager, Vampire.class, 6.0F, 1.0D, 1.2D));

@@ -68,19 +68,6 @@ public class HominidEntityCreator {
                     .sized(0.6F, 1.9F)
     );
 
-    public static final Supplier<EntityType<HuskEntity>> HUSK = registerEntity(
-            "husk",
-            EntityType.Builder.of(HuskEntity::new, MobCategory.MONSTER)
-                    .sized(0.7F, 2.1F)
-    );
-
-    public static final Supplier<EntityType<StrayEntity>> STRAY = registerEntity(
-            "stray",
-            EntityType.Builder.of(StrayEntity::new, MobCategory.MONSTER)
-                    .sized(0.6F, 2.1F)
-    );
-
-
     private static <T extends Entity> Supplier<EntityType<T>> registerEntity(String name, EntityType.Builder<T> builder) {
         return ENTITY_TYPES.register(
                 name,
@@ -98,8 +85,6 @@ public class HominidEntityCreator {
         event.put(HominidEntityCreator.JUGGERNAUT.get(), Juggernaut.createAttributes().build());
         event.put(HominidEntityCreator.FOSSILISED.get(), Fossilised.createAttributes().build());
         event.put(HominidEntityCreator.VAMPIRE.get(), Vampire.createAttributes().build());
-        event.put(HominidEntityCreator.HUSK.get(), HuskEntity.createAttributes().build());
-        event.put(HominidEntityCreator.STRAY.get(), StrayEntity.createAttributes().build());
     }
 
     // RENDERERS
@@ -114,8 +99,6 @@ public class HominidEntityCreator {
         event.registerEntityRenderer(HominidEntityCreator.FOSSILISED.get(), FossilisedRenderer::new);
         event.registerEntityRenderer(HominidEntityCreator.ROCK.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(HominidEntityCreator.VAMPIRE.get(), VampireRenderer::new);
-        event.registerEntityRenderer(HominidEntityCreator.HUSK.get(), HuskRenderer::new);
-        event.registerEntityRenderer(HominidEntityCreator.STRAY.get(), StrayRenderer::new);
     }
 
     // LAYERS
@@ -129,7 +112,5 @@ public class HominidEntityCreator {
         event.registerLayerDefinition(HominidModelLayers.JUGGERNAUT, JuggernautModel::createBodyLayer);
         event.registerLayerDefinition(HominidModelLayers.FOSSILISED, FossilisedModel::createBodyLayer);
         event.registerLayerDefinition(HominidModelLayers.VAMPIRE, VampireModel::createBodyLayer);
-        event.registerLayerDefinition(HominidModelLayers.HUSK, HuskModel::createBodyLayer);
-        event.registerLayerDefinition(HominidModelLayers.STRAY, StrayModel::createBodyLayer);
     }
 }
