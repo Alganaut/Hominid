@@ -36,6 +36,13 @@
   "advancements.adventure.fossilised.title": "Return the Slab",
   "advancements.adventure.fossilised.description": "Brush a Fossilized Skeleton to take a piece of its body",
 
+  "painting.hominid.orbit.title": "Orbit",
+  "painting.hominid.orbit.author": "FishStacks",
+  "painting.hominid.hothead.title": "Hothead",
+  "painting.hominid.hothead.author": "FishStacks",
+  "painting.hominid.not_happy.title": "Not Happy",
+  "painting.hominid.not_happy.author": "FishStacks",
+
   "sounds.hominid.vampire_idle": "Vampire Groans",
   "sounds.hominid.vampire_hurt": "Vampire Hurts",
   "sounds.hominid.vampire_death": "Vampire Dies"
