@@ -54,7 +54,7 @@ public class VampireModel<T extends Vampire> extends HierarchicalModel<T> {
         this.animateWalk(VampireAnimations.ANIM_VAMPIRE_WALK, limbSwing, limbSwingAmount, 4f, 54);
         this.animate(entity.idleAnimationState,VampireAnimations.ANIM_VAMPIRE_IDLE,ageInTicks, 1f);
         this.animate(entity.attackAnimationState,VampireAnimations.ANIM_VAMPIRE_ATTACK,ageInTicks, 1f);
-        this.animate(entity.dieAnimationState,VampireAnimations.ANIM_VAMPIRE_PERISH,ageInTicks, 1f);
+        this.animate(entity.dieAnimationState,VampireAnimations.ANIM_VAMPIRE_SCREAM,ageInTicks, 1f);
 
     }
 
