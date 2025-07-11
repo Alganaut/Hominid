@@ -24,7 +24,7 @@ public class IncendiaryRenderer  extends MobRenderer<Incendiary, IncendiaryModel
 
     @Override
     public ResourceLocation getTextureLocation(Incendiary incendiary) {
-        return incendiary.getAttribute(Attributes.MOVEMENT_SPEED).getBaseValue() == 0.35 ? FIRE : BASE;
+        return incendiary.getAttribute(Attributes.MOVEMENT_SPEED).getBaseValue() == 0.35 && incendiary.isOnFire() ? FIRE : BASE;
     }
 
     @Override

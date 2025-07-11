@@ -250,7 +250,7 @@ public class Fossilised extends Monster {
 
             if (this.brushOffScute()) {
                 this.entityData.set(HAS_BEEN_BRUSHED, true);
-                itemstack.hurtAndBreak(16, player, getSlotForHand(hand));
+                itemstack.hurtAndBreak(32, player, getSlotForHand(hand));
                 return InteractionResult.sidedSuccess(this.level().isClientSide);
             }
         }

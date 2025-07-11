@@ -16,7 +16,7 @@ public class ParanoiaEffect extends MobEffect {
     private static final Map<UUID, Integer> soundTimerMap = new HashMap<>();
 
     public ParanoiaEffect() {
-        super(MobEffectCategory.HARMFUL, 0xFFD700);
+        super(MobEffectCategory.HARMFUL, 0x6e211f);
     }
 
     @Override

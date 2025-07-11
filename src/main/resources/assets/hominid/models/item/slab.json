@@ -1,37 +1,39 @@
 {
-  "credit": "Made with Blockbench",
-  "texture_size": [64, 64],
-  "textures": {
-    "0": "hominid:item/rock"
-  },
-  "elements": [
-    {
-      "from": [4, 7, 3],
-      "to": [14, 11, 13],
-      "rotation": {"angle": 0, "axis": "y", "origin": [8, 7, 8]},
-      "faces": {
-        "north": {"uv": [8.5, 15, 11, 16], "texture": "#0"},
-        "east": {"uv": [6, 15, 8.5, 16], "texture": "#0"},
-        "south": {"uv": [13.5, 15, 16, 16], "texture": "#0"},
-        "west": {"uv": [11, 15, 13.5, 16], "texture": "#0"},
-        "up": {"uv": [11, 15, 8.5, 12.5], "texture": "#0"},
-        "down": {"uv": [13.5, 12.5, 11, 15], "texture": "#0"}
-      }
-    }
-  ],
-  "groups": [
-    {
-      "name": "all",
-      "origin": [8, 4, 8],
-      "color": 0,
-      "children": [
-        {
-          "name": "rock",
-          "origin": [8, 4, 8],
-          "color": 0,
-          "children": [0]
-        }
-      ]
-    }
-  ]
+	"credit": "Made with Blockbench",
+	"texture_size": [64, 64],
+	"textures": {
+		"0": "hominid:item/rock",
+		"particle": "hominid:item/rock"
+	},
+	"elements": [
+		{
+			"name": "body",
+			"from": [2, 4, 2],
+			"to": [14, 7, 13],
+			"rotation": {"angle": 0, "axis": "x", "origin": [8, 4, 7]},
+			"faces": {
+				"north": {"uv": [2.75, 15.25, 5.75, 16], "texture": "#0"},
+				"east": {"uv": [0, 15.25, 2.75, 16], "texture": "#0"},
+				"south": {"uv": [8.5, 15.25, 11.5, 16], "texture": "#0"},
+				"west": {"uv": [5.75, 15.25, 8.5, 16], "texture": "#0"},
+				"up": {"uv": [5.75, 15.25, 2.75, 12.5], "texture": "#0"},
+				"down": {"uv": [8.75, 12.5, 5.75, 15.25], "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "rock",
+			"origin": [8, 3, 4],
+			"color": 0,
+			"children": [
+				{
+					"name": "body",
+					"origin": [8, 7, 4],
+					"color": 0,
+					"children": [0]
+				}
+			]
+		}
+	]
 }
