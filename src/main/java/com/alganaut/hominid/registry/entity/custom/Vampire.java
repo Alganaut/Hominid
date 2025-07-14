@@ -149,8 +149,6 @@ public class Vampire extends Monster {
             serverLevel.sendParticles(ParticleTypes.SMOKE, this.getX(), this.getY() + 1.0, this.getZ(), 20, 0.5, 0.5, 0.5, 0.1);
         }
         this.scream();
-
-        this.remove(Entity.RemovalReason.DISCARDED);
     }
 
 
@@ -213,7 +211,7 @@ public class Vampire extends Monster {
     public class BurnInSunGoal extends Goal {
         private final Vampire entity;
         private int sunTimer = 0;
-        private static final int SUN_VANISH_TIME = 10;
+        private static final int SUN_VANISH_TIME = 20;
 
         public BurnInSunGoal(Vampire entity) {
             this.entity = entity;
@@ -230,16 +228,13 @@ public class Vampire extends Monster {
                 if (sunTimer == 0) {
                     entity.level().broadcastEntityEvent(entity, (byte) 85);
                     entity.setRemainingFireTicks(100);
+                    triggerEvent();
                 }
 
                 if (sunTimer < SUN_VANISH_TIME) {
                     sunTimer++;
-                } else {
-                    triggerEvent();
-                }
-            } else {
-                if (sunTimer > 0) {
-
+                }else{
+                    this.entity.remove(Entity.RemovalReason.DISCARDED);
                 }
             }
         }
@@ -317,6 +312,6 @@ public class Vampire extends Monster {
 
 
     public void scream(){
-        this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.WITHER_DEATH, this.getSoundSource(), 1.0F, 1.0F);
+        this.level().playSound(null, this.getX(), this.getY(), this.getZ(), HominidSounds.VAMPIRE_SCREAM.get(), this.getSoundSource(), 0.5F, 1.0F);
     }
 }

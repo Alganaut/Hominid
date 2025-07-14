@@ -1,5 +1,6 @@
 package com.alganaut.hominid.registry.effect;
 
+import com.alganaut.hominid.registry.sound.HominidSounds;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -36,9 +37,10 @@ public class ParanoiaEffect extends MobEffect {
 
             if (isCameraStill) {
                 if (timer <= 0) {
-                    player.playSound(SoundEvents.GRASS_STEP, 0.5F, 1.0F);
-                    System.out.println("uhhh playing noises");
-                    timer = 60;
+                    player.playSound(SoundEvents.GRASS_STEP, 0.3F, 1.0F);
+                    player.playSound(SoundEvents.SAND_STEP, 0.3F, 1.0F);
+                    player.playSound(SoundEvents.STONE_STEP, 0.3F, 1.0F);
+                    timer = 40;
                 } else {
                     timer--;
                 }
@@ -49,6 +51,7 @@ public class ParanoiaEffect extends MobEffect {
             lastYawMap.put(uuid, currentYaw);
             lastPitchMap.put(uuid, currentPitch);
             soundTimerMap.put(uuid, timer);
+            player.playSound(HominidSounds.PARANOIA.get(), 0.03F, 1.0F);
         }
 
         return true;

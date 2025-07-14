@@ -24,5 +24,17 @@
     "sounds": [
       "hominid:vampire_death"
     ]
+  },
+  "paranoia": {
+    "subtitle": "sounds.hominid.paranoia",
+    "sounds": [
+      "hominid:paranoia"
+    ]
+  },
+  "vampire_scream": {
+    "subtitle": "sounds.hominid.vampire_scream",
+    "sounds": [
+      "hominid:vampire_scream"
+    ]
   }
 }

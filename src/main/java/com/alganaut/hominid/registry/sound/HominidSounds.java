@@ -28,6 +28,8 @@ public class HominidSounds {
     public static final Supplier<SoundEvent> VAMPIRE_IDLE = registerSoundEvent("vampire_idle");
     public static final Supplier<SoundEvent> VAMPIRE_HURT = registerSoundEvent("vampire_hurt");
     public static final Supplier<SoundEvent> VAMPIRE_DEATH = registerSoundEvent("vampire_death");
+    public static final Supplier<SoundEvent> VAMPIRE_SCREAM = registerSoundEvent("vampire_scream");
+    public static final Supplier<SoundEvent> PARANOIA = registerSoundEvent("paranoia");
 
     private static ResourceKey<JukeboxSong> createSong (String name) {
         return ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.fromNamespaceAndPath(Hominid.MODID, name));
