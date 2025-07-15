@@ -83,7 +83,7 @@ public class Mellified extends Monster {
     private void setupAnimationStates() {
         if (this.getDeltaMovement().horizontalDistance() <= 0.001F) {
             if (this.idleAnimationTimeout <= 0) {
-                this.idleAnimationTimeout = 340;
+                this.idleAnimationTimeout = 60;
                 this.idleAnimationState.start(this.tickCount);
             } else {
                 --this.idleAnimationTimeout;

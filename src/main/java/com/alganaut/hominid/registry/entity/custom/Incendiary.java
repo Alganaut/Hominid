@@ -95,7 +95,7 @@ public class Incendiary extends Monster {
     private void setupAnimationStates() {
         if (this.getDeltaMovement().horizontalDistance() <= 0.001F) {
             if (this.idleAnimationTimeout <= 0) {
-                this.idleAnimationTimeout = 80;
+                this.idleAnimationTimeout = 120;
                 this.idleAnimationState.start(this.tickCount);
             } else {
                 --this.idleAnimationTimeout;
