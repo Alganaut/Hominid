@@ -16,6 +16,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.monster.Guardian;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -46,7 +47,7 @@ public class Vampire extends Monster {
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MAX_HEALTH, 30.0)
-                .add(Attributes.FOLLOW_RANGE, 50.0)
+                .add(Attributes.FOLLOW_RANGE, 100.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.25)
                 .add(Attributes.ATTACK_DAMAGE, 12.0);
     }
@@ -87,6 +88,9 @@ public class Vampire extends Monster {
         this.targetSelector.addGoal(2, new TargetDamagedEntityGoal(this));
         this.targetSelector.addGoal(2, new BurnInSunGoal(this));
         this.targetSelector.addGoal(2, new FollowPlayerGoal(this){
+            public boolean canUse() { return !Vampire.this.isAggressive() && super.canUse(); }
+        });
+        this.goalSelector.addGoal(9, new AvoidEntityGoal<>(this, Player.class, 6.0F, 1.0, 1.0){
             public boolean canUse() { return !Vampire.this.isAggressive() && super.canUse(); }
         });
     }
@@ -255,7 +259,7 @@ public class Vampire extends Monster {
 
     public class FollowPlayerGoal extends Goal {
         private final Vampire entity;
-        private final double followDistance = 30.0;
+        private final double followDistance = 60.0;
         private final double stopDistance = 8.0;
         private Player targetPlayer;
 
