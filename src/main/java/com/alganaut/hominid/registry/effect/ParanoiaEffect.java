@@ -16,7 +16,7 @@ public class ParanoiaEffect extends MobEffect {
     private static final Map<UUID, Float> lastPitchMap = new HashMap<>();
     private static final Map<UUID, Integer> soundTimerMap = new HashMap<>();
 
-    private static final Set<UUID> paranoiaSoundPlaying = new HashSet<>();
+    private static final Set<UUID> playingParanoia = new HashSet<>();
 
 
     public ParanoiaEffect() {
@@ -54,9 +54,8 @@ public class ParanoiaEffect extends MobEffect {
             lastYawMap.put(uuid, currentYaw);
             lastPitchMap.put(uuid, currentPitch);
             soundTimerMap.put(uuid, timer);
-            if (!paranoiaSoundPlaying.contains(player.getUUID())) {
-                Minecraft.getInstance().getSoundManager().play(new ParanoiaLoopSound(player));
-                paranoiaSoundPlaying.add(player.getUUID());
+            if (entity.level().isClientSide) {
+                ParanoiaSoundManager.tryPlayParanoiaSound(player);
             }
         }
 

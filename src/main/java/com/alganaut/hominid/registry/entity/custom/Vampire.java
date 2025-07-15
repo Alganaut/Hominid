@@ -126,6 +126,10 @@ public class Vampire extends Monster {
             idleAnimationState.startIfStopped(tickCount);
             walkAnimationState.stop();
         }
+
+        if(this.getTarget() != null){
+            this.getTarget().addEffect(new MobEffectInstance(HominidEffects.PARANOIA, 80, 0));
+        }
     }
 
     @Override
