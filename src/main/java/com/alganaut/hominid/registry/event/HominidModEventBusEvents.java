@@ -4,7 +4,9 @@ import com.alganaut.hominid.Hominid;
 import com.alganaut.hominid.registry.entity.HominidEntityCreator;
 import com.alganaut.hominid.registry.entity.custom.Fossilised;
 import com.alganaut.hominid.registry.entity.custom.Incendiary;
+import com.alganaut.hominid.registry.misc.HominidBuiltinPacks;
 import net.minecraft.client.Minecraft;
+import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.PackRepository;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.SpawnPlacementTypes;
@@ -18,6 +20,7 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.event.AddPackFindersEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.neoforged.neoforge.event.level.ExplosionEvent;
 
@@ -46,5 +49,15 @@ public class HominidModEventBusEvents {
         PackRepository repository = Minecraft.getInstance().getResourcePackRepository();
 
         repository.addPackFinder(new ModPackFinder(MODID));
+    }
+
+    @SubscribeEvent
+    public static void addBuiltinPacks(AddPackFindersEvent event) {
+        if (event.getPackType() == PackType.CLIENT_RESOURCES) { // Resource Packs
+            HominidBuiltinPacks.rpHominidRetextures(event);
+        }
+        if (event.getPackType() == PackType.SERVER_DATA) { // Datapacks
+
+        }
     }
 }
