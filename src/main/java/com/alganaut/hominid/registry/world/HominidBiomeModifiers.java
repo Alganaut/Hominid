@@ -27,19 +27,19 @@ public class HominidBiomeModifiers {
         var biomes = context.lookup(Registries.BIOME);
         context.register(SPAWN_MELLIFIED, new BiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(Biomes.FLOWER_FOREST), biomes.getOrThrow(Biomes.MEADOW), biomes.getOrThrow(Biomes.CHERRY_GROVE), biomes.getOrThrow(Biomes.BIRCH_FOREST)),
-                List.of(new MobSpawnSettings.SpawnerData(HominidEntityCreator.MELLIFIED.get(), 100, 2, 3))));
+                List.of(new MobSpawnSettings.SpawnerData(HominidEntityCreator.MELLIFIED.get(), 100, 1, 3))));
         context.register(SPAWN_INCENDIARY, new BiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(Biomes.TAIGA), biomes.getOrThrow(Biomes.SNOWY_TAIGA), biomes.getOrThrow(Biomes.OLD_GROWTH_SPRUCE_TAIGA), biomes.getOrThrow(Biomes.OLD_GROWTH_PINE_TAIGA), biomes.getOrThrow(Biomes.WINDSWEPT_HILLS), biomes.getOrThrow(Biomes.GROVE)),
                 List.of(new MobSpawnSettings.SpawnerData(HominidEntityCreator.INCENDIARY.get(), 100, 1, 3))));
         context.register(SPAWN_FAMISHED, new BiomeModifiers.AddSpawnsBiomeModifier(
-                HolderSet.direct(biomes.getOrThrow(Biomes.DRIPSTONE_CAVES), biomes.getOrThrow(Biomes.STONY_PEAKS), biomes.getOrThrow(Biomes.JAGGED_PEAKS), biomes.getOrThrow(Biomes.FROZEN_PEAKS), biomes.getOrThrow(Biomes.SNOWY_SLOPES), biomes.getOrThrow(Biomes.DESERT), biomes.getOrThrow(Biomes.BADLANDS)),
-                List.of(new MobSpawnSettings.SpawnerData(HominidEntityCreator.FAMISHED.get(), 100, 1, 2))));
+                HolderSet.direct(biomes.getOrThrow(Biomes.DRIPSTONE_CAVES), biomes.getOrThrow(Biomes.STONY_PEAKS), biomes.getOrThrow(Biomes.JAGGED_PEAKS), biomes.getOrThrow(Biomes.FROZEN_PEAKS), biomes.getOrThrow(Biomes.SNOWY_SLOPES), biomes.getOrThrow(Biomes.DESERT), biomes.getOrThrow(Biomes.BADLANDS), biomes.getOrThrow(Biomes.SNOWY_PLAINS), biomes.getOrThrow(Biomes.ICE_SPIKES), biomes.getOrThrow(Biomes.WINDSWEPT_GRAVELLY_HILLS), biomes.getOrThrow(Biomes.WINDSWEPT_HILLS)),
+                List.of(new MobSpawnSettings.SpawnerData(HominidEntityCreator.FAMISHED.get(), 75, 1, 6))));
         context.register(SPAWN_FOSSILISED, new BiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(Biomes.DESERT), biomes.getOrThrow(Biomes.SWAMP), biomes.getOrThrow(Biomes.DRIPSTONE_CAVES), biomes.getOrThrow(Biomes.LUSH_CAVES), biomes.getOrThrow(Biomes.MANGROVE_SWAMP), biomes.getOrThrow(Biomes.BADLANDS), biomes.getOrThrow(Biomes.ERODED_BADLANDS), biomes.getOrThrow(Biomes.WOODED_BADLANDS)),
-                List.of(new MobSpawnSettings.SpawnerData(HominidEntityCreator.FOSSILISED.get(), 100, 1, 2))));
+                List.of(new MobSpawnSettings.SpawnerData(HominidEntityCreator.FOSSILISED.get(), 25, 1, 1))));
         context.register(SPAWN_VAMPIRE, new BiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(Biomes.DARK_FOREST)),
-                List.of(new MobSpawnSettings.SpawnerData(HominidEntityCreator.VAMPIRE.get(), 80, 1, 1))));
+                List.of(new MobSpawnSettings.SpawnerData(HominidEntityCreator.VAMPIRE.get(), 50, 1, 1))));
     }
 
     private static ResourceKey<BiomeModifier> registerKey(String name) {

@@ -29,23 +29,21 @@ public class JuggernautModel<T extends Juggernaut> extends HierarchicalModel<T> 
         PartDefinition juggernaut = partdefinition.addOrReplaceChild("juggernaut", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 
         PartDefinition torso = juggernaut.addOrReplaceChild("torso", CubeListBuilder.create().texOffs(0, 0).addBox(-6.0F, -10.0F, -4.0F, 12.0F, 10.0F, 8.0F, new CubeDeformation(0.0F))
-                .texOffs(20, 47).addBox(-5.0F, 0.0F, -3.0F, 10.0F, 3.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -16.0F, 0.0F));
+                .texOffs(36, 18).addBox(-5.0F, 0.0F, -3.0F, 10.0F, 3.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -16.0F, 0.0F));
 
-        PartDefinition left_leg = juggernaut.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(0, 38).addBox(-2.0F, 0.0F, -3.0F, 5.0F, 13.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, -13.0F, 0.5F));
+        PartDefinition left_leg = juggernaut.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(40, 0).addBox(-2.0F, 0.0F, -3.0F, 5.0F, 13.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, -13.0F, 0.5F));
 
-        PartDefinition right_leg = juggernaut.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(0, 38).mirror().addBox(-3.0F, 0.0F, -3.0F, 5.0F, 13.0F, 5.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-2.0F, -13.0F, 0.5F));
+        PartDefinition right_leg = juggernaut.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(40, 0).mirror().addBox(-3.0F, 0.0F, -3.0F, 5.0F, 13.0F, 5.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-2.0F, -13.0F, 0.5F));
 
-        PartDefinition left_arm = juggernaut.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(36, 27).addBox(0.0F, -2.0F, -3.0F, 5.0F, 14.0F, 5.0F, new CubeDeformation(0.0F))
-                .texOffs(42, 8).addBox(5.0F, -2.0F, -2.0F, 1.0F, 13.0F, 0.0F, new CubeDeformation(0.0F))
-                .texOffs(42, 8).addBox(5.0F, -2.0F, 1.0F, 1.0F, 13.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(6.0F, -24.0F, 0.5F));
+        PartDefinition left_arm = juggernaut.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(36, 27).addBox(0.0F, -2.5F, -2.5F, 5.0F, 14.0F, 5.0F, new CubeDeformation(0.0F))
+                .texOffs(28, 38).addBox(5.0F, 2.5F, -1.5F, 1.0F, 7.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(6.0F, -23.5F, 0.0F));
 
-        PartDefinition right_arm = juggernaut.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(36, 27).mirror().addBox(-5.0F, -2.0F, -3.0F, 5.0F, 14.0F, 5.0F, new CubeDeformation(0.0F)).mirror(false)
-                .texOffs(42, 8).mirror().addBox(-6.0F, -2.0F, -2.0F, 1.0F, 13.0F, 0.0F, new CubeDeformation(0.0F)).mirror(false)
-                .texOffs(42, 8).mirror().addBox(-6.0F, -2.0F, 1.0F, 1.0F, 13.0F, 0.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-6.0F, -24.0F, 0.5F));
+        PartDefinition right_arm = juggernaut.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(0, 38).addBox(-5.0F, -2.5F, -2.5F, 5.0F, 14.0F, 5.0F, new CubeDeformation(0.0F))
+                .texOffs(28, 38).addBox(-6.0F, 2.5F, -1.5F, 1.0F, 7.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-6.0F, -23.5F, 0.0F));
 
         PartDefinition head = juggernaut.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 18).addBox(-5.0F, -12.0F, -4.0F, 10.0F, 12.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -26.0F, 0.0F));
 
-        return LayerDefinition.create(meshdefinition, 64, 64);
+        return LayerDefinition.create(meshdefinition, 128, 128);
     }
 
     @Override

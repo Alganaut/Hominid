@@ -47,7 +47,7 @@ public class HominidEntityCreator {
     public static final Supplier<EntityType<Juggernaut>> JUGGERNAUT = registerEntity(
             "juggernaut",
             EntityType.Builder.of(Juggernaut::new, MobCategory.MONSTER)
-                    .sized(0.6F, 1.99F)
+                    .sized(0.8F, 2.2F)
     );
 
     public static final Supplier<EntityType<Fossilised>> FOSSILISED = registerEntity(

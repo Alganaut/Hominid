@@ -1,7 +1,7 @@
-// 1.21.1	2025-04-05T20:38:19.5575228	Registries
-b0e97d94938a1c909c156868762ced78f3651d6b data/hominid/neoforge/biome_modifier/spawn_famished.json
-dd1214af9c82293943444add53967e87c5c65413 data/hominid/neoforge/biome_modifier/spawn_fossilised.json
+// 1.21.1	2025-10-29T12:11:11.8410742	Registries
+70fccb16cdc71447c3b4db155d65beb00aa68809 data/hominid/neoforge/biome_modifier/spawn_famished.json
+1169039e118dc16d88eb1293dbcd4152e88a413f data/hominid/neoforge/biome_modifier/spawn_fossilised.json
 6308754059d5887e3bcc94124eb6e3a0fd92c7f5 data/hominid/neoforge/biome_modifier/spawn_incendiary.json
-297758de74f9c880059dfc55c0b773e178cdc9d5 data/hominid/neoforge/biome_modifier/spawn_mellified.json
-eda46d2266424a3e18d4fa4222360991e5f4a140 data/hominid/neoforge/biome_modifier/spawn_vampire.json
+90b258e5a21e7a7150dd6d5208f639600b1723f0 data/hominid/neoforge/biome_modifier/spawn_mellified.json
+af98dad99a3577301e02810ed05bef5f001d30b0 data/hominid/neoforge/biome_modifier/spawn_vampire.json
 08a071137d9abac43bc703f89c32101d0bfa5509 data/hominid/trim_pattern/remains.json

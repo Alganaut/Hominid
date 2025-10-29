@@ -7,11 +7,15 @@
     "minecraft:frozen_peaks",
     "minecraft:snowy_slopes",
     "minecraft:desert",
-    "minecraft:badlands"
+    "minecraft:badlands",
+    "minecraft:snowy_plains",
+    "minecraft:ice_spikes",
+    "minecraft:windswept_gravelly_hills",
+    "minecraft:windswept_hills"
   ],
   "spawners": {
     "type": "hominid:famished",
-    "maxCount": 2,
+    "maxCount": 6,
     "minCount": 1,
     "weight": 100
   }

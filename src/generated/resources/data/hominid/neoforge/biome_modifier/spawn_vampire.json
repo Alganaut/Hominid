@@ -5,6 +5,6 @@
     "type": "hominid:vampire",
     "maxCount": 1,
     "minCount": 1,
-    "weight": 80
+    "weight": 50
   }
 }
