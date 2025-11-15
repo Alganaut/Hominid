@@ -39,7 +39,7 @@ public class HominidBiomeModifiers {
                 List.of(new MobSpawnSettings.SpawnerData(HominidEntityCreator.FOSSILISED.get(), 25, 1, 1))));
         context.register(SPAWN_VAMPIRE, new BiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(Biomes.DARK_FOREST)),
-                List.of(new MobSpawnSettings.SpawnerData(HominidEntityCreator.VAMPIRE.get(), 50, 1, 1))));
+                List.of(new MobSpawnSettings.SpawnerData(HominidEntityCreator.VAMPIRE.get(), 25, 1, 1))));
     }
 
     private static ResourceKey<BiomeModifier> registerKey(String name) {

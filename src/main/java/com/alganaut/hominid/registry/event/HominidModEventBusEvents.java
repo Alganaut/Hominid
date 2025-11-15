@@ -55,7 +55,6 @@ public class HominidModEventBusEvents {
     public static void addBuiltinPacks(AddPackFindersEvent event) {
         if (event.getPackType() == PackType.CLIENT_RESOURCES) { // Resource Packs
             HominidBuiltinPacks.rpHominidRetextures(event);
-            HominidBuiltinPacks.rpHominidZombieVariation(event);
         }
         if (event.getPackType() == PackType.SERVER_DATA) { // Datapacks
 

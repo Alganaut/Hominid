@@ -17,6 +17,6 @@
     "type": "hominid:famished",
     "maxCount": 6,
     "minCount": 1,
-    "weight": 100
+    "weight": 75
   }
 }

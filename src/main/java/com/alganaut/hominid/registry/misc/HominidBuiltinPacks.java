@@ -28,17 +28,6 @@ public class HominidBuiltinPacks {
                 new PackLocationInfo("hominid:hominid_retextures", Component.literal("Hominid Retextures"), PackSource.BUILT_IN, Optional.empty()),
                 new PathPackResources.PathResourcesSupplier(path),
                 new Pack.Metadata(metadata.description(), PackCompatibility.COMPATIBLE, FeatureFlagSet.of(), List.of(), false),
-                new PackSelectionConfig(true, Pack.Position.TOP, false)
-        )));
-    }
-
-    public static void rpHominidZombieVariation(AddPackFindersEvent event) {
-        Path path = ModList.get().getModFileById(Hominid.MODID).getFile().findResource("resourcepacks/hominid_zombie_variation");
-        PackMetadataSection metadata = new PackMetadataSection(Component.literal("Requires EMF!"), SharedConstants.getCurrentVersion().getPackVersion(PackType.CLIENT_RESOURCES));
-        event.addRepositorySource(source -> source.accept(new Pack(
-                new PackLocationInfo("hominid:hominid_zombie_variation", Component.literal("Hominid Zombie Variation"), PackSource.BUILT_IN, Optional.empty()),
-                new PathPackResources.PathResourcesSupplier(path),
-                new Pack.Metadata(metadata.description(), PackCompatibility.COMPATIBLE, FeatureFlagSet.of(), List.of(), false),
                 new PackSelectionConfig(false, Pack.Position.TOP, false)
         )));
     }
