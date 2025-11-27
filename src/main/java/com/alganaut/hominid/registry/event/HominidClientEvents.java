@@ -66,6 +66,7 @@ public class HominidClientEvents {
         }
     }
 
+
     @SubscribeEvent
     public static void onExplosionDetonate(ExplosionEvent.Detonate event) {
         if (event.getExplosion().getDirectSourceEntity() instanceof Creeper creeper) {

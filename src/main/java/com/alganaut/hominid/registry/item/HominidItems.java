@@ -36,8 +36,8 @@ public class HominidItems {
             () -> new DeferredSpawnEggItem(HominidEntityCreator.VAMPIRE, 0x6e211f, 0x4d4129,
                     new Item.Properties()));
 
-    public static final DeferredItem<Item> DRIED_ROTTEN_FLESH = ITEMS.register("dried_rotten_flesh",
-            () -> new Item(new Item.Properties().food(FoodItems.DRIED_ROTTEN_FLESH)));
+    public static final DeferredItem<Item> DRIED_FLESH = ITEMS.register("dried_flesh",
+            () -> new Item(new Item.Properties().food(FoodItems.DRIED_FLESH)));
 
     public static final DeferredItem<Item> GASOLINE_TANK = ITEMS.register("gasoline_tank",
             () -> new GasTank(new Item.Properties().durability(3).stacksTo(1)));

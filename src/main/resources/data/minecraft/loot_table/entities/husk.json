@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "hominid:dried_rotten_flesh",
+          "name": "hominid:dried_flesh",
           "weight": 1,
           "functions": [
             {
