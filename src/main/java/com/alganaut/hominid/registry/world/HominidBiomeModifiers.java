@@ -20,7 +20,7 @@ public class HominidBiomeModifiers {
     public static final ResourceKey<BiomeModifier> SPAWN_MELLIFIED = registerKey("spawn_mellified");
     public static final ResourceKey<BiomeModifier> SPAWN_INCENDIARY = registerKey("spawn_incendiary");
     public static final ResourceKey<BiomeModifier> SPAWN_FAMISHED = registerKey("spawn_famished");
-    public static final ResourceKey<BiomeModifier> SPAWN_FOSSILISED = registerKey("spawn_fossilised");
+    public static final ResourceKey<BiomeModifier> SPAWN_FOSSILIZED = registerKey("spawn_fossilised");
     public static final ResourceKey<BiomeModifier> SPAWN_VAMPIRE = registerKey("spawn_vampire");
 
     public static void bootstrap(BootstrapContext<BiomeModifier> context) {
@@ -34,9 +34,9 @@ public class HominidBiomeModifiers {
         context.register(SPAWN_FAMISHED, new BiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(Biomes.DRIPSTONE_CAVES), biomes.getOrThrow(Biomes.STONY_PEAKS), biomes.getOrThrow(Biomes.JAGGED_PEAKS), biomes.getOrThrow(Biomes.FROZEN_PEAKS), biomes.getOrThrow(Biomes.SNOWY_SLOPES), biomes.getOrThrow(Biomes.DESERT), biomes.getOrThrow(Biomes.BADLANDS), biomes.getOrThrow(Biomes.SNOWY_PLAINS), biomes.getOrThrow(Biomes.ICE_SPIKES), biomes.getOrThrow(Biomes.WINDSWEPT_GRAVELLY_HILLS), biomes.getOrThrow(Biomes.WINDSWEPT_HILLS)),
                 List.of(new MobSpawnSettings.SpawnerData(HominidEntityCreator.FAMISHED.get(), 75, 1, 6))));
-        context.register(SPAWN_FOSSILISED, new BiomeModifiers.AddSpawnsBiomeModifier(
+        context.register(SPAWN_FOSSILIZED, new BiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(Biomes.DESERT), biomes.getOrThrow(Biomes.SWAMP), biomes.getOrThrow(Biomes.DRIPSTONE_CAVES), biomes.getOrThrow(Biomes.LUSH_CAVES), biomes.getOrThrow(Biomes.MANGROVE_SWAMP), biomes.getOrThrow(Biomes.BADLANDS), biomes.getOrThrow(Biomes.ERODED_BADLANDS), biomes.getOrThrow(Biomes.WOODED_BADLANDS)),
-                List.of(new MobSpawnSettings.SpawnerData(HominidEntityCreator.FOSSILISED.get(), 25, 1, 1))));
+                List.of(new MobSpawnSettings.SpawnerData(HominidEntityCreator.FOSSILIZED.get(), 25, 1, 1))));
         context.register(SPAWN_VAMPIRE, new BiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(Biomes.DARK_FOREST)),
                 List.of(new MobSpawnSettings.SpawnerData(HominidEntityCreator.VAMPIRE.get(), 25, 1, 1))));

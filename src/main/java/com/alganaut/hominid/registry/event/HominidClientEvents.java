@@ -97,6 +97,7 @@ public class HominidClientEvents {
             Juggernaut customMob = new Juggernaut(HominidEntityCreator.JUGGERNAUT.get(), wolf.level());
             customMob.setPos(wolf.position().x, wolf.position().y, wolf.position().z);
             wolf.level().addFreshEntity(customMob);
+
         }
         if (event.getEntity() != null && event.getEntity() instanceof AbstractIllager) {
             AbstractIllager illager = (AbstractIllager) event.getEntity();

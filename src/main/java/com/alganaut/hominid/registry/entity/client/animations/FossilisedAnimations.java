@@ -7,7 +7,7 @@ import net.minecraft.client.animation.KeyframeAnimations;
 
 public class FossilisedAnimations {
 
-        public static final AnimationDefinition ANIM_FOSSILISED_IDLE = AnimationDefinition.Builder.withLength(1.3333F).looping()
+        public static final AnimationDefinition ANIM_FOSSILIZED_IDLE = AnimationDefinition.Builder.withLength(1.3333F).looping()
                 .addAnimation("body", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                         new Keyframe(0.0F, KeyframeAnimations.degreeVec(2.5F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR),
                         new Keyframe(0.3323F, KeyframeAnimations.degreeVec(2.5F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR),
@@ -54,7 +54,7 @@ public class FossilisedAnimations {
                 ))
                 .build();
 
-        public static final AnimationDefinition ANIM_FOSSILISED_WALK = AnimationDefinition.Builder.withLength(1.3333F).looping()
+        public static final AnimationDefinition ANIM_FOSSILIZED_WALK = AnimationDefinition.Builder.withLength(1.3333F).looping()
                 .addAnimation("fossilised", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                         new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, -2.5F), AnimationChannel.Interpolations.LINEAR),
                         new Keyframe(0.2907F, KeyframeAnimations.degreeVec(0.0F, 0.0F, -2.5F), AnimationChannel.Interpolations.LINEAR),
@@ -123,7 +123,7 @@ public class FossilisedAnimations {
                 ))
                 .build();
 
-        public static final AnimationDefinition ANIMATION_FOSSILISED_ATTACK = AnimationDefinition.Builder.withLength(2.0F)
+        public static final AnimationDefinition ANIMATION_FOSSILIZED_ATTACK = AnimationDefinition.Builder.withLength(2.0F)
                 .addAnimation("body", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                         new Keyframe(0.0F, KeyframeAnimations.degreeVec(2.5F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR),
                         new Keyframe(0.2073F, KeyframeAnimations.degreeVec(2.5F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR),

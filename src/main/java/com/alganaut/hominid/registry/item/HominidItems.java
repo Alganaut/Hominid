@@ -29,8 +29,13 @@ public class HominidItems {
     public static final DeferredItem<Item> JUGGERNAUT_SPAWN_EGG = ITEMS.register("juggernaut_spawn_egg",
             () -> new DeferredSpawnEggItem(HominidEntityCreator.JUGGERNAUT, 0x6f625d, 0x541635,
                     new Item.Properties()));
+
+    public static final DeferredItem<Item> BELLMAN_SPAWN_EGG = ITEMS.register("bellman_spawn_egg",
+            () -> new DeferredSpawnEggItem(HominidEntityCreator.BELLMAN, 0x211f1b, 0x898b82,
+                    new Item.Properties()));
+
     public static final DeferredItem<Item> FOSSLISED_SPAWN_EGG = ITEMS.register("fossilised_spawn_egg",
-            () -> new DeferredSpawnEggItem(HominidEntityCreator.FOSSILISED, 0x9a9c7a, 0x5b5344,
+            () -> new DeferredSpawnEggItem(HominidEntityCreator.FOSSILIZED, 0x9a9c7a, 0x5b5344,
                     new Item.Properties()));
     public static final DeferredItem<Item> VAMPIRE_SPAWN_EGG = ITEMS.register("vampire_spawn_egg",
             () -> new DeferredSpawnEggItem(HominidEntityCreator.VAMPIRE, 0x6e211f, 0x4d4129,

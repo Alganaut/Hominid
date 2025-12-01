@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 public class FossilisedRenderer extends MobRenderer<Fossilised, FossilisedModel<Fossilised>> {
     private static final ResourceLocation LOCATION = ResourceLocation.fromNamespaceAndPath(Hominid.MODID, "textures/entity/fossilised/fossilised.png");
     public FossilisedRenderer(EntityRendererProvider.Context context) {
-        super(context, new FossilisedModel<>(context.bakeLayer(HominidModelLayers.FOSSILISED)), 0.3f);
+        super(context, new FossilisedModel<>(context.bakeLayer(HominidModelLayers.FOSSILIZED)), 0.3f);
     }
 
     @Override

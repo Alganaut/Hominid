@@ -72,6 +72,10 @@ public class Creative {
                     Items.TURTLE_SPAWN_EGG,
                     HominidItems.VAMPIRE_SPAWN_EGG
             );
+            insertItems(
+                    Items.BEE_SPAWN_EGG,
+                    HominidItems.BELLMAN_SPAWN_EGG
+            );
         }
     }
 

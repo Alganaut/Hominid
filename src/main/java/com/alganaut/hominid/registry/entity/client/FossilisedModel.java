@@ -55,9 +55,9 @@ public class FossilisedModel<T extends Fossilised> extends HierarchicalModel<T> 
         this.root().getAllParts().forEach(ModelPart::resetPose);
 
 
-        this.animateWalk(FossilisedAnimations.ANIM_FOSSILISED_WALK, limbSwing, limbSwingAmount, 4f, 54);
-        this.animate(entity.idleAnimationState,FossilisedAnimations.ANIM_FOSSILISED_IDLE,ageInTicks, 1f);
-        this.animate(entity.throwAnimationState,FossilisedAnimations.ANIMATION_FOSSILISED_ATTACK,ageInTicks, 1f);
+        this.animateWalk(FossilisedAnimations.ANIM_FOSSILIZED_WALK, limbSwing, limbSwingAmount, 4f, 54);
+        this.animate(entity.idleAnimationState,FossilisedAnimations.ANIM_FOSSILIZED_IDLE,ageInTicks, 1f);
+        this.animate(entity.throwAnimationState,FossilisedAnimations.ANIMATION_FOSSILIZED_ATTACK,ageInTicks, 1f);
     }
 
     @Override

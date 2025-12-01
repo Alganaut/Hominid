@@ -6,6 +6,7 @@
   "item.hominid.incendiary_spawn_egg": "Incendiary Spawn Egg",
   "item.hominid.famished_spawn_egg": "Famished Spawn Egg",
   "item.hominid.juggernaut_spawn_egg": "Juggernaut Spawn Egg",
+  "item.hominid.bellman_spawn_egg": "Bellman Spawn Egg",
   "item.hominid.fossilised_spawn_egg": "Fossilized Spawn Egg",
   "item.hominid.vampire_spawn_egg": "Vampire Spawn Egg",
 
@@ -19,6 +20,7 @@
   "entity.hominid.incendiary": "Incendiary",
   "entity.hominid.famished": "Famished",
   "entity.hominid.juggernaut": "Juggernaut",
+  "entity.hominid.bellman": "Bellman",
   "entity.hominid.fossilised": "Fossilized",
   "entity.hominid.vampire": "Vampire",
 
