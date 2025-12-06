@@ -1,7 +1,8 @@
-package com.alganaut.hominid.registry.item;
+package com.alganaut.hominid.registry.misc;
 
 import com.alganaut.hominid.Hominid;
 import com.alganaut.hominid.registry.block.HominidBlocks;
+import com.alganaut.hominid.registry.item.HominidItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;

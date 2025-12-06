@@ -5,7 +5,7 @@ import com.alganaut.hominid.registry.effect.HominidEffects;
 import com.alganaut.hominid.registry.entity.HominidEntityCreator;
 import com.alganaut.hominid.registry.event.HominidClientEvents;
 import com.alganaut.hominid.registry.item.HominidItems;
-import com.alganaut.hominid.registry.item.HominidCreativeModeTab;
+import com.alganaut.hominid.registry.misc.HominidCreativeModeTab;
 import com.alganaut.hominid.registry.sound.HominidSounds;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.resources.ResourceLocation;

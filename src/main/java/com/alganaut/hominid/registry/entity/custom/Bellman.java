@@ -1,10 +1,15 @@
 package com.alganaut.hominid.registry.entity.custom;
 
+import com.alganaut.hominid.registry.misc.HominidTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
@@ -23,6 +28,10 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Bellman extends Monster {
     public final AnimationState attackAnimationState = new AnimationState();
@@ -43,6 +52,7 @@ public class Bellman extends Monster {
 
     @Override
     protected void registerGoals() {
+        this.goalSelector.addGoal(10, new SummonUndeadGoal(this));
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(4, new Bellman.ZombieAttackTurtleEggGoal(this, 1.0, 3));
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2, false));
@@ -106,6 +116,45 @@ public class Bellman extends Monster {
         super.aiStep();
     }
 
+    private int summonCooldown = 600;
+
+
+    static class SummonUndeadGoal extends Goal {
+        private final Bellman bellman;
+
+        public SummonUndeadGoal(Bellman bellman) {
+            this.bellman = bellman;
+        }
+
+        @Override
+        public boolean canUse() {
+            return bellman.summonCooldown <= 0 && bellman.getTarget() != null;
+        }
+
+        @Override
+        public void start() {
+            if (!bellman.level().isClientSide) {
+                ServerLevel serverLevel = (ServerLevel) bellman.level();
+                RandomSource random = bellman.getRandom();
+
+                Optional<Holder<EntityType<?>>> randomEntityFromTag = BuiltInRegistries.ENTITY_TYPE.getRandomElementOf(HominidTags.BELLMAN_SPAWNABLE, random);
+                EntityType<?> entityToSpawn = null;;
+                if (randomEntityFromTag.isPresent()) entityToSpawn = randomEntityFromTag.get().value();
+
+                if (entityToSpawn != null) {
+                    for (int i = 0; i < 3; i++) {
+                        Entity entity = entityToSpawn.create(serverLevel);
+                        BlockPos summonPos = bellman.blockPosition().offset(random.nextInt(5) - 2, 0, random.nextInt(5) - 2);
+                        entity.moveTo(summonPos.getX(), summonPos.getY(), summonPos.getZ(), bellman.getYRot(), 0);
+                        serverLevel.addFreshEntity(entity);
+                    }
+                }
+
+                bellman.summonCooldown = 600;
+            }
+        }
+    }
+    
     @Override
     protected SoundEvent getAmbientSound() {
         return SoundEvents.ZOMBIE_AMBIENT;
