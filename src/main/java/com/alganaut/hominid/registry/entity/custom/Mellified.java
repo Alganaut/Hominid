@@ -136,7 +136,7 @@ public class Mellified extends Monster {
                 double velocityY = this.random.nextDouble() * 0.3 + 0.2;
                 double velocityZ = (this.random.nextDouble() - 0.5) * 0.2;
 
-                serverLevel.sendParticles(ParticleTypes.LANDING_HONEY,
+                serverLevel.sendParticles(ParticleTypes.FALLING_HONEY,
                         entity.getX() + offsetX, entity.getY() + offsetY, entity.getZ() + offsetZ,
                         1, velocityX, velocityY, velocityZ, 0);
             }
@@ -154,7 +154,7 @@ public class Mellified extends Monster {
 
         for (Monster zombie : nearbyZombies) {
             if (!zombie.equals(this)) {
-                zombie.addEffect(new MobEffectInstance(HominidEffects.HONEYED, 200, 1));
+                zombie.addEffect(new MobEffectInstance(HominidEffects.HONEYED, 600, 10));
             }
         }
     }

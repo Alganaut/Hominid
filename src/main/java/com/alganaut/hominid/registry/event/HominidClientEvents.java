@@ -35,23 +35,10 @@ public class HominidClientEvents {
     private static final Map<UUID, Integer> soundTimerMap = new HashMap<>();
 
     public static void register() {
-        NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onPlayerDrinkHoney);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onPlayerEatFlesh);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onExplosionDetonate);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onEntityJoinWorld);
         //NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onClientTick);
-    }
-
-    @SubscribeEvent
-    public static void onPlayerDrinkHoney(LivingEntityUseItemEvent.Finish event) {
-        if (event.getEntity() instanceof Player player) {
-            ItemStack itemStack = event.getItem();
-            Level world = player.level();
-
-            if (!world.isClientSide && itemStack.getItem() == Items.HONEY_BOTTLE) {
-                player.addEffect(new MobEffectInstance(HominidEffects.HONEYED, 400, 0));
-            }
-        }
     }
 
     @SubscribeEvent

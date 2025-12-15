@@ -43,7 +43,7 @@ public class Creative {
         if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
             insertItems(
                     Items.ROTTEN_FLESH,
-                    HominidItems.DRIED_FLESH
+                    HominidItems.FAMISHED_STOMACH
             );
         }
 

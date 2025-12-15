@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hominid:item/dried_flesh"
+    "layer0": "hominid:item/famished_stomach"
   }
 }

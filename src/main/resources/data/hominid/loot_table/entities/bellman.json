@@ -6,31 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:bone",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchanted_count_increase",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1,
-                "max": 2
-              },
-              "enchantment": "minecraft:looting"
-            },
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1,
-                "max": 3
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:rotten_flesh",
+          "name": "minecraft:iron_ingot",
           "weight": 2,
           "functions": [
             {
@@ -46,15 +22,15 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
-                "max": 2
+                "min": 2,
+                "max": 4
               }
             }
           ]
         },
         {
           "type": "minecraft:item",
-          "name": "hominid:famished_stomach",
+          "name": "minecraft:rotten_flesh",
           "weight": 1,
           "functions": [
             {
@@ -62,7 +38,7 @@
               "count": {
                 "type": "minecraft:uniform",
                 "min": 1,
-                "max": 1
+                "max": 3
               },
               "enchantment": "minecraft:looting"
             },
@@ -70,8 +46,8 @@
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1,
-                "max": 1
+                "min": 4,
+                "max": 8
               }
             }
           ]
