@@ -244,6 +244,7 @@ public class Famished extends Monster {
 
             animals.removeIf(entity -> entity instanceof SkeletonHorse);
             animals.removeIf(entity -> entity instanceof TamableAnimal && ((TamableAnimal) entity).isTame());
+            animals.removeIf(entity -> entity instanceof OwnableEntity && entity.isBaby());
             animals.removeIf(entity -> entity instanceof OwnableEntity && ((OwnableEntity) entity).getOwner() != null);
 
             if (!animals.isEmpty()) {

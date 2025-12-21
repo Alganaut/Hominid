@@ -28,7 +28,9 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Debug;
 
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -37,6 +39,8 @@ public class Bellman extends Monster {
     public final AnimationState attackAnimationState = new AnimationState();
     public final AnimationState idleAnimationState = new AnimationState();
     public int idleAnimationTimeout = 0;
+
+    private int summonCooldown;
 
     public Bellman(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
@@ -52,7 +56,7 @@ public class Bellman extends Monster {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(10, new SummonUndeadGoal(this));
+        this.goalSelector.addGoal(1, new SummonUndeadGoal(this));
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(4, new Bellman.ZombieAttackTurtleEggGoal(this, 1.0, 3));
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2, false));
@@ -86,6 +90,9 @@ public class Bellman extends Monster {
         if (this.level().isClientSide()) {
             this.setupAnimationStates();
         }
+        if(summonCooldown >= -100){
+            summonCooldown--;
+        }
         super.tick();
     }
 
@@ -116,19 +123,23 @@ public class Bellman extends Monster {
         super.aiStep();
     }
 
-    private int summonCooldown = 600;
-
 
     static class SummonUndeadGoal extends Goal {
         private final Bellman bellman;
 
         public SummonUndeadGoal(Bellman bellman) {
             this.bellman = bellman;
+            this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
         }
 
         @Override
         public boolean canUse() {
             return bellman.summonCooldown <= 0 && bellman.getTarget() != null;
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return false;
         }
 
         @Override
@@ -140,6 +151,7 @@ public class Bellman extends Monster {
                 Optional<Holder<EntityType<?>>> randomEntityFromTag = BuiltInRegistries.ENTITY_TYPE.getRandomElementOf(HominidTags.BELLMAN_SPAWNABLE, random);
                 EntityType<?> entityToSpawn = null;;
                 if (randomEntityFromTag.isPresent()) entityToSpawn = randomEntityFromTag.get().value();
+                else entityToSpawn = EntityType.ZOMBIE;
 
                 if (entityToSpawn != null) {
                     for (int i = 0; i < 3; i++) {
@@ -149,8 +161,8 @@ public class Bellman extends Monster {
                         serverLevel.addFreshEntity(entity);
                     }
                 }
-
                 bellman.summonCooldown = 600;
+                stop();
             }
         }
     }

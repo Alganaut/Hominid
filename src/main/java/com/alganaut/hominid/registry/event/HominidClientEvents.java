@@ -86,6 +86,15 @@ public class HominidClientEvents {
             wolf.level().addFreshEntity(customMob);
 
         }
+        if (event.getEntity().getClass() == Zombie.class && Math.random() < 0.05) {
+            Zombie wolf = (Zombie) event.getEntity();
+            event.getEntity().discard();
+
+            Bellman customMob = new Bellman(HominidEntityCreator.BELLMAN.get(), wolf.level());
+            customMob.setPos(wolf.position().x, wolf.position().y, wolf.position().z);
+            wolf.level().addFreshEntity(customMob);
+
+        }
         if (event.getEntity() != null && event.getEntity() instanceof AbstractIllager) {
             AbstractIllager illager = (AbstractIllager) event.getEntity();
             illager.targetSelector.addGoal(3, new AvoidEntityGoal<>(illager, Vampire.class, 6.0F, 1.0D, 1.2D));

@@ -40,10 +40,10 @@ public class ParanoiaEffect extends MobEffect {
 
             if (isCameraStill) {
                 if (timer <= 0) {
-                    player.playSound(SoundEvents.GRASS_STEP, 0.3F, 1.0F);
-                    player.playSound(SoundEvents.SAND_STEP, 0.3F, 1.0F);
-                    player.playSound(SoundEvents.STONE_STEP, 0.3F, 1.0F);
-                    timer = 40;
+                    player.playSound(SoundEvents.GRASS_STEP, 0.15F, 1.0F);
+                    player.playSound(SoundEvents.SAND_STEP, 0.15F, 1.0F);
+                    player.playSound(SoundEvents.STONE_STEP, 0.15F, 1.0F);
+                    timer = player.getRandom().nextInt(100);
                 } else {
                     timer--;
                 }
