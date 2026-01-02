@@ -6,16 +6,13 @@
     "minecraft:skeleton",
     "minecraft:stray",
     "minecraft:bogged",
-    "minecraft:parched",
     "hominid:incendiary",
     "hominid:mellified",
     "hominid:famished",
     "hominid:juggernaut",
     "hominid:fossilized",
     "hominid:vampire",
-    {
-      "id": "galosphere:preserved",
-      "required": false
-    }
+    {"id": "galosphere:preserved", "required": false},
+    {"id": "minecraft:parched", "required": false}
   ]
 }

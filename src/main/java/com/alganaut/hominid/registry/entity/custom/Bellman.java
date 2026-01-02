@@ -148,7 +148,7 @@ public class Bellman extends Monster {
                 ServerLevel serverLevel = (ServerLevel) bellman.level();
                 RandomSource random = bellman.getRandom();
 
-                Optional<Holder<EntityType<?>>> randomEntityFromTag = BuiltInRegistries.ENTITY_TYPE.getRandomElementOf(HominidTags.BELLMAN_SPAWNABLE, random);
+                Optional<Holder<EntityType<?>>> randomEntityFromTag = BuiltInRegistries.ENTITY_TYPE.getRandomElementOf(HominidTags.EntityType.BELLMAN_SPAWNABLE, random);
                 EntityType<?> entityToSpawn = null;;
                 if (randomEntityFromTag.isPresent()) entityToSpawn = randomEntityFromTag.get().value();
                 else entityToSpawn = EntityType.ZOMBIE;
