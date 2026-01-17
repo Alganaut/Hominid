@@ -10,11 +10,10 @@ import net.minecraft.world.entity.EntityType;
 public class HominidTags {
 
     public static class EntityType {
-        public static final TagKey<EntityType> BELLMAN_SPAWNABLE = createTag("bellman_spawnable");
+        public static final TagKey<net.minecraft.world.entity.EntityType<?>> BELLMAN_SPAWNABLE = createTag("bellman_spawnable");
 
-        private static TagKey<EntityType> createTag(String name) {
-            return EntityTypeTags.create(ResourceLocation.fromNamespaceAndPath(Hominid.MODID, name));
+        private static TagKey<net.minecraft.world.entity.EntityType<?>> createTag(String name) {
+            return TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(Hominid.MODID, name));
         }
-
     }
 }

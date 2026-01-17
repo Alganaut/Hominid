@@ -5,10 +5,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -27,8 +30,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
+import org.jetbrains.annotations.Debug;
 import org.jetbrains.annotations.Nullable;
-import org.spongepowered.asm.mixin.Debug;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -147,22 +150,44 @@ public class Bellman extends Monster {
             if (!bellman.level().isClientSide) {
                 ServerLevel serverLevel = (ServerLevel) bellman.level();
                 RandomSource random = bellman.getRandom();
-
-                Optional<Holder<EntityType<?>>> randomEntityFromTag = BuiltInRegistries.ENTITY_TYPE.getRandomElementOf(HominidTags.EntityType.BELLMAN_SPAWNABLE, random);
-                EntityType<?> entityToSpawn = null;;
-                if (randomEntityFromTag.isPresent()) entityToSpawn = randomEntityFromTag.get().value();
-                else entityToSpawn = EntityType.ZOMBIE;
-
-                if (entityToSpawn != null) {
-                    for (int i = 0; i < 3; i++) {
-                        Entity entity = entityToSpawn.create(serverLevel);
-                        BlockPos summonPos = bellman.blockPosition().offset(random.nextInt(5) - 2, 0, random.nextInt(5) - 2);
-                        entity.moveTo(summonPos.getX(), summonPos.getY(), summonPos.getZ(), bellman.getYRot(), 0);
-                        serverLevel.addFreshEntity(entity);
-                    }
+                var tagOptional = BuiltInRegistries.ENTITY_TYPE.getTag(HominidTags.EntityType.BELLMAN_SPAWNABLE);
+                net.minecraft.world.entity.EntityType<?>[] entityPool;
+                if (tagOptional.isPresent()) {
+                    entityPool = tagOptional.get().stream()
+                            .map(Holder::value)
+                            .toArray(net.minecraft.world.entity.EntityType<?>[]::new);
+                } else {
+                    entityPool = new net.minecraft.world.entity.EntityType<?>[]{
+                            EntityType.ZOMBIE,
+                            EntityType.HUSK,
+                            EntityType.DROWNED,
+                            EntityType.SKELETON,
+                            EntityType.STRAY,
+                            EntityType.BOGGED,
+                            BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("hominid", "incendiary")),
+                            BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("hominid", "mellified")),
+                            BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("hominid", "famished")),
+                            BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("hominid", "juggernaut")),
+                            BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("hominid", "fossilized")),
+                            BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("hominid", "vampire"))
+                    };
                 }
+
+                for (int i = 0; i < 3; i++) {
+                    int rand = random.nextInt(entityPool.length);
+                    net.minecraft.world.entity.EntityType<?> entityToSpawn = entityPool[rand];
+                    Entity entity = entityToSpawn.create(serverLevel);
+                    BlockPos summonPos = bellman.blockPosition().offset(random.nextInt(5) - 2, 0, random.nextInt(5) - 2);
+                    entity.moveTo(summonPos.getX(), summonPos.getY(), summonPos.getZ(), bellman.getYRot(), 0);
+                    if (entity instanceof Mob mob) {
+                        mob.finalizeSpawn(serverLevel, serverLevel.getCurrentDifficultyAt(summonPos),
+                                MobSpawnType.MOB_SUMMONED, null);
+                    }
+
+                    serverLevel.addFreshEntity(entity);
+                }
+
                 bellman.summonCooldown = 600;
-                stop();
             }
         }
     }
