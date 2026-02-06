@@ -20,7 +20,7 @@ public class HominidBiomeModifiers {
     public static final ResourceKey<BiomeModifier> SPAWN_MELLIFIED = registerKey("spawn_mellified");
     public static final ResourceKey<BiomeModifier> SPAWN_INCENDIARY = registerKey("spawn_incendiary");
     public static final ResourceKey<BiomeModifier> SPAWN_FAMISHED = registerKey("spawn_famished");
-    public static final ResourceKey<BiomeModifier> SPAWN_FOSSILIZED = registerKey("spawn_fossilised");
+    public static final ResourceKey<BiomeModifier> SPAWN_FOSSILIZED = registerKey("spawn_fossilized");
     public static final ResourceKey<BiomeModifier> SPAWN_VAMPIRE = registerKey("spawn_vampire");
 
     public static void bootstrap(BootstrapContext<BiomeModifier> context) {

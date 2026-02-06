@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:adventure/trim_with_any_armor_pattern",
   "criteria": {
-    "charred": {
+    "hematoma": {
       "conditions": {
         "items": [
           {
@@ -14,7 +14,7 @@
   },
   "display": {
     "description": {
-      "translate": "advancements.adventure.fossilised.description"
+      "translate": "advancements.adventure.fossilized.description"
     },
     "frame": "goal",
     "icon": {
@@ -22,12 +22,12 @@
       "id": "hominid:remains_armor_trim_smithing_template"
     },
     "title": {
-      "translate": "advancements.adventure.fossilised.title"
+      "translate": "advancements.adventure.fossilized.title"
     }
   },
   "requirements": [
     [
-      "charred"
+      "hematoma"
     ]
   ],
   "sends_telemetry_event": true

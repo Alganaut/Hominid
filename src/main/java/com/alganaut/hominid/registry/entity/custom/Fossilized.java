@@ -20,27 +20,25 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BrushItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.neoforge.common.ItemAbilities;
 import org.jetbrains.annotations.Nullable;
 
-public class Fossilised extends Monster {
+public class Fossilized extends Monster {
     public int idleAnimationTimeout = 0;
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState walkAnimationState = new AnimationState();
     public final AnimationState throwAnimationState = new AnimationState();
     public int attackState;
-    private static final EntityDataAccessor<Integer> BRUSH_COOLDOWN = SynchedEntityData.defineId(Fossilised.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Boolean> HAS_BEEN_BRUSHED = SynchedEntityData.defineId(Fossilised.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> BRUSH_COOLDOWN = SynchedEntityData.defineId(Fossilized.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> HAS_BEEN_BRUSHED = SynchedEntityData.defineId(Fossilized.class, EntityDataSerializers.BOOLEAN);
     private static final int COOLDOWN_TICKS = 200;
     private static final double DROP_CHANCE = 0.1;
 
-    public Fossilised(EntityType<? extends Monster> entityType, Level level) {
+    public Fossilized(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -79,7 +77,7 @@ public class Fossilised extends Monster {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new FossilisedRangedAttackGoal(this));
+        this.goalSelector.addGoal(1, new FossilizedRangedAttackGoal(this));
         this.goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0, 0.0F));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
@@ -134,28 +132,28 @@ public class Fossilised extends Monster {
     }
 
 
-    public class FossilisedRangedAttackGoal extends Goal {
-        private final Fossilised fossilised;
+    public class FossilizedRangedAttackGoal extends Goal {
+        private final Fossilized fossilized;
         private int attackCooldown;
         private int animationTimer;
 
-        public FossilisedRangedAttackGoal(Fossilised fossilised) {
-            this.fossilised = fossilised;
+        public FossilizedRangedAttackGoal(Fossilized fossilized) {
+            this.fossilized = fossilized;
             this.attackCooldown = 0;
             this.animationTimer = 0;
-            this.fossilised.attackState = 0;
+            this.fossilized.attackState = 0;
         }
 
         @Override
         public boolean canUse() {
-            return this.fossilised.getTarget() != null;
+            return this.fossilized.getTarget() != null;
         }
 
         @Override
         public void tick() {
-            LivingEntity target = this.fossilised.getTarget();
+            LivingEntity target = this.fossilized.getTarget();
             if (target == null) return;
-            this.fossilised.getLookControl().setLookAt(target, 30.0F, 30.0F);
+            this.fossilized.getLookControl().setLookAt(target, 30.0F, 30.0F);
 
             if (this.attackCooldown > 0) {
                 this.attackCooldown--;
@@ -164,7 +162,7 @@ public class Fossilised extends Monster {
 
             switch (attackState) {
                 case 0:
-                    this.fossilised.attackState = 1;
+                    this.fossilized.attackState = 1;
                     this.animationTimer = 18;
                     break;
 
@@ -172,13 +170,13 @@ public class Fossilised extends Monster {
                     if (animationTimer > 0) {
                         animationTimer--;
                     } else {
-                        this.fossilised.attackState = 2;
+                        this.fossilized.attackState = 2;
                         this.animationTimer = 18;
-                        if (!this.fossilised.level().isClientSide) {
-                            this.fossilised.level().broadcastEntityEvent(this.fossilised, (byte) 70);
+                        if (!this.fossilized.level().isClientSide) {
+                            this.fossilized.level().broadcastEntityEvent(this.fossilized, (byte) 70);
                         }
-                        this.fossilised.getNavigation().stop();
-                        this.fossilised.getLookControl().setLookAt(target, 30.0F, 30.0F);
+                        this.fossilized.getNavigation().stop();
+                        this.fossilized.getLookControl().setLookAt(target, 30.0F, 30.0F);
                     }
                     break;
 
@@ -186,30 +184,30 @@ public class Fossilised extends Monster {
                     if (animationTimer > 0) {
                         animationTimer--;
                     } else {
-                        this.fossilised.attackState = 3;
-                        this.fossilised.getLookControl().setLookAt(target, 30.0F, 30.0F);
-                        this.fossilised.getNavigation().stop();
-                        if (!this.fossilised.level().isClientSide) {
-                            this.fossilised.level().broadcastEntityEvent(this.fossilised, (byte) 90);
+                        this.fossilized.attackState = 3;
+                        this.fossilized.getLookControl().setLookAt(target, 30.0F, 30.0F);
+                        this.fossilized.getNavigation().stop();
+                        if (!this.fossilized.level().isClientSide) {
+                            this.fossilized.level().broadcastEntityEvent(this.fossilized, (byte) 90);
                         }
                         this.throwRock(target);
                         this.attackCooldown = 20;
-                        this.fossilised.attackState = 0;
+                        this.fossilized.attackState = 0;
                     }
                     break;
             }
         }
 
         private void throwRock(LivingEntity target) {
-            Level level = this.fossilised.level();
-            FossilisedRock rock = new FossilisedRock(this.fossilised.level(), this.fossilised);
+            Level level = this.fossilized.level();
+            FossilizedRock rock = new FossilizedRock(this.fossilized.level(), this.fossilized);
 
-            double dx = target.getX() - this.fossilised.getX();
-            double dy = target.getY() - this.fossilised.getEyeY() + 0.5;
-            double dz = target.getZ() - this.fossilised.getZ();
+            double dx = target.getX() - this.fossilized.getX();
+            double dy = target.getY() - this.fossilized.getEyeY() + 0.5;
+            double dz = target.getZ() - this.fossilized.getZ();
 
-            rock.setPos(this.fossilised.getX(), this.fossilised.getEyeY(), this.fossilised.getZ());
-            rock.setOwner(this.fossilised);
+            rock.setPos(this.fossilized.getX(), this.fossilized.getEyeY(), this.fossilized.getZ());
+            rock.setOwner(this.fossilized);
             rock.shoot(dx, dy, dz, 2.5F, 0.2F);
 
             rock.setInvisible(false);

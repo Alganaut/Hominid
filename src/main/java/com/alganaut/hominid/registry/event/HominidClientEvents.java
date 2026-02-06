@@ -65,7 +65,7 @@ public class HominidClientEvents {
                     if (incendiary.ignitedCreepers.contains(creeper.getUUID())) {
                         incendiary.ignitedCreepers.remove(creeper.getUUID());
 
-                        ItemStack droppedItem = new ItemStack(HominidItems.MUSIC_DISC_CHARRED.get(), 1);
+                        ItemStack droppedItem = new ItemStack(HominidItems.MUSIC_DISC_HEMATOMA.get(), 1);
                         ItemEntity itemEntity = new ItemEntity((ServerLevel) world, explosionPos.x, explosionPos.y, explosionPos.z, droppedItem);
                         world.addFreshEntity(itemEntity);
                         break;

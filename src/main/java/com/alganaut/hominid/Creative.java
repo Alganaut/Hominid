@@ -25,7 +25,7 @@ public class Creative {
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             insertItems(
                     Items.MUSIC_DISC_PRECIPICE,
-                    HominidItems.MUSIC_DISC_CHARRED
+                    HominidItems.MUSIC_DISC_HEMATOMA
             );
             insertItems(
                     Items.FLINT_AND_STEEL,

@@ -56,15 +56,15 @@ public class HominidEntityCreator {
                     .sized(1.4F, 2.4F)
     );
 
-    public static final Supplier<EntityType<Fossilised>> FOSSILIZED = registerEntity(
-            "fossilised",
-            EntityType.Builder.of(Fossilised::new, MobCategory.MONSTER)
+    public static final Supplier<EntityType<Fossilized>> FOSSILIZED = registerEntity(
+            "fossilized",
+            EntityType.Builder.of(Fossilized::new, MobCategory.MONSTER)
                     .sized(0.65F, 2.3F)
     );
 
-    public static final Supplier<EntityType<FossilisedRock>> ROCK = registerEntity(
+    public static final Supplier<EntityType<FossilizedRock>> ROCK = registerEntity(
             "rock",
-            EntityType.Builder.<FossilisedRock>of(FossilisedRock::new, MobCategory.MISC)
+            EntityType.Builder.<FossilizedRock>of(FossilizedRock::new, MobCategory.MISC)
                     .sized(0.8F, 0.3F)
     );
 
@@ -90,7 +90,7 @@ public class HominidEntityCreator {
         event.put(HominidEntityCreator.FAMISHED.get(), Famished.createAttributes().build());
         event.put(HominidEntityCreator.JUGGERNAUT.get(), Juggernaut.createAttributes().build());
         event.put(HominidEntityCreator.BELLMAN.get(), Bellman.createAttributes().build());
-        event.put(HominidEntityCreator.FOSSILIZED.get(), Fossilised.createAttributes().build());
+        event.put(HominidEntityCreator.FOSSILIZED.get(), Fossilized.createAttributes().build());
         event.put(HominidEntityCreator.VAMPIRE.get(), Vampire.createAttributes().build());
     }
 
@@ -104,7 +104,7 @@ public class HominidEntityCreator {
         event.registerEntityRenderer(HominidEntityCreator.FAMISHED.get(), FamishedRenderer::new);
         event.registerEntityRenderer(HominidEntityCreator.JUGGERNAUT.get(), JuggernautRenderer::new);
         event.registerEntityRenderer(HominidEntityCreator.BELLMAN.get(), BellmanRenderer::new);
-        event.registerEntityRenderer(HominidEntityCreator.FOSSILIZED.get(), FossilisedRenderer::new);
+        event.registerEntityRenderer(HominidEntityCreator.FOSSILIZED.get(), FossilizedRenderer::new);
         event.registerEntityRenderer(HominidEntityCreator.ROCK.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(HominidEntityCreator.VAMPIRE.get(), VampireRenderer::new);
     }
@@ -119,7 +119,7 @@ public class HominidEntityCreator {
         event.registerLayerDefinition(HominidModelLayers.FAMISHED, FamishedModel::createBodyLayer);
         event.registerLayerDefinition(HominidModelLayers.JUGGERNAUT, JuggernautModel::createBodyLayer);
         event.registerLayerDefinition(HominidModelLayers.BELLMAN, BellmanModel::createBodyLayer);
-        event.registerLayerDefinition(HominidModelLayers.FOSSILIZED, FossilisedModel::createBodyLayer);
+        event.registerLayerDefinition(HominidModelLayers.FOSSILIZED, FossilizedModel::createBodyLayer);
         event.registerLayerDefinition(HominidModelLayers.VAMPIRE, VampireModel::createBodyLayer);
     }
 }

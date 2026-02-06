@@ -10,22 +10,20 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.event.EventHooks;
 
-public class FossilisedRock extends ThrowableItemProjectile {
+public class FossilizedRock extends ThrowableItemProjectile {
     private int lifetime;
-    public FossilisedRock(EntityType<? extends FossilisedRock> entityType, Level level) {
+    public FossilizedRock(EntityType<? extends FossilizedRock> entityType, Level level) {
         super(entityType, level);
         this.lifetime = 0;
     }
 
-    public FossilisedRock(Level level, LivingEntity shooter) {
+    public FossilizedRock(Level level, LivingEntity shooter) {
         super(HominidEntityCreator.ROCK.get(), shooter, level);
         this.lifetime = 0;
     }
 
-    public FossilisedRock(Level level, double x, double y, double z) {
+    public FossilizedRock(Level level, double x, double y, double z) {
         super(HominidEntityCreator.ROCK.get(), x, y, z, level);
         this.lifetime = 0;
     }

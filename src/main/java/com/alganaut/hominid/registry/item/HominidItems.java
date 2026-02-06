@@ -34,7 +34,7 @@ public class HominidItems {
             () -> new DeferredSpawnEggItem(HominidEntityCreator.BELLMAN, 0x211f1b, 0x898b82,
                     new Item.Properties()));
 
-    public static final DeferredItem<Item> FOSSLISED_SPAWN_EGG = ITEMS.register("fossilised_spawn_egg",
+    public static final DeferredItem<Item> FOSSLISED_SPAWN_EGG = ITEMS.register("fossilized_spawn_egg",
             () -> new DeferredSpawnEggItem(HominidEntityCreator.FOSSILIZED, 0x9a9c7a, 0x5b5344,
                     new Item.Properties()));
     public static final DeferredItem<Item> VAMPIRE_SPAWN_EGG = ITEMS.register("vampire_spawn_egg",
@@ -47,8 +47,8 @@ public class HominidItems {
     public static final DeferredItem<Item> GASOLINE_TANK = ITEMS.register("gasoline_tank",
             () -> new GasTank(new Item.Properties().durability(3).stacksTo(1)));
 
-    public static final DeferredItem<Item> MUSIC_DISC_CHARRED = ITEMS.register("music_disc_charred",
-            () -> new Item(new Item.Properties().rarity(Rarity.RARE).jukeboxPlayable(HominidSounds.CHARRED_KEY).stacksTo(1)));
+    public static final DeferredItem<Item> MUSIC_DISC_HEMATOMA = ITEMS.register("music_disc_hematoma",
+            () -> new Item(new Item.Properties().rarity(Rarity.RARE).jukeboxPlayable(HominidSounds.HEMATOMA_KEY).stacksTo(1)));
 
     public static final DeferredItem<Item> REMAINS_SMITHING_TEMPLATE = ITEMS.register("remains_armor_trim_smithing_template",
             () -> SmithingTemplateItem.createArmorTrimTemplate(ResourceLocation.fromNamespaceAndPath(Hominid.MODID, "remains")));

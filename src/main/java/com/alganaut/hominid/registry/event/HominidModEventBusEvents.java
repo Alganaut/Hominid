@@ -2,7 +2,7 @@ package com.alganaut.hominid.registry.event;
 
 import com.alganaut.hominid.Hominid;
 import com.alganaut.hominid.registry.entity.HominidEntityCreator;
-import com.alganaut.hominid.registry.entity.custom.Fossilised;
+import com.alganaut.hominid.registry.entity.custom.Fossilized;
 import com.alganaut.hominid.registry.entity.custom.Incendiary;
 import com.alganaut.hominid.registry.misc.HominidBuiltinPacks;
 import net.minecraft.client.Minecraft;

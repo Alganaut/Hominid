@@ -1,8 +1,8 @@
 {
-  "charred": {
+  "hematoma": {
     "sounds": [
       {
-        "name": "hominid:charred",
+        "name": "hominid:hematoma",
         "stream": true
       }
     ]

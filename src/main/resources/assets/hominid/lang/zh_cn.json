@@ -1,6 +1,6 @@
 {
-  "item.hominid.music_disc_charred": "音乐唱片",
-  "item.hominid.music_disc_charred.desc": "Quizzly - 化为焦炭",
+  "item.hominid.music_disc_hematoma": "音乐唱片",
+  "item.hominid.music_disc_hematoma.desc": "ChipsTheCat - 化为焦炭",
 
   "item.hominid.mellified_spawn_egg": "浸蜜人刷怪蛋",
   "item.hominid.incendiary_spawn_egg": "纵火者刷怪蛋",
@@ -19,8 +19,8 @@
   "effect.hominid.honeyed": "甜蜜",
   "advancements.adventure.hungry.title": "你饿了么...?",
   "advancements.adventure.hungry.description": "攻击并杀死一个饿殍",
-  "advancements.adventure.charred.title": "炙手可燃",
-  "advancements.adventure.charred.description": "利用自燃者点燃苦力怕，并获得以此途径获得一个特殊的奖励",
+  "advancements.adventure.hematoma.title": "炙手可燃",
+  "advancements.adventure.hematoma.description": "利用自燃者点燃苦力怕，并获得以此途径获得一个特殊的奖励",
   "advancements.adventure.gasoline.title": "不可思议的燃料",
   "advancements.adventure.gasoline.description": "获得一个油罐，它可用作可重复使用的燃料"
 }

@@ -5,7 +5,7 @@ import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.client.animation.Keyframe;
 import net.minecraft.client.animation.KeyframeAnimations;
 
-public class FossilisedAnimations {
+public class FossilizedAnimations {
 
         public static final AnimationDefinition ANIM_FOSSILIZED_IDLE = AnimationDefinition.Builder.withLength(1.3333F).looping()
                 .addAnimation("body", new AnimationChannel(AnimationChannel.Targets.ROTATION,
@@ -55,7 +55,7 @@ public class FossilisedAnimations {
                 .build();
 
         public static final AnimationDefinition ANIM_FOSSILIZED_WALK = AnimationDefinition.Builder.withLength(1.3333F).looping()
-                .addAnimation("fossilised", new AnimationChannel(AnimationChannel.Targets.ROTATION,
+                .addAnimation("fossilized", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                         new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, -2.5F), AnimationChannel.Interpolations.LINEAR),
                         new Keyframe(0.2907F, KeyframeAnimations.degreeVec(0.0F, 0.0F, -2.5F), AnimationChannel.Interpolations.LINEAR),
                         new Keyframe(0.2917F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 1.25F), AnimationChannel.Interpolations.LINEAR),

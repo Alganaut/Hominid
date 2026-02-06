@@ -1,11 +1,11 @@
 {
-  "parent": "hominid:adventure/gasoline",
+  "parent": "minecraft:adventure",
   "criteria": {
-    "charred": {
+    "hematoma": {
       "conditions": {
         "items": [
           {
-            "items": "hominid:music_disc_charred"
+            "items": "hominid:music_disc_hematoma"
           }
         ]
       },
@@ -14,20 +14,20 @@
   },
   "display": {
     "description": {
-      "translate": "advancements.adventure.charred.description"
+      "translate": "advancements.adventure.hematoma.description"
     },
     "frame": "goal",
     "icon": {
       "count": 1,
-      "id": "hominid:music_disc_charred"
+      "id": "hominid:music_disc_hematoma"
     },
     "title": {
-      "translate": "advancements.adventure.charred.title"
+      "translate": "advancements.adventure.hematoma.title"
     }
   },
   "requirements": [
     [
-      "charred"
+      "hematoma"
     ]
   ],
   "sends_telemetry_event": true

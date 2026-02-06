@@ -22,8 +22,8 @@ public class HominidSounds {
         return SOUND_EVENTS.register(name, () ->SoundEvent.createVariableRangeEvent(id));
     }
 
-    public static final Supplier<SoundEvent> CHARRED = registerSoundEvent("charred");
-    public static final ResourceKey<JukeboxSong> CHARRED_KEY = createSong("charred");
+    public static final Supplier<SoundEvent> HEMATOMA = registerSoundEvent("hematoma");
+    public static final ResourceKey<JukeboxSong> HEMATOMA_KEY = createSong("hematoma");
 
     public static final Supplier<SoundEvent> VAMPIRE_IDLE = registerSoundEvent("vampire_idle");
     public static final Supplier<SoundEvent> VAMPIRE_HURT = registerSoundEvent("vampire_hurt");

@@ -1,6 +1,6 @@
 {
-    "item.hominid.music_disc_charred": "دیسک آهنگ",
-    "item.hominid.music_disc_charred.desc": "سوخته‌شده- Quizzly اثری از",
+    "item.hominid.music_disc_hematoma": "دیسک آهنگ",
+    "item.hominid.music_disc_hematoma.desc": "سوخته‌شده- ChipsTheCat اثری از",
   
     "item.hominid.mellified_spawn_egg": "تخم احضار شیرین‌شده",
     "item.hominid.incendiary_spawn_egg": "تخم احضار آتش‌افروز",
@@ -19,8 +19,8 @@
     "effect.hominid.honeyed": "عسلی",
     "advancements.adventure.hungry.title": "چه‌قدر حریص...؟",
     "advancements.adventure.hungry.description": "به یک قحطی‌زده حمله و بکشید",
-    "advancements.adventure.charred.title": "کریپر سوخته‌شده",
-    "advancements.adventure.charred.description": "یک آتش‌افروز را محبور کنید که یک کریپر را روشن کنید تا یک جایزه ویژه بگیرید",
+    "advancements.adventure.hematoma.title": "کریپر سوخته‌شده",
+    "advancements.adventure.hematoma.description": "یک آتش‌افروز را محبور کنید که یک کریپر را روشن کنید تا یک جایزه ویژه بگیرید",
     "advancements.adventure.gasoline.title": "بنزین عالی",
     "advancements.adventure.gasoline.description": "یک مخزن بنزین بدست آورید، که میتواند به عنوان منبع قابل استفاده مجدد سوخت استفاده شود"
   }

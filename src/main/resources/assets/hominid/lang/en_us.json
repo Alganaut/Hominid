@@ -1,13 +1,13 @@
 {
-  "item.hominid.music_disc_charred": "Music Disc",
-  "item.hominid.music_disc_charred.desc": "Quizzly - Charred",
+  "item.hominid.music_disc_hematoma": "Music Disc",
+  "item.hominid.music_disc_hematoma.desc": "ChipsTheCat - Hematoma",
 
   "item.hominid.mellified_spawn_egg": "Mellified Spawn Egg",
   "item.hominid.incendiary_spawn_egg": "Incendiary Spawn Egg",
   "item.hominid.famished_spawn_egg": "Famished Spawn Egg",
   "item.hominid.juggernaut_spawn_egg": "Juggernaut Spawn Egg",
   "item.hominid.bellman_spawn_egg": "Bellman Spawn Egg",
-  "item.hominid.fossilised_spawn_egg": "Fossilized Spawn Egg",
+  "item.hominid.fossilized_spawn_egg": "Fossilized Spawn Egg",
   "item.hominid.vampire_spawn_egg": "Vampire Spawn Egg",
 
   "item.hominid.remains_armor_trim_smithing_template": "Smithing Template",
@@ -21,7 +21,7 @@
   "entity.hominid.famished": "Famished",
   "entity.hominid.juggernaut": "Juggernaut",
   "entity.hominid.bellman": "Bellman",
-  "entity.hominid.fossilised": "Fossilized",
+  "entity.hominid.fossilized": "Fossilized",
   "entity.hominid.vampire": "Vampire",
 
   "creativetab.hominid.hominid": "Hominid",
@@ -31,12 +31,12 @@
 
   "advancements.adventure.hungry.title": "How Hungry...?",
   "advancements.adventure.hungry.description": "Attack and kill a Famished",
-  "advancements.adventure.charred.title": "Charred Creeper",
-  "advancements.adventure.charred.description": "Make an Incendiary ignite a Creeper for a special reward",
+  "advancements.adventure.hematoma.title": "Dracula Flow",
+  "advancements.adventure.hematoma.description": "Get a Vampire to kill a Creeper for a special reward",
   "advancements.adventure.gasoline.title": "Incredible Gasoline",
   "advancements.adventure.gasoline.description": "Acquire a Gasoline tank, which can be used as a reusable fuel source",
-  "advancements.adventure.fossilised.title": "Return the Slab",
-  "advancements.adventure.fossilised.description": "Brush a Fossilized Skeleton to take a piece of its body",
+  "advancements.adventure.fossilized.title": "Return the Slab",
+  "advancements.adventure.fossilized.description": "Brush a Fossilized Skeleton to take a piece of its body",
 
   "painting.hominid.orbit.title": "Orbit",
   "painting.hominid.orbit.author": "FishStacks",

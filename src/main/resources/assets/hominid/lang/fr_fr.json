@@ -1,6 +1,6 @@
 {
-  "item.hominid.music_disc_charred": "Disque de Musique",
-  "item.hominid.music_disc_charred.desc": "Quizzly - Charred",
+  "item.hominid.music_disc_hematoma": "Disque de Musique",
+  "item.hominid.music_disc_hematoma.desc": "ChipsTheCat - Hematoma",
 
   "item.hominid.mellified_spawn_egg": "Oeuf d'apparition de Mellifiée",
   "item.hominid.incendiary_spawn_egg": "Oeuf d'apparition d'Incendiaire",
@@ -18,8 +18,8 @@
   "effect.hominid.honeyed": "Mielleux",
   "advancements.adventure.hungry.title": "Un Petit Creux",
   "advancements.adventure.hungry.description": "Attaquer et tuer un Affamé",
-  "advancements.adventure.charred.title": "Creeper Fumé",
-  "advancements.adventure.charred.description": "Force une Incendiaire à allumer un Creeper pour une récompense spéciale",
+  "advancements.adventure.hematoma.title": "Creeper Fumé",
+  "advancements.adventure.hematoma.description": "Force une Incendiaire à allumer un Creeper pour une récompense spéciale",
   "advancements.adventure.gasoline.title": "Ça Carbure !",
   "advancements.adventure.gasoline.description": "Acquérir un Réservoir à Essence, qui est une forme de carburant réutilisable"
 }
