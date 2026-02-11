@@ -12,6 +12,10 @@
     "hominid:juggernaut",
     "hominid:fossilized",
     "hominid:vampire",
-    {"id": "galosphere:preserved", "required": false}
+    {"id": "galosphere:preserved", "required": false},
+    {"id": "minecraft:parched", "required": false},
+    {"id": "alexscaves:boundroid", "required": false},
+    {"id": "alexscaves:caniac", "required": false},
+    {"id": "alexscaves:brainiac", "required": false}
   ]
 }

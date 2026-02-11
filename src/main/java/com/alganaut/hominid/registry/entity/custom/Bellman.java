@@ -173,11 +173,15 @@ public class Bellman extends Monster {
                             BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("hominid", "juggernaut")),
                             BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("hominid", "fossilized")),
                             BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("hominid", "vampire")),
-                            BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("galosphere", "preserved"))
+                            BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("galosphere", "preserved")),
+                            BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("minecraft", "parched")),
+                            BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("alexscaves", "boundroid")),
+                            BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("alexscaves", "caniac")),
+                            BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("alexscaves", "brainiac"))
                     };
                 }
 
-                for (int i = 0; i < 3; i++) {
+                for (int i = 0; i < 1; i++) {
                     int rand = random.nextInt(entityPool.length);
                     net.minecraft.world.entity.EntityType<?> entityToSpawn = entityPool[rand];
                     Entity entity = entityToSpawn.create(serverLevel);
