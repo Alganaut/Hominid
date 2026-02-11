@@ -13,6 +13,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.*;
@@ -26,6 +27,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.level.ExplosionEvent;
 
@@ -42,6 +44,7 @@ public class HominidClientEvents {
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onPlayerEatFlesh);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onExplosionDetonate);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onEntityJoinWorld);
+        NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onEntityDie);
         //NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onClientTick);
     }
 
@@ -106,6 +109,37 @@ public class HominidClientEvents {
         if (event.getEntity() != null && event.getEntity() instanceof AbstractIllager) {
             AbstractIllager illager = (AbstractIllager) event.getEntity();
             illager.targetSelector.addGoal(3, new AvoidEntityGoal<>(illager, Vampire.class, 6.0F, 1.0D, 1.2D));
+        }
+    }
+
+
+    @SubscribeEvent
+    public static void onEntityDie(LivingDeathEvent event){
+        if (event.getEntity().level().isClientSide) return;
+
+        LivingEntity deadEntity = event.getEntity();
+
+        if (!(deadEntity instanceof Creeper creeper)) return;
+
+        LivingEntity killer = deadEntity.getLastAttacker();
+        if (killer == null) return;
+
+        if (killer instanceof Vampire) {
+
+            Level level = deadEntity.level();
+
+            ItemStack drop = new ItemStack(HominidItems.MUSIC_DISC_HEMATOMA.get());
+
+            ItemEntity itemEntity = new ItemEntity(
+                    level,
+                    creeper.getX(),
+                    creeper.getY(),
+                    creeper.getZ(),
+                    drop
+            );
+
+            itemEntity.setDefaultPickUpDelay();
+            level.addFreshEntity(itemEntity);
         }
     }
 

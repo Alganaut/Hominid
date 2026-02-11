@@ -148,6 +148,7 @@ public class Bellman extends Monster {
         @Override
         public void start() {
             if (!bellman.level().isClientSide) {
+                bellman.level().broadcastEntityEvent(bellman, (byte) 60);
                 ServerLevel serverLevel = (ServerLevel) bellman.level();
                 RandomSource random = bellman.getRandom();
                 var tagOptional = BuiltInRegistries.ENTITY_TYPE.getTag(HominidTags.EntityType.BELLMAN_SPAWNABLE);
