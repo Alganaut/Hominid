@@ -28,6 +28,7 @@ import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.level.ExplosionEvent;
 
@@ -45,6 +46,7 @@ public class HominidClientEvents {
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onExplosionDetonate);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onEntityJoinWorld);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onEntityDie);
+        NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onLivingDrops);
         //NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onClientTick);
     }
 
@@ -112,6 +114,15 @@ public class HominidClientEvents {
         }
     }
 
+    private static void onLivingDrops(LivingDropsEvent event) {
+
+        if (event.getEntity().level().isClientSide) return;
+
+        if (event.getEntity().getPersistentData().getBoolean("BellmanSummon")) {
+
+            event.getDrops().clear();
+        }
+    }
 
     @SubscribeEvent
     public static void onEntityDie(LivingDeathEvent event){

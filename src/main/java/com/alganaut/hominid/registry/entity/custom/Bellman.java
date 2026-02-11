@@ -185,7 +185,10 @@ public class Bellman extends Monster {
                     if (entity instanceof Mob mob) {
                         mob.finalizeSpawn(serverLevel, serverLevel.getCurrentDifficultyAt(summonPos),
                                 MobSpawnType.MOB_SUMMONED, null);
+
+                        mob.getPersistentData().putBoolean("BellmanSummon", true);
                     }
+
 
                     serverLevel.addFreshEntity(entity);
                 }
