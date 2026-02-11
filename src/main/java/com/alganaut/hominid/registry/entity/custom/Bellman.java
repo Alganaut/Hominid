@@ -21,6 +21,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
@@ -62,7 +63,7 @@ public class Bellman extends Monster {
         this.goalSelector.addGoal(1, new SummonUndeadGoal(this));
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(4, new Bellman.ZombieAttackTurtleEggGoal(this, 1.0, 3));
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2, false));
+        this.goalSelector.addGoal(1, new FollowPlayerGoal(this, 1.0, 3.0F, 20.0F));
         this.goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0, 0.0F));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
@@ -256,6 +257,66 @@ public class Bellman extends Monster {
         @Override
         public double acceptedDistance() {
             return 1.14;
+        }
+    }
+    public class FollowPlayerGoal extends Goal {
+        private final Monster entity;
+        private final double speedModifier;
+        private final float minDistance;
+        private final float maxDistance;
+        private Player targetPlayer;
+
+        public FollowPlayerGoal(Monster entity, double speedModifier, float minDistance, float maxDistance) {
+            this.entity = entity;
+            this.speedModifier = speedModifier;
+            this.minDistance = minDistance;
+            this.maxDistance = maxDistance;
+            this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
+        }
+
+        @Override
+        public boolean canUse() {
+
+            if (this.entity.level() == null || this.entity.level().isClientSide) {
+                return false;
+            }
+
+            this.targetPlayer = this.entity.level().getNearestPlayer(this.entity, maxDistance);
+
+            return this.targetPlayer != null && !targetPlayer.isCreative() && this.targetPlayer.distanceTo(this.entity) >= minDistance && this.targetPlayer.distanceTo(this.entity) <= maxDistance;
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return this.targetPlayer != null && this.targetPlayer.isAlive() && this.targetPlayer.distanceTo(this.entity) > minDistance && this.targetPlayer.distanceTo(this.entity) <= maxDistance;
+        }
+
+        @Override
+        public void start() {
+            if (this.targetPlayer != null) {
+                PathNavigation navigation = this.entity.getNavigation();
+                if (navigation != null) {
+                    navigation.moveTo(this.targetPlayer, this.speedModifier);
+                }
+            }
+        }
+
+        @Override
+        public void stop() {
+            this.targetPlayer = null;
+        }
+
+        @Override
+        public void tick() {
+            if (this.targetPlayer != null) {
+                double distance = this.targetPlayer.distanceTo(this.entity);
+                if (distance > minDistance && distance <= maxDistance) {
+                    PathNavigation navigation = this.entity.getNavigation();
+                    if (navigation != null) {
+                        navigation.moveTo(this.targetPlayer, this.speedModifier);
+                    }
+                }
+            }
         }
     }
 }
