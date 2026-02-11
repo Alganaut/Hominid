@@ -6,5 +6,5 @@ import net.minecraft.world.food.FoodProperties;
 
 public class HominidFoodItems {
     public static final FoodProperties FAMISHED_STOMACH = new FoodProperties.Builder().nutrition(2).saturationModifier(0.2f)
-            .effect(() -> new MobEffectInstance(HominidEffects.PARANOIA, 2400, 0), 1f).build();
+            .effect(() -> new MobEffectInstance(HominidEffects.ENDURANCE, 2400, 0), 1f).build();
 }

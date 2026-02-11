@@ -1,5 +1,6 @@
 package com.alganaut.hominid.registry.event;
 
+import com.alganaut.hominid.registry.effect.EnduranceEffect;
 import com.alganaut.hominid.registry.effect.HominidEffects;
 import com.alganaut.hominid.registry.effect.renderer.ParanoiaOverlayRenderer;
 import com.alganaut.hominid.registry.entity.HominidEntityCreator;
@@ -7,8 +8,11 @@ import com.alganaut.hominid.registry.entity.custom.*;
 import com.alganaut.hominid.registry.item.HominidItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.*;
@@ -48,7 +52,11 @@ public class HominidClientEvents {
             Level world = player.level();
 
             if (!world.isClientSide && itemStack.getItem() == Items.ROTTEN_FLESH) {
-                player.addEffect(new MobEffectInstance(HominidEffects.PARANOIA, 600, 0));
+                if(player.hasEffect(HominidEffects.ENDURANCE)) {
+                    player.removeEffect(MobEffects.HUNGER);
+                }else{
+                    player.addEffect(new MobEffectInstance(HominidEffects.PARANOIA, 600, 0));
+                }
             }
         }
     }
