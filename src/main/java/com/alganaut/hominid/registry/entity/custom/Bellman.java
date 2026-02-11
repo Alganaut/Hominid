@@ -149,6 +149,7 @@ public class Bellman extends Monster {
         @Override
         public void start() {
             if (!bellman.level().isClientSide) {
+                bellman.playSound(SoundEvents.BELL_BLOCK);
                 bellman.level().broadcastEntityEvent(bellman, (byte) 60);
                 ServerLevel serverLevel = (ServerLevel) bellman.level();
                 RandomSource random = bellman.getRandom();
