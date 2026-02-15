@@ -43,7 +43,6 @@ public class HominidClientEvents {
 
     public static void register() {
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onPlayerEatFlesh);
-        NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onExplosionDetonate);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onEntityJoinWorld);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onEntityDie);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onLivingDrops);
@@ -61,28 +60,6 @@ public class HominidClientEvents {
                     player.removeEffect(MobEffects.HUNGER);
                 }else{
                     player.addEffect(new MobEffectInstance(HominidEffects.PARANOIA, 600, 0));
-                }
-            }
-        }
-    }
-
-
-    @SubscribeEvent
-    public static void onExplosionDetonate(ExplosionEvent.Detonate event) {
-        if (event.getExplosion().getDirectSourceEntity() instanceof Creeper creeper) {
-            Level world = event.getExplosion().getDirectSourceEntity().level();
-            Vec3 explosionPos = event.getExplosion().getDirectSourceEntity().position();
-
-            if (!world.isClientSide) {
-                for (Incendiary incendiary : world.getEntitiesOfClass(Incendiary.class, creeper.getBoundingBox().inflate(30))) {
-                    if (incendiary.ignitedCreepers.contains(creeper.getUUID())) {
-                        incendiary.ignitedCreepers.remove(creeper.getUUID());
-
-                        ItemStack droppedItem = new ItemStack(HominidItems.MUSIC_DISC_HEMATOMA.get(), 1);
-                        ItemEntity itemEntity = new ItemEntity((ServerLevel) world, explosionPos.x, explosionPos.y, explosionPos.z, droppedItem);
-                        world.addFreshEntity(itemEntity);
-                        break;
-                    }
                 }
             }
         }
