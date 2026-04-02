@@ -76,7 +76,7 @@ public class HominidClientEvents {
             wolf.level().addFreshEntity(customMob);
 
         }
-        if (event.getEntity().getClass() == Zombie.class && Math.random() < 0.05) {
+        if (event.getEntity().getClass() == Zombie.class && Math.random() < 0.1) {
             Zombie wolf = (Zombie) event.getEntity();
             event.getEntity().discard();
 

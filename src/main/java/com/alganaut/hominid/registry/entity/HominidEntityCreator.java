@@ -53,7 +53,7 @@ public class HominidEntityCreator {
     public static final Supplier<EntityType<Bellman>> BELLMAN = registerEntity(
             "bellman",
             EntityType.Builder.of(Bellman::new, MobCategory.MONSTER)
-                    .sized(1.4F, 2.4F)
+                    .sized(1F, 2.4F)
     );
 
     public static final Supplier<EntityType<Fossilized>> FOSSILIZED = registerEntity(
