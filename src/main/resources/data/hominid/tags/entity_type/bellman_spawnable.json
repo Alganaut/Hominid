@@ -16,6 +16,7 @@
     {"id": "minecraft:parched", "required": false},
     {"id": "alexscaves:boundroid", "required": false},
     {"id": "alexscaves:caniac", "required": false},
-    {"id": "alexscaves:brainiac", "required": false}
+    {"id": "alexscaves:brainiac", "required": false},
+    {"id": "netherexp:vessel", "required": false}
   ]
 }
