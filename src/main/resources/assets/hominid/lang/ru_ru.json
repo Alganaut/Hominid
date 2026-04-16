@@ -1,0 +1,54 @@
+{
+  "item.hominid.music_disc_hematoma": "Пластинка",
+  "item.hominid.music_disc_hematoma.desc": "ChipsTheCat - Hematoma",
+
+  "item.hominid.mellified_spawn_egg": "Яйцо призыва медового человека",
+  "item.hominid.incendiary_spawn_egg": "Яйцо призыва пиромана",
+  "item.hominid.famished_spawn_egg": "Яйцо призыва несыти",
+  "item.hominid.juggernaut_spawn_egg": "Яйцо призыва джаггернаута",
+  "item.hominid.bellman_spawn_egg": "Яйцо призыва звонаря",
+  "item.hominid.fossilized_spawn_egg": "Яйцо призыва фоссилии",
+  "item.hominid.vampire_spawn_egg": "Яйцо призыва вампира",
+
+  "item.hominid.remains_armor_trim_smithing_template": "Кузнечный шаблон",
+  "trim_pattern.hominid.remains": "Отделка «Останки»",
+
+  "item.hominid.gasoline_tank": "Канистра с бензином",
+  "item.hominid.famished_stomach": "Изголодавшийся желудок",
+
+  "entity.hominid.mellified": "Медовый человек",
+  "entity.hominid.incendiary": "Пироман",
+  "entity.hominid.famished": "Несыть",
+  "entity.hominid.juggernaut": "Джаггернаут",
+  "entity.hominid.bellman": "Звонарь",
+  "entity.hominid.fossilized": "Фоссилия",
+  "entity.hominid.vampire": "Вампир",
+
+  "creativetab.hominid.hominid": "Гоминид",
+
+  "effect.hominid.honeyed": "Медовый",
+  "effect.hominid.paranoia": "Паранойя",
+  "effect.hominid.endurance": "Выносливость",
+
+  "advancements.adventure.hungry.title": "Подайте пропитание",
+  "advancements.adventure.hungry.description": "Атакуйте и убейте несыть",
+  "advancements.adventure.hematoma.title": "Бал у Сатаны",
+  "advancements.adventure.hematoma.description": "Заставьте вампира убить крипера ради особой награды",
+  "advancements.adventure.gasoline.title": "Жидкое золото",
+  "advancements.adventure.gasoline.description": "Получите канистру с бензином, использующуюся как многоразовый источник топлива",
+  "advancements.adventure.fossilized.title": "Неживое ископаемое",
+  "advancements.adventure.fossilized.description": "Протрите кистью фоссилию чтобы забрать частичку её тела",
+
+  "painting.hominid.orbit.title": "Орбита",
+  "painting.hominid.orbit.author": "FishStacks",
+  "painting.hominid.hothead.title": "Горячая голова",
+  "painting.hominid.hothead.author": "FishStacks",
+  "painting.hominid.not_happy.title": "Недовольный",
+  "painting.hominid.not_happy.author": "FishStacks",
+
+  "sounds.hominid.vampire_idle": "Вампир кряхтит",
+  "sounds.hominid.vampire_hurt": "Вампир ранен",
+  "sounds.hominid.vampire_death": "Вампир погибает",
+  "sounds.hominid.vampire_scream": "Вампир кричит",
+  "sounds.hominid.paranoia": "Голоса шепчут"
+}
