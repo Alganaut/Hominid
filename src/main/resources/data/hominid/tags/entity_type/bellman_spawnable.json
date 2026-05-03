@@ -17,6 +17,8 @@
     {"id": "alexscaves:boundroid", "required": false},
     {"id": "alexscaves:caniac", "required": false},
     {"id": "alexscaves:brainiac", "required": false},
-    {"id": "netherexp:vessel", "required": false}
+    {"id": "netherexp:vessel", "required": false},
+    {"id": "dungeonsdelight:zombified_dryad", "required": false},
+    {"id": "spawn:barbed", "required": false}
   ]
 }
