@@ -4,6 +4,9 @@ import com.alganaut.hominid.Hominid;
 import com.alganaut.hominid.registry.entity.client.*;
 import com.alganaut.hominid.registry.entity.client.layer.HominidModelLayers;
 import com.alganaut.hominid.registry.entity.custom.*;
+import net.minecraft.client.model.HumanoidArmorModel;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -18,6 +21,9 @@ import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
+
+import static com.alganaut.hominid.registry.entity.client.layer.HominidModelLayers.FAMISHED_INNER_ARMOR;
+import static com.alganaut.hominid.registry.entity.client.layer.HominidModelLayers.FAMISHED_OUTER_ARMOR;
 
 @EventBusSubscriber(modid = Hominid.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class HominidEntityCreator {
@@ -117,6 +123,8 @@ public class HominidEntityCreator {
         event.registerLayerDefinition(HominidModelLayers.MELLIFIED, MellifiedModel::createBodyLayer);
         event.registerLayerDefinition(HominidModelLayers.INCENDIARY, IncendiaryModel::createBodyLayer);
         event.registerLayerDefinition(HominidModelLayers.FAMISHED, FamishedModel::createBodyLayer);
+        event.registerLayerDefinition(FAMISHED_INNER_ARMOR, () -> LayerDefinition.create(HumanoidArmorModel.createBodyLayer(new CubeDeformation(0.5F)), 64, 32));
+        event.registerLayerDefinition(FAMISHED_OUTER_ARMOR, () -> LayerDefinition.create(HumanoidArmorModel.createBodyLayer(new CubeDeformation(1.0F)), 64, 32));
         event.registerLayerDefinition(HominidModelLayers.JUGGERNAUT, JuggernautModel::createBodyLayer);
         event.registerLayerDefinition(HominidModelLayers.BELLMAN, BellmanModel::createBodyLayer);
         event.registerLayerDefinition(HominidModelLayers.FOSSILIZED, FossilizedModel::createBodyLayer);

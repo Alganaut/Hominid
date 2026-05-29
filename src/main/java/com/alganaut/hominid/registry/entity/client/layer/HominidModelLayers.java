@@ -7,6 +7,8 @@ public class HominidModelLayers {
     public static final ModelLayerLocation MELLIFIED = new ModelLayerLocation(Hominid.id("mellified"), "main");
     public static final ModelLayerLocation INCENDIARY = new ModelLayerLocation(Hominid.id("incendiary"), "main");
     public static final ModelLayerLocation FAMISHED = new ModelLayerLocation(Hominid.id("famished"), "main");
+    public static final ModelLayerLocation FAMISHED_INNER_ARMOR = new ModelLayerLocation(Hominid.id("famished"), "inner_armor");
+    public static final ModelLayerLocation FAMISHED_OUTER_ARMOR = new ModelLayerLocation(Hominid.id("famished"), "outer_armor");
     public static final ModelLayerLocation JUGGERNAUT = new ModelLayerLocation(Hominid.id("juggernaut"), "main");
     public static final ModelLayerLocation BELLMAN = new ModelLayerLocation(Hominid.id("bellman"), "main");
     public static final ModelLayerLocation FOSSILIZED = new ModelLayerLocation(Hominid.id("fossilized"), "main");
