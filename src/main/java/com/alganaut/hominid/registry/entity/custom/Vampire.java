@@ -302,21 +302,15 @@ public class Vampire extends Monster {
 
         @Override
         public void tick() {
-            if (targetPlayer != null) {
-                if (!targetPlayer.hasEffect(HominidEffects.ENDURANCE)) {
-                    targetPlayer.addEffect(new MobEffectInstance(HominidEffects.ENDURANCE, 80, 0));
-                }
+            double distanceToPlayer = entity.distanceTo(targetPlayer);
 
-                double distanceToPlayer = entity.distanceTo(targetPlayer);
-
-                if (distanceToPlayer < fleeDistance) {
-                    moveAwayFromPlayer();
-                } else if (distanceToPlayer >= fleeDistance && distanceToPlayer <= stopDistance) {
-                    entity.getNavigation().stop();
-                    entity.getLookControl().setLookAt(targetPlayer, 30.0F, 30.0F);
-                } else if (distanceToPlayer > stopDistance && distanceToPlayer <= followDistance) {
-                    entity.getNavigation().moveTo(targetPlayer, 1.0);
-                }
+            if (distanceToPlayer < fleeDistance) {
+                moveAwayFromPlayer();
+            } else if (distanceToPlayer >= fleeDistance && distanceToPlayer <= stopDistance) {
+                entity.getNavigation().stop();
+                entity.getLookControl().setLookAt(targetPlayer, 30.0F, 30.0F);
+            } else if (distanceToPlayer > stopDistance && distanceToPlayer <= followDistance) {
+                entity.getNavigation().moveTo(targetPlayer, 1.0);
             }
         }
 
