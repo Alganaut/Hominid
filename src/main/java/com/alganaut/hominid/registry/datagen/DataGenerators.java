@@ -31,6 +31,18 @@ public class DataGenerators {
 
         generator.addProvider(
                 event.includeServer(),
+                new LootTableProvider(
+                        output,
+                        Collections.emptySet(),
+                        List.of(
+                                new LootTableProvider.SubProviderEntry(HominidBlockLootTableProvider::new, LootContextParamSets.BLOCK)
+                        ),
+                        provider
+                )
+        );
+
+        generator.addProvider(
+                event.includeServer(),
                 new HominidRecipeProvider(output, provider)
         );
 
@@ -46,6 +58,11 @@ public class DataGenerators {
                         blockTagsProvider.contentsGetter(),
                         helper
                 )
+        );
+
+        generator.addProvider(
+                event.includeClient(),
+                new HominidBlockStateProvider(output, helper)
         );
 
         generator.addProvider(

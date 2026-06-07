@@ -16,6 +16,8 @@
   "item.hominid.gasoline_tank": "Gasoline Tank",
   "item.hominid.famished_stomach": "Famished Stomach",
 
+  "block.hominid.fossilized_stone": "Fossilized Stone",
+
   "entity.hominid.mellified": "Mellified",
   "entity.hominid.incendiary": "Incendiary",
   "entity.hominid.famished": "Famished",
@@ -27,7 +29,6 @@
   "creativetab.hominid.hominid": "Hominid",
 
   "effect.hominid.honeyed": "Honeyed",
-  "effect.hominid.paranoia": "Paranoia",
   "effect.hominid.endurance": "Endurance",
 
   "advancements.adventure.hungry.title": "How Hungry...?",
@@ -49,6 +50,5 @@
   "sounds.hominid.vampire_idle": "Vampire Groans",
   "sounds.hominid.vampire_hurt": "Vampire Hurts",
   "sounds.hominid.vampire_death": "Vampire Dies",
-  "sounds.hominid.vampire_scream": "Vampire Screams",
-  "sounds.hominid.paranoia": "Voices Whisper"
+  "sounds.hominid.vampire_scream": "Vampire Screams"
 }

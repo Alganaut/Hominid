@@ -28,6 +28,9 @@ public class HominidItemTagProvider extends ItemTagsProvider {
         this.tag(ItemTags.TRIM_TEMPLATES).add(
                 HominidItems.REMAINS_SMITHING_TEMPLATE.get()
         );
+        this.tag(ItemTags.MEAT).add(
+                HominidItems.FAMISHED_STOMACH.get()
+        );
     }
 }
 

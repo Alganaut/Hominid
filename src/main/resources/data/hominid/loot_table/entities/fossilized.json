@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:stone",
+          "name": "hominid:fossilized_stone",
           "weight": 1,
           "functions": [
             {

@@ -1,0 +1,26 @@
+package com.alganaut.hominid.registry.datagen;
+
+import com.alganaut.hominid.registry.block.HominidBlocks;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.level.block.Block;
+
+import java.util.Set;
+
+public class HominidBlockLootTableProvider extends BlockLootSubProvider {
+    protected HominidBlockLootTableProvider(HolderLookup.Provider registries) {
+        super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
+    }
+
+    @Override
+    protected void generate() {
+        dropSelf(HominidBlocks.FOSSILIZED_STONE.get());
+    }
+
+    @Override
+    protected Iterable<Block> getKnownBlocks() {
+        return HominidBlocks.BLOCKS.getEntries().stream().map(Holder::value)::iterator;
+    }
+}
