@@ -303,8 +303,8 @@ public class Vampire extends Monster {
         @Override
         public void tick() {
             if (targetPlayer != null) {
-                if (!targetPlayer.hasEffect(HominidEffects.PARANOIA)) {
-                    targetPlayer.addEffect(new MobEffectInstance(HominidEffects.PARANOIA, 80, 0));
+                if (!targetPlayer.hasEffect(HominidEffects.ENDURANCE)) {
+                    targetPlayer.addEffect(new MobEffectInstance(HominidEffects.ENDURANCE, 80, 0));
                 }
 
                 double distanceToPlayer = entity.distanceTo(targetPlayer);

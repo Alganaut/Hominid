@@ -18,9 +18,6 @@ public class HominidEffects {
     public static final Holder<MobEffect> HONEYED = MOB_EFFECTS.register("honeyed",
             () -> new HoneyedEffect());
 
-    public static final Holder<MobEffect> PARANOIA = MOB_EFFECTS.register("paranoia",
-            () -> new ParanoiaEffect());
-
     public static final Holder<MobEffect> ENDURANCE = MOB_EFFECTS.register("endurance",
             () -> new EnduranceEffect());
 

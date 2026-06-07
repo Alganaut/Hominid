@@ -42,27 +42,10 @@ public class HominidClientEvents {
     private static final Map<UUID, Integer> soundTimerMap = new HashMap<>();
 
     public static void register() {
-        NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onPlayerEatFlesh);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onEntityJoinWorld);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onEntityDie);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onLivingDrops);
         //NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onClientTick);
-    }
-
-    @SubscribeEvent
-    public static void onPlayerEatFlesh(LivingEntityUseItemEvent.Finish event) {
-        if (event.getEntity() instanceof Player player) {
-            ItemStack itemStack = event.getItem();
-            Level world = player.level();
-
-            if (!world.isClientSide && itemStack.getItem() == Items.ROTTEN_FLESH) {
-                if(player.hasEffect(HominidEffects.ENDURANCE)) {
-                    player.removeEffect(MobEffects.HUNGER);
-                }else{
-                    player.addEffect(new MobEffectInstance(HominidEffects.PARANOIA, 600, 0));
-                }
-            }
-        }
     }
 
     @SubscribeEvent
@@ -128,16 +111,6 @@ public class HominidClientEvents {
 
             itemEntity.setDefaultPickUpDelay();
             level.addFreshEntity(itemEntity);
-        }
-    }
-
-    @SubscribeEvent
-    public static void onRenderGuiOverlay(RenderGuiLayerEvent.Post event) {
-        Minecraft mc = Minecraft.getInstance();
-        LocalPlayer player = mc.player;
-
-        if (player != null && player.hasEffect(HominidEffects.PARANOIA)) {
-            ParanoiaOverlayRenderer.renderTextureOverlay(event.getGuiGraphics(), ParanoiaOverlayRenderer.PARANOIA_OVERLAY, 0.5F);
         }
     }
 
