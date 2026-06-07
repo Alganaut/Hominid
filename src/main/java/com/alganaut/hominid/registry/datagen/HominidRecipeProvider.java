@@ -1,6 +1,7 @@
 package com.alganaut.hominid.registry.datagen;
 
 import com.alganaut.hominid.Hominid;
+import com.alganaut.hominid.registry.block.HominidBlocks;
 import com.alganaut.hominid.registry.item.HominidItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -25,9 +26,9 @@ public class HominidRecipeProvider extends RecipeProvider implements IConditionB
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, HominidItems.REMAINS_SMITHING_TEMPLATE.get(), 2)
                 .pattern("DRD")
-                .pattern("DSD")
+                .pattern("DFD")
                 .pattern("DDD")
-                .define('S', Blocks.STONE)
+                .define('F', HominidBlocks.FOSSILIZED_STONE)
                 .define('D', Items.DIAMOND)
                 .define('R', HominidItems.REMAINS_SMITHING_TEMPLATE)
                 .unlockedBy("has_remains_smithing_template", has(HominidItems.REMAINS_SMITHING_TEMPLATE)).save(recipeOutput);
