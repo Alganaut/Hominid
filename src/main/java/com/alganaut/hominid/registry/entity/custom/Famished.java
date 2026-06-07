@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -33,6 +34,8 @@ import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.level.pathfinder.Node;
+import net.minecraft.world.level.pathfinder.Path;
 
 public class Famished extends Monster {
     public final AnimationState attackAnimationState = new AnimationState();
@@ -57,7 +60,7 @@ public class Famished extends Monster {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(2, new HuntAnimalGoal(this));
+        this.goalSelector.addGoal(2, new AttackAnimalGoal(this, 1.2, false));
         this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 1.2, false));
         this.goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0, 0.0F));
@@ -65,6 +68,7 @@ public class Famished extends Monster {
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.goalSelector.addGoal(4, new ZombieAttackTurtleEggGoal(this, 1.0, 3));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Animal.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
     }
@@ -284,6 +288,162 @@ public class Famished extends Monster {
             target = null;
         }
     }
+
+    public class AttackAnimalGoal extends MeleeAttackGoal {
+        protected final PathfinderMob mob;
+        private final double speedModifier;
+        private final boolean followingTargetEvenIfNotSeen;
+        private Path path;
+        private double pathedTargetX;
+        private double pathedTargetY;
+        private double pathedTargetZ;
+        private int ticksUntilNextPathRecalculation;
+        private int ticksUntilNextAttack;
+        private final int attackInterval = 20;
+        private long lastCanUseCheck;
+        private static final long COOLDOWN_BETWEEN_CAN_USE_CHECKS = 20L;
+        private int failedPathFindingPenalty = 0;
+        private boolean canPenalize = false;
+        private LivingEntity target;
+
+        public AttackAnimalGoal(PathfinderMob mob, double speedModifier, boolean followingTargetEvenIfNotSeen) {
+            super(mob, speedModifier, followingTargetEvenIfNotSeen);
+            this.mob = mob;
+            this.speedModifier = speedModifier;
+            this.followingTargetEvenIfNotSeen = followingTargetEvenIfNotSeen;
+            this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
+        }
+
+        @Override
+        public boolean canUse() {
+            List<LivingEntity> animals = this.mob.level().getEntitiesOfClass(LivingEntity.class,
+                    this.mob.getBoundingBox().inflate(30), entity -> entity instanceof Animal);
+
+            animals.removeIf(entity -> entity instanceof SkeletonHorse);
+            animals.removeIf(entity -> entity instanceof TamableAnimal && ((TamableAnimal) entity).isTame());
+            animals.removeIf(entity -> entity instanceof OwnableEntity && entity.isBaby());
+            animals.removeIf(entity -> entity instanceof OwnableEntity && ((OwnableEntity) entity).getOwner() != null);
+
+            if (!animals.isEmpty()) {
+                animals.sort(Comparator.comparingDouble(this.mob::distanceToSqr));
+                target = animals.get(0);
+                return true;
+            }
+            return false;
+        }
+
+        public boolean canContinueToUse() {
+            if (target == null) {
+                return false;
+            } else if (!target.isAlive()) {
+                return false;
+            } else if (!this.followingTargetEvenIfNotSeen) {
+                return !this.mob.getNavigation().isDone();
+            } else {
+                return this.mob.isWithinRestriction(target.blockPosition()) && (!(target instanceof Player) || !target.isSpectator() && !((Player) target).isCreative());
+            }
+        }
+
+        public void start() {
+            if (target != null) {
+                this.mob.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.27);
+            }
+            this.mob.getNavigation().moveTo(this.path, this.speedModifier);
+            this.mob.setAggressive(true);
+            this.ticksUntilNextPathRecalculation = 0;
+            this.ticksUntilNextAttack = 0;
+        }
+
+        public void stop() {
+            LivingEntity livingentity = this.mob.getTarget();
+            if (!EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(livingentity)) {
+                this.mob.setTarget((LivingEntity)null);
+                this.target = null;
+            }
+
+            this.mob.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.17);
+            this.mob.setAggressive(false);
+            this.mob.getNavigation().stop();
+        }
+
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
+
+        public void tick() {
+            LivingEntity livingentity = this.mob.getTarget();
+            if (livingentity != null) {
+                this.mob.getLookControl().setLookAt(livingentity, 30.0F, 30.0F);
+                this.ticksUntilNextPathRecalculation = Math.max(this.ticksUntilNextPathRecalculation - 1, 0);
+                if ((this.followingTargetEvenIfNotSeen || this.mob.getSensing().hasLineOfSight(livingentity)) && this.ticksUntilNextPathRecalculation <= 0 && (this.pathedTargetX == 0.0 && this.pathedTargetY == 0.0 && this.pathedTargetZ == 0.0 || livingentity.distanceToSqr(this.pathedTargetX, this.pathedTargetY, this.pathedTargetZ) >= 1.0 || this.mob.getRandom().nextFloat() < 0.05F)) {
+                    this.pathedTargetX = livingentity.getX();
+                    this.pathedTargetY = livingentity.getY();
+                    this.pathedTargetZ = livingentity.getZ();
+                    this.ticksUntilNextPathRecalculation = 4 + this.mob.getRandom().nextInt(7);
+                    double d0 = this.mob.distanceToSqr(livingentity);
+                    if (this.canPenalize) {
+                        this.ticksUntilNextPathRecalculation += this.failedPathFindingPenalty;
+                        if (this.mob.getNavigation().getPath() != null) {
+                            Node finalPathPoint = this.mob.getNavigation().getPath().getEndNode();
+                            if (finalPathPoint != null && livingentity.distanceToSqr((double)finalPathPoint.x, (double)finalPathPoint.y, (double)finalPathPoint.z) < 1.0) {
+                                this.failedPathFindingPenalty = 0;
+                            } else {
+                                this.failedPathFindingPenalty += 10;
+                            }
+                        } else {
+                            this.failedPathFindingPenalty += 10;
+                        }
+                    }
+
+                    if (d0 > 1024.0) {
+                        this.ticksUntilNextPathRecalculation += 10;
+                    } else if (d0 > 256.0) {
+                        this.ticksUntilNextPathRecalculation += 5;
+                    }
+
+                    if (!this.mob.getNavigation().moveTo(livingentity, this.speedModifier)) {
+                        this.ticksUntilNextPathRecalculation += 15;
+                    }
+
+                    this.ticksUntilNextPathRecalculation = this.adjustedTickDelay(this.ticksUntilNextPathRecalculation);
+                }
+
+                this.ticksUntilNextAttack = Math.max(this.ticksUntilNextAttack - 1, 0);
+                this.checkAndPerformAttack(livingentity);
+            }
+
+        }
+
+        protected void checkAndPerformAttack(LivingEntity target) {
+            if (this.canPerformAttack(target)) {
+                this.resetAttackCooldown();
+                this.mob.swing(InteractionHand.MAIN_HAND);
+                this.mob.doHurtTarget(target);
+            }
+
+        }
+
+        protected void resetAttackCooldown() {
+            this.ticksUntilNextAttack = this.adjustedTickDelay(20);
+        }
+
+        protected boolean isTimeToAttack() {
+            return this.ticksUntilNextAttack <= 0;
+        }
+
+        protected boolean canPerformAttack(LivingEntity entity) {
+            return this.isTimeToAttack() && this.mob.isWithinMeleeAttackRange(entity) && this.mob.getSensing().hasLineOfSight(entity);
+        }
+
+        protected int getTicksUntilNextAttack() {
+            return this.ticksUntilNextAttack;
+        }
+
+        protected int getAttackInterval() {
+            return this.adjustedTickDelay(20);
+        }
+    }
+
 
     @Override
     public void handleEntityEvent(byte state) {
