@@ -19,7 +19,6 @@ import java.util.concurrent.CompletableFuture;
 
 import static com.ibm.icu.impl.CurrencyData.provider;
 
-@EventBusSubscriber(modid = Hominid.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
@@ -39,11 +38,6 @@ public class DataGenerators {
                         ),
                         provider
                 )
-        );
-
-        generator.addProvider(
-                event.includeServer(),
-                new HominidRecipeProvider(output, provider)
         );
 
         var blockTagsProvider = new HominidBlockTagProvider(output, provider, helper);

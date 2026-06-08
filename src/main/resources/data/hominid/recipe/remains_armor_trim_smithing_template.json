@@ -2,20 +2,22 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "D": {
+    "#": {
       "item": "minecraft:diamond"
     },
-    "R": {
-      "item": "hominid:remains_armor_trim_smithing_template"
-    },
+    "C": [
+      {
+        "item": "hominid:fossilized_stone"
+      }
+    ],
     "S": {
-      "item": "minecraft:stone"
+      "item": "hominid:remains_armor_trim_smithing_template"
     }
   },
   "pattern": [
-    "DRD",
-    "DSD",
-    "DDD"
+    "#S#",
+    "#C#",
+    "###"
   ],
   "result": {
     "count": 2,

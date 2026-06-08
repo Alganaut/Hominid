@@ -26,6 +26,11 @@ public class HominidBlocks {
 
     public static final DeferredBlock<Block> FOSSILIZED_STONE = registerBlock("fossilized_stone",
             () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).strength(3.0f, 6.0f).requiresCorrectToolForDrops()));
+    public static final DeferredBlock<Block> POLISHED_FOSSILIZED_STONE = registerBlock("polished_fossilized_stone",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(FOSSILIZED_STONE.get())));
+    public static final DeferredBlock<Block> FOSSILIZED_STONE_BRICKS = registerBlock("fossilized_stone_bricks",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(FOSSILIZED_STONE.get())));
+
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);

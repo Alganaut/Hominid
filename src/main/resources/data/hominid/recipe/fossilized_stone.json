@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "C": {
+      "item": "minecraft:cobblestone"
+    },
+    "B": {
+      "item": "minecraft:bone"
+    },
+    "F": {
+      "item": "hominid:fossilized_stone"
+    }
+  },
+  "pattern": [
+    "CF",
+    "BC"
+  ],
+  "result": {
+    "count": 64,
+    "id": "hominid:fossilized_stone"
+  }
+}

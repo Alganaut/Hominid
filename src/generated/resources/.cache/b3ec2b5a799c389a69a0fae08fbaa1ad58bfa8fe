@@ -1,4 +1,10 @@
-// 1.21.1	2026-06-07T14:23:40.2752771	Block States: hominid
+// 1.21.1	2026-06-08T13:27:31.9648088	Block States: hominid
 0a7153feea9b18e26015da75b7e5770302c1fce6 assets/hominid/blockstates/fossilized_stone.json
+d318c60555a26852774f510b12497ac302312587 assets/hominid/blockstates/fossilized_stone_bricks.json
+1272754a26260045d34c065ccf9806037e6d0524 assets/hominid/blockstates/polished_fossilized_stone.json
 75f1ec52632bdad449e0a43ac68f48cd44002d77 assets/hominid/models/block/fossilized_stone.json
+d5bedf5c420753d4d3ddae59e6cb5f13f5b130a5 assets/hominid/models/block/fossilized_stone_bricks.json
+6413f68d7f463966665150dedfa0e261778343c1 assets/hominid/models/block/polished_fossilized_stone.json
 00f1e70d62a2766e633049b3a9920b6f40fee88a assets/hominid/models/item/fossilized_stone.json
+cea83d133cf5fdc54e8ef30e69c88b8a0a191dfc assets/hominid/models/item/fossilized_stone_bricks.json
+89d10e1d48b406cad87d924338303dd27ff89400 assets/hominid/models/item/polished_fossilized_stone.json

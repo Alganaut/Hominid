@@ -1,5 +1,7 @@
 {
   "values": [
-    "hominid:fossilized_stone"
+    "hominid:fossilized_stone",
+    "hominid:polished_fossilized_stone",
+    "hominid:fossilized_stone_bricks"
   ]
 }

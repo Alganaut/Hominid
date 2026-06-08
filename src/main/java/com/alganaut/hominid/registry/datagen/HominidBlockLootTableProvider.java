@@ -17,6 +17,8 @@ public class HominidBlockLootTableProvider extends BlockLootSubProvider {
     @Override
     protected void generate() {
         dropSelf(HominidBlocks.FOSSILIZED_STONE.get());
+        dropSelf(HominidBlocks.POLISHED_FOSSILIZED_STONE.get());
+        dropSelf(HominidBlocks.FOSSILIZED_STONE_BRICKS.get());
     }
 
     @Override

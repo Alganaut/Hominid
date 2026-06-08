@@ -19,6 +19,8 @@ public class HominidBlockTagProvider extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(HominidBlocks.FOSSILIZED_STONE.get());
+                .add(HominidBlocks.FOSSILIZED_STONE.get())
+                .add(HominidBlocks.POLISHED_FOSSILIZED_STONE.get())
+                .add(HominidBlocks.FOSSILIZED_STONE_BRICKS.get());
     }
 }

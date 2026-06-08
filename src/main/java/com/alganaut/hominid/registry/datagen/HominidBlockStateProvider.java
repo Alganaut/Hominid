@@ -16,6 +16,8 @@ public class HominidBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         blockWithItem(HominidBlocks.FOSSILIZED_STONE);
+        blockWithItem(HominidBlocks.POLISHED_FOSSILIZED_STONE);
+        blockWithItem(HominidBlocks.FOSSILIZED_STONE_BRICKS);
     }
 
     private void blockWithItem(DeferredBlock<?> deferredBlock) {
