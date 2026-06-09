@@ -20,6 +20,10 @@
   "block.hominid.polished_fossilized_stone": "Polished Fossilized Stone",
   "block.hominid.fossilized_stone_bricks": "Fossilized Stone Bricks",
 
+  "block.hominid.fossilized_stone_stairs": "Fossilized Stone Stairs",
+  "block.hominid.polished_fossilized_stone_stairs": "Polished Fossilized Stone Stairs",
+  "block.hominid.fossilized_stone_brick_stairs": "Fossilized Stone Brick Stairs",
+
   "entity.hominid.mellified": "Mellified",
   "entity.hominid.incendiary": "Incendiary",
   "entity.hominid.famished": "Famished",

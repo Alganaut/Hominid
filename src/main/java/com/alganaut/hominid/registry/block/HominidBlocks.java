@@ -26,10 +26,24 @@ public class HominidBlocks {
 
     public static final DeferredBlock<Block> FOSSILIZED_STONE = registerBlock("fossilized_stone",
             () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).strength(3.0f, 6.0f).requiresCorrectToolForDrops()));
+
+    public static final DeferredBlock<StairBlock> FOSSILIZED_STONE_STAIRS = registerBlock("fossilized_stone_stairs",
+            () -> new StairBlock(HominidBlocks.FOSSILIZED_STONE.get().defaultBlockState(),
+                    BlockBehaviour.Properties.ofFullCopy(FOSSILIZED_STONE.get())));
+
     public static final DeferredBlock<Block> POLISHED_FOSSILIZED_STONE = registerBlock("polished_fossilized_stone",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(FOSSILIZED_STONE.get())));
+
+    public static final DeferredBlock<StairBlock> POLISHED_FOSSILIZED_STONE_STAIRS = registerBlock("polished_fossilized_stone_stairs",
+            () -> new StairBlock(HominidBlocks.POLISHED_FOSSILIZED_STONE.get().defaultBlockState(),
+                    BlockBehaviour.Properties.ofFullCopy(FOSSILIZED_STONE.get())));
+
     public static final DeferredBlock<Block> FOSSILIZED_STONE_BRICKS = registerBlock("fossilized_stone_bricks",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(FOSSILIZED_STONE.get())));
+
+    public static final DeferredBlock<StairBlock> FOSSILIZED_STONE_BRICK_STAIRS = registerBlock("fossilized_stone_brick_stairs",
+            () -> new StairBlock(HominidBlocks.FOSSILIZED_STONE_BRICKS.get().defaultBlockState(),
+                    BlockBehaviour.Properties.ofFullCopy(FOSSILIZED_STONE.get())));
 
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {

@@ -21,6 +21,9 @@ public class HominidBlockTagProvider extends BlockTagsProvider {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(HominidBlocks.FOSSILIZED_STONE.get())
                 .add(HominidBlocks.POLISHED_FOSSILIZED_STONE.get())
-                .add(HominidBlocks.FOSSILIZED_STONE_BRICKS.get());
+                .add(HominidBlocks.FOSSILIZED_STONE_BRICKS.get())
+                .add(HominidBlocks.FOSSILIZED_STONE_STAIRS.get())
+                .add(HominidBlocks.POLISHED_FOSSILIZED_STONE_STAIRS.get())
+                .add(HominidBlocks.FOSSILIZED_STONE_BRICK_STAIRS.get());
     }
 }

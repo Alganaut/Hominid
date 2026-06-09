@@ -19,6 +19,7 @@ import java.util.concurrent.CompletableFuture;
 
 import static com.ibm.icu.impl.CurrencyData.provider;
 
+@EventBusSubscriber(modid = Hominid.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {

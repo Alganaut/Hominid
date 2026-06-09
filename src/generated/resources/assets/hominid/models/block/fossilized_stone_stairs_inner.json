@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "hominid:block/fossilized_stone",
+    "side": "hominid:block/fossilized_stone",
+    "top": "hominid:block/fossilized_stone"
+  }
+}
