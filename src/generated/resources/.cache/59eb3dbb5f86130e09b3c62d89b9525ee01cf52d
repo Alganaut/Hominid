@@ -1,7 +1,10 @@
-// 1.21.1	2026-06-09T12:46:19.7204325	Loot Tables
+// 1.21.1	2026-06-09T16:05:33.1097079	Loot Tables
 1be369fb07c46ac2c61d74fc9f4bd7573e38d1ea data/hominid/loot_table/blocks/fossilized_stone.json
 e7cf47e196d2f7f5ec280696eb1cf00ba02c0bb0 data/hominid/loot_table/blocks/fossilized_stone_bricks.json
+f2246a69d7ad28432b8d76cd989eccdbdae61c54 data/hominid/loot_table/blocks/fossilized_stone_brick_slab.json
 cf4e0b3c8f7860fa0f4319f39796a79cd2ccb2c8 data/hominid/loot_table/blocks/fossilized_stone_brick_stairs.json
+9b3a46c0bd581e16e5ed5efdf26362b83caa02e0 data/hominid/loot_table/blocks/fossilized_stone_slab.json
 330347da9707ac10b477ca5cf197bf57df1c3ef3 data/hominid/loot_table/blocks/fossilized_stone_stairs.json
 ff6501c77a8a4c3f269f1d791b2c55826fb0ab8e data/hominid/loot_table/blocks/polished_fossilized_stone.json
+41b6a57fd5828df5da9be00c911846f096c1e38a data/hominid/loot_table/blocks/polished_fossilized_stone_slab.json
 29e638640f328ddcd22f723e9c168147f778a350 data/hominid/loot_table/blocks/polished_fossilized_stone_stairs.json

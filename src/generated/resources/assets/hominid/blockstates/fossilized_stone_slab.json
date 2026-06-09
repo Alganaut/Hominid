@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "hominid:block/fossilized_stone_slab"
+    },
+    "type=double": {
+      "model": "hominid:block/fossilized_stone"
+    },
+    "type=top": {
+      "model": "hominid:block/fossilized_stone_slab_top"
+    }
+  }
+}

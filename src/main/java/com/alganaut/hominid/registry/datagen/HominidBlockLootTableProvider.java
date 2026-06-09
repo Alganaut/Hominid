@@ -23,6 +23,13 @@ public class HominidBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(HominidBlocks.FOSSILIZED_STONE_STAIRS.get());
         dropSelf(HominidBlocks.POLISHED_FOSSILIZED_STONE_STAIRS.get());
         dropSelf(HominidBlocks.FOSSILIZED_STONE_BRICK_STAIRS.get());
+
+        add(HominidBlocks.FOSSILIZED_STONE_SLAB.get(),
+                block -> createSlabItemTable(HominidBlocks.FOSSILIZED_STONE_SLAB.get()));
+        add(HominidBlocks.POLISHED_FOSSILIZED_STONE_SLAB.get(),
+                block -> createSlabItemTable(HominidBlocks.POLISHED_FOSSILIZED_STONE_SLAB.get()));
+        add(HominidBlocks.FOSSILIZED_STONE_BRICK_SLAB.get(),
+                block -> createSlabItemTable(HominidBlocks.FOSSILIZED_STONE_BRICK_SLAB.get()));
     }
 
     @Override

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "hominid:block/fossilized_stone_bricks",
+    "side": "hominid:block/fossilized_stone_bricks",
+    "top": "hominid:block/fossilized_stone_bricks"
+  }
+}
