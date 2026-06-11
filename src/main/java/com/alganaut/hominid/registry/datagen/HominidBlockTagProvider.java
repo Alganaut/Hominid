@@ -37,6 +37,8 @@ public class HominidBlockTagProvider extends BlockTagsProvider {
                 .add(HominidBlocks.POLISHED_FOSSILIZED_STONE_SLAB.get())
                 .add(HominidBlocks.FOSSILIZED_STONE_BRICK_SLAB.get());
         tag(BlockTags.WALLS)
-        ;
+                .add(HominidBlocks.FOSSILIZED_STONE_WALL.get())
+                .add(HominidBlocks.POLISHED_FOSSILIZED_STONE_WALL.get())
+                .add(HominidBlocks.FOSSILIZED_STONE_BRICK_WALL.get());
     }
 }

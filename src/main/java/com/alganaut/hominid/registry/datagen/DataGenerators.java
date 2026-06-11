@@ -57,6 +57,11 @@ public class DataGenerators {
 
         generator.addProvider(
                 event.includeClient(),
+                new HominidItemModelProvider(output, helper)
+        );
+
+        generator.addProvider(
+                event.includeClient(),
                 new HominidBlockStateProvider(output, helper)
         );
 

@@ -34,7 +34,7 @@ public class HominidItems {
             () -> new DeferredSpawnEggItem(HominidEntityCreator.BELLMAN, 0x211f1b, 0x898b82,
                     new Item.Properties()));
 
-    public static final DeferredItem<Item> FOSSLISED_SPAWN_EGG = ITEMS.register("fossilized_spawn_egg",
+    public static final DeferredItem<Item> FOSSILIZED_SPAWN_EGG = ITEMS.register("fossilized_spawn_egg",
             () -> new DeferredSpawnEggItem(HominidEntityCreator.FOSSILIZED, 0x9a9c7a, 0x5b5344,
                     new Item.Properties()));
     public static final DeferredItem<Item> VAMPIRE_SPAWN_EGG = ITEMS.register("vampire_spawn_egg",

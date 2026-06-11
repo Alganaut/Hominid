@@ -30,6 +30,10 @@ public class HominidBlockLootTableProvider extends BlockLootSubProvider {
                 block -> createSlabItemTable(HominidBlocks.POLISHED_FOSSILIZED_STONE_SLAB.get()));
         add(HominidBlocks.FOSSILIZED_STONE_BRICK_SLAB.get(),
                 block -> createSlabItemTable(HominidBlocks.FOSSILIZED_STONE_BRICK_SLAB.get()));
+
+        dropSelf(HominidBlocks.FOSSILIZED_STONE_WALL.get());
+        dropSelf(HominidBlocks.POLISHED_FOSSILIZED_STONE_WALL.get());
+        dropSelf(HominidBlocks.FOSSILIZED_STONE_BRICK_WALL.get());
     }
 
     @Override

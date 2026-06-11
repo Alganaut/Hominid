@@ -66,7 +66,7 @@ public class Creative {
             );
             insertItems(
                     HominidItems.FAMISHED_SPAWN_EGG,
-                    HominidItems.FOSSLISED_SPAWN_EGG
+                    HominidItems.FOSSILIZED_SPAWN_EGG
             );
             insertItems(
                     Items.TURTLE_SPAWN_EGG,

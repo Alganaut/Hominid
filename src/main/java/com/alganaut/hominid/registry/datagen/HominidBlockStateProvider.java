@@ -34,6 +34,10 @@ public class HominidBlockStateProvider extends BlockStateProvider {
         blockItem(HominidBlocks.FOSSILIZED_STONE_SLAB);
         blockItem(HominidBlocks.POLISHED_FOSSILIZED_STONE_SLAB);
         blockItem(HominidBlocks.FOSSILIZED_STONE_BRICK_SLAB);
+
+        wallBlock(HominidBlocks.FOSSILIZED_STONE_WALL.get(), blockTexture(HominidBlocks.FOSSILIZED_STONE.get()));
+        wallBlock(HominidBlocks.POLISHED_FOSSILIZED_STONE_WALL.get(), blockTexture(HominidBlocks.POLISHED_FOSSILIZED_STONE.get()));
+        wallBlock(HominidBlocks.FOSSILIZED_STONE_BRICK_WALL.get(), blockTexture(HominidBlocks.FOSSILIZED_STONE_BRICKS.get()));
     }
 
     private void blockWithItem(DeferredBlock<?> deferredBlock) {

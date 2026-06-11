@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_wall_side",
+  "textures": {
+    "wall": "hominid:block/fossilized_stone_bricks"
+  }
+}
