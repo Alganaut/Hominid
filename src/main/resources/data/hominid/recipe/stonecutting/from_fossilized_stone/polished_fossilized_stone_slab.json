@@ -1,0 +1,10 @@
+{
+  "ingredient": {
+    "item": "hominid:fossilized_stone"
+  },
+  "result": {
+    "count": 2,
+    "id": "hominid:polished_fossilized_stone_slab"
+  },
+  "type": "minecraft:stonecutting"
+}
