@@ -23,6 +23,9 @@ public class HominidBiomeModifiers {
     public static final ResourceKey<BiomeModifier> SPAWN_FOSSILIZED = registerKey("spawn_fossilized");
     public static final ResourceKey<BiomeModifier> SPAWN_VAMPIRE = registerKey("spawn_vampire");
 
+    public static final ResourceKey<BiomeModifier> SPAWN_JUGGERNAUT = registerKey("spawn_juggernaut");
+    public static final ResourceKey<BiomeModifier> SPAWN_BELLMAN = registerKey("spawn_bellman");
+
     public static void bootstrap(BootstrapContext<BiomeModifier> context) {
         var biomes = context.lookup(Registries.BIOME);
         context.register(SPAWN_MELLIFIED, new BiomeModifiers.AddSpawnsBiomeModifier(

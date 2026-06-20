@@ -1,0 +1,11 @@
+// change weight and biome to make them spawn naturally
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "minecraft:desert",
+  "spawners": {
+    "type": "hominid:bellman",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 0
+  }
+}
