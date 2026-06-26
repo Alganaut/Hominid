@@ -22,12 +22,14 @@ public class HominidBlockTagProvider extends BlockTagsProvider {
                 .add(HominidBlocks.FOSSILIZED_STONE.get())
                 .add(HominidBlocks.POLISHED_FOSSILIZED_STONE.get())
                 .add(HominidBlocks.FOSSILIZED_STONE_BRICKS.get())
+                .add(HominidBlocks.CRACKED_FOSSILIZED_STONE_BRICKS.get())
                 .add(HominidBlocks.FOSSILIZED_STONE_STAIRS.get())
                 .add(HominidBlocks.POLISHED_FOSSILIZED_STONE_STAIRS.get())
                 .add(HominidBlocks.FOSSILIZED_STONE_BRICK_STAIRS.get())
                 .add(HominidBlocks.FOSSILIZED_STONE_SLAB.get())
                 .add(HominidBlocks.POLISHED_FOSSILIZED_STONE_SLAB.get())
-                .add(HominidBlocks.FOSSILIZED_STONE_BRICK_SLAB.get());
+                .add(HominidBlocks.FOSSILIZED_STONE_BRICK_SLAB.get())
+                .add(HominidBlocks.FOSSILIZED_STONE_PILLAR.get());
         tag(BlockTags.STAIRS)
                 .add(HominidBlocks.FOSSILIZED_STONE_STAIRS.get())
                 .add(HominidBlocks.POLISHED_FOSSILIZED_STONE_STAIRS.get())

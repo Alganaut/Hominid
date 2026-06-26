@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "hominid:block/fossilized_stone_pillar_top",
+    "side": "hominid:block/fossilized_stone_pillar"
+  }
+}

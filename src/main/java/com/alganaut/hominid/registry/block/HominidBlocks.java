@@ -37,6 +37,9 @@ public class HominidBlocks {
     public static final DeferredBlock<WallBlock> FOSSILIZED_STONE_WALL = registerBlock("fossilized_stone_wall",
             () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(FOSSILIZED_STONE.get())));
 
+    public static final DeferredBlock<Block> FOSSILIZED_STONE_PILLAR = registerBlock("fossilized_stone_pillar",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(FOSSILIZED_STONE.get())));
+
     public static final DeferredBlock<Block> POLISHED_FOSSILIZED_STONE = registerBlock("polished_fossilized_stone",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(FOSSILIZED_STONE.get())));
 
@@ -51,6 +54,9 @@ public class HominidBlocks {
             () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(FOSSILIZED_STONE.get())));
 
     public static final DeferredBlock<Block> FOSSILIZED_STONE_BRICKS = registerBlock("fossilized_stone_bricks",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(FOSSILIZED_STONE.get())));
+
+    public static final DeferredBlock<Block> CRACKED_FOSSILIZED_STONE_BRICKS = registerBlock("cracked_fossilized_stone_bricks",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(FOSSILIZED_STONE.get())));
 
     public static final DeferredBlock<StairBlock> FOSSILIZED_STONE_BRICK_STAIRS = registerBlock("fossilized_stone_brick_stairs",

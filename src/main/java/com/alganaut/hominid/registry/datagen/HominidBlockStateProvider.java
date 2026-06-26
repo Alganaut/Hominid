@@ -18,6 +18,7 @@ public class HominidBlockStateProvider extends BlockStateProvider {
         blockWithItem(HominidBlocks.FOSSILIZED_STONE);
         blockWithItem(HominidBlocks.POLISHED_FOSSILIZED_STONE);
         blockWithItem(HominidBlocks.FOSSILIZED_STONE_BRICKS);
+        blockWithItem(HominidBlocks.CRACKED_FOSSILIZED_STONE_BRICKS);
 
         stairsBlock(HominidBlocks.FOSSILIZED_STONE_STAIRS.get(), blockTexture(HominidBlocks.FOSSILIZED_STONE.get()));
         stairsBlock(HominidBlocks.POLISHED_FOSSILIZED_STONE_STAIRS.get(), blockTexture(HominidBlocks.POLISHED_FOSSILIZED_STONE.get()));

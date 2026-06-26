@@ -19,6 +19,7 @@
   "block.hominid.fossilized_stone": "Fossilized Stone",
   "block.hominid.polished_fossilized_stone": "Polished Fossilized Stone",
   "block.hominid.fossilized_stone_bricks": "Fossilized Stone Bricks",
+  "block.hominid.cracked_fossilized_stone_bricks": "Cracked Fossilized Stone Bricks",
 
   "block.hominid.fossilized_stone_stairs": "Fossilized Stone Stairs",
   "block.hominid.polished_fossilized_stone_stairs": "Polished Fossilized Stone Stairs",
@@ -31,6 +32,8 @@
   "block.hominid.fossilized_stone_wall": "Fossilized Stone Wall",
   "block.hominid.polished_fossilized_stone_wall": "Polished Fossilized Stone Wall",
   "block.hominid.fossilized_stone_brick_wall": "Fossilized Stone Brick Wall",
+
+  "block.hominid.fossilized_stone_pillar": "Fossilized Stone Pillar",
 
   "entity.hominid.mellified": "Mellified",
   "entity.hominid.incendiary": "Incendiary",

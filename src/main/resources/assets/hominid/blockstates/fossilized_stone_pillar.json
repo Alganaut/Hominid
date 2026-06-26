@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "hominid:block/fossilized_stone_pillar_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "hominid:block/fossilized_stone_pillar"
+    },
+    "axis=z": {
+      "model": "hominid:block/fossilized_stone_pillar_horizontal",
+      "x": 90
+    }
+  }
+}

@@ -1,9 +1,11 @@
-// 1.21.1	2026-06-11T15:57:23.0063481	Loot Tables
+// 1.21.1	2026-06-17T21:41:32.3150572	Loot Tables
+991d5f2f7f778d6a2e6ad59e1c72668eab1a367d data/hominid/loot_table/blocks/cracked_fossilized_stone_bricks.json
 1be369fb07c46ac2c61d74fc9f4bd7573e38d1ea data/hominid/loot_table/blocks/fossilized_stone.json
 e7cf47e196d2f7f5ec280696eb1cf00ba02c0bb0 data/hominid/loot_table/blocks/fossilized_stone_bricks.json
 f2246a69d7ad28432b8d76cd989eccdbdae61c54 data/hominid/loot_table/blocks/fossilized_stone_brick_slab.json
 cf4e0b3c8f7860fa0f4319f39796a79cd2ccb2c8 data/hominid/loot_table/blocks/fossilized_stone_brick_stairs.json
 687d1c1e7fee23a650e664ca28ce88c870aac2ef data/hominid/loot_table/blocks/fossilized_stone_brick_wall.json
+9791aa817eef0bbb00ddf813f96b76b5cf71028c data/hominid/loot_table/blocks/fossilized_stone_pillar.json
 9b3a46c0bd581e16e5ed5efdf26362b83caa02e0 data/hominid/loot_table/blocks/fossilized_stone_slab.json
 330347da9707ac10b477ca5cf197bf57df1c3ef3 data/hominid/loot_table/blocks/fossilized_stone_stairs.json
 533dc7cadc7e04bb7a711b8e7e6b5849516840b4 data/hominid/loot_table/blocks/fossilized_stone_wall.json
