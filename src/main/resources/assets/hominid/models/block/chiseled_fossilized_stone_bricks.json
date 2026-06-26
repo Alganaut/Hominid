@@ -3,9 +3,9 @@
   "textures": {
     "down": "hominid:block/chiseled_fossilized_stone_bricks_top",
     "east": "hominid:block/chiseled_fossilized_stone_bricks_side",
-    "north": "hominid:block/chiseled_fossilized_stone_bricks_front",
-    "particle":  "hominid:block/chiseled_fossilized_stone_bricks_front",
-    "south":  "hominid:block/chiseled_fossilized_stone_bricks_front",
+    "north": "hominid:block/chiseled_fossilized_stone_bricks",
+    "particle":  "hominid:block/chiseled_fossilized_stone_bricks",
+    "south":  "hominid:block/chiseled_fossilized_stone_bricks",
     "up": "hominid:block/chiseled_fossilized_stone_bricks_top",
     "west": "hominid:block/chiseled_fossilized_stone_bricks_side"
   }
