@@ -23,6 +23,7 @@ public class HominidBlockTagProvider extends BlockTagsProvider {
                 .add(HominidBlocks.POLISHED_FOSSILIZED_STONE.get())
                 .add(HominidBlocks.FOSSILIZED_STONE_BRICKS.get())
                 .add(HominidBlocks.CRACKED_FOSSILIZED_STONE_BRICKS.get())
+                .add(HominidBlocks.CHISELED_FOSSILIZED_STONE_BRICKS.get())
                 .add(HominidBlocks.FOSSILIZED_STONE_STAIRS.get())
                 .add(HominidBlocks.POLISHED_FOSSILIZED_STONE_STAIRS.get())
                 .add(HominidBlocks.FOSSILIZED_STONE_BRICK_STAIRS.get())

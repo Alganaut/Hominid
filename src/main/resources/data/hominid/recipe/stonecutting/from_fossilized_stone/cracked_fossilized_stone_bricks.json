@@ -1,0 +1,10 @@
+{
+  "ingredient": {
+    "item": "hominid:fossilized_stone"
+  },
+  "result": {
+    "count": 1,
+    "id": "hominid:cracked_fossilized_stone_bricks"
+  },
+  "type": "minecraft:stonecutting"
+}

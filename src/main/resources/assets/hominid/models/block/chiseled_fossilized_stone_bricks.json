@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "hominid:block/chiseled_fossilized_stone_bricks_top",
+    "east": "hominid:block/chiseled_fossilized_stone_bricks_side",
+    "north": "hominid:block/chiseled_fossilized_stone_bricks_front",
+    "particle":  "hominid:block/chiseled_fossilized_stone_bricks_front",
+    "south":  "hominid:block/chiseled_fossilized_stone_bricks_front",
+    "up": "hominid:block/chiseled_fossilized_stone_bricks_top",
+    "west": "hominid:block/chiseled_fossilized_stone_bricks_side"
+  }
+}
