@@ -1,0 +1,54 @@
+{
+  "item.hominid.music_disc_hematoma": "Disco Musicale",
+  "item.hominid.music_disc_hematoma.desc": "ChipsTheCat - Hematoma",
+
+  "item.hominid.mellified_spawn_egg": "Uovo generatore di zombi mellificato",
+  "item.hominid.incendiary_spawn_egg": "Uovo generatore di zombi incendioso",
+  "item.hominid.famished_spawn_egg": "Uovo generatore di zombi affamato",
+  "item.hominid.juggernaut_spawn_egg": "Uovo generatore di zombi inarrestabile",
+  "item.hominid.bellman_spawn_egg": "Uovo generatore di campanaro",
+  "item.hominid.fossilized_spawn_egg": "Uovo generatore di scheletro fossilizzato",
+  "item.hominid.vampire_spawn_egg": "Uovo generatore di vampiro",
+
+  "item.hominid.remains_armor_trim_smithing_template": "Schema di forgiatura",
+  "trim_pattern.hominid.remains": "Ornamento stile resti",
+
+  "item.hominid.gasoline_tank": "Tanica di gasolio",
+  "item.hominid.famished_stomach": "Stomaco di zombi affamato",
+
+  "entity.hominid.mellified": "zombi mellificato",
+  "entity.hominid.incendiary": "Zombi Incendioso",
+  "entity.hominid.famished": "Zombi affamato",
+  "entity.hominid.juggernaut": "Zombi inarrestabile",
+  "entity.hominid.bellman": "Campanaro",
+  "entity.hominid.fossilized": "Scheletro fossilizzato",
+  "entity.hominid.vampire": "Vampiro",
+
+  "creativetab.hominid.hominid": "Hominid",
+
+  "effect.hominid.honeyed": "Mellifluo",
+  "effect.hominid.paranoia": "Paranoia",
+  "effect.hominid.endurance": "Sopportazione",
+
+  "advancements.adventure.hungry.title": "Quanto affamato...?",
+  "advancements.adventure.hungry.description": "Attacca e uccidi uno zombi affamato",
+  "advancements.adventure.hematoma.title": "Flusso di dracula",
+  "advancements.adventure.hematoma.description": "Convinci un vampiro ad uccidere un creeper per un premio speciale",
+  "advancements.adventure.gasoline.title": "Gasolio incredibile",
+  "advancements.adventure.gasoline.description": "Ottieni una tanica di gasolio, che può essere usato come carborante più volte",
+  "advancements.adventure.fossilized.title": "Riporta la stele",
+  "advancements.adventure.fossilized.description": "Spazzola uno scheletro fossilizzato per ottenere un pezzo del suo corpo",
+
+  "painting.hominid.orbit.title": "Orbit",
+  "painting.hominid.orbit.author": "FishStacks",
+  "painting.hominid.hothead.title": "Hothead",
+  "painting.hominid.hothead.author": "FishStacks",
+  "painting.hominid.not_happy.title": "Not Happy",
+  "painting.hominid.not_happy.author": "FishStacks",
+
+  "sounds.hominid.vampire_idle": "Vampiro geme",
+  "sounds.hominid.vampire_hurt": "Vampiro ferito",
+  "sounds.hominid.vampire_death": "Vampiro muore",
+  "sounds.hominid.vampire_scream": "Vampire urla",
+  "sounds.hominid.paranoia": "Voci sussurrano"
+}
