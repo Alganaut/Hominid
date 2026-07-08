@@ -184,7 +184,9 @@ public class Bellman extends Monster {
                             BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("species", "quake")),
                             BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("opposing_force", "frowzy")),
                             BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("opposing_force", "rambler")),
-                            BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("quark", "forgotten"))
+                            BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("quark", "forgotten")),
+                            BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("undead_unleashed", "wraith")),
+                            BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("undead_unleashed", "dreadknight"))
                     };
                 }
 

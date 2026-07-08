@@ -23,6 +23,8 @@
     {"id": "species:quake", "required": false},
     {"id": "opposing_force:frowzy", "required": false},
     {"id": "opposing_force:rambler", "required": false},
-    {"id": "quark:forgotten", "required": false}
+    {"id": "quark:forgotten", "required": false},
+    {"id": "undead_unleashed:wraith", "required": false},
+    {"id": "undead_unleashed:dreadknight", "required": false}
   ]
 }
