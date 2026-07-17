@@ -1,0 +1,26 @@
+{
+  "item.hominid.charred_music_disc": "音乐唱片",
+  "item.hominid.charred_music_disc.desc": "Quizzly - 化为焦炭",
+
+  "item.hominid.mellified_spawn_egg": "浸蜜人刷怪蛋",
+  "item.hominid.incendiary_spawn_egg": "纵火者刷怪蛋",
+  "item.hominid.famished_spawn_egg": "饿殍刷怪蛋",
+  "item.hominid.juggernaut_spawn_egg": "破阻者刷怪蛋",
+
+  "item.hominid.gasoline_tank": "油罐",
+
+  "entity.hominid.mellified": "浸蜜人",
+  "entity.hominid.incendiary": "纵火者",
+  "entity.hominid.famished": "饿殍",
+  "entity.hominid.juggernaut": "破阻者",
+
+  "creativetab.hominid.hominid": "人猿",
+
+  "effect.hominid.honeyed": "甜蜜",
+  "advancements.adventure.hungry.title": "你饿了么...?",
+  "advancements.adventure.hungry.description": "攻击并杀死一个饿殍",
+  "advancements.adventure.charred.title": "炙手可燃",
+  "advancements.adventure.charred.description": "利用自燃者点燃苦力怕，并获得以此途径获得一个特殊的奖励",
+  "advancements.adventure.gasoline.title": "不可思议的燃料",
+  "advancements.adventure.gasoline.description": "获得一个油罐，它可用作可重复使用的燃料"
+}
