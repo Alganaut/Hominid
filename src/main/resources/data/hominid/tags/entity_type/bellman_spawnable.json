@@ -25,6 +25,8 @@
     {"id": "opposing_force:rambler", "required": false},
     {"id": "quark:forgotten", "required": false},
     {"id": "undead_unleashed:wraith", "required": false},
-    {"id": "undead_unleashed:dreadknight", "required": false}
+    {"id": "undead_unleashed:dreadknight", "required": false},
+    {"id": "nomansland:buried", "required": false},
+    {"id": "nomansland:remnant", "required": false}
   ]
 }
