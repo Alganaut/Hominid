@@ -7,11 +7,13 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -19,9 +21,12 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,8 +35,8 @@ import java.util.List;
 
 public class Mellified extends Monster {
     public int idleAnimationTimeout = 0;
+    public final AnimationState attackAnimationState = new AnimationState();
     public final AnimationState idleAnimationState = new AnimationState();
-    public final AnimationState walkAnimationState = new AnimationState();
 
     public Mellified(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
@@ -71,19 +76,21 @@ public class Mellified extends Monster {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new FollowPlayerGoal(this, 1.0, 1.0F, 10.0F));
+        this.goalSelector.addGoal(4, new ZombieAttackTurtleEggGoal(this, 1.0, 3));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2, false));
         this.goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0, 0.0F));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
     }
 
     private void setupAnimationStates() {
         if (this.getDeltaMovement().horizontalDistance() <= 0.001F) {
             if (this.idleAnimationTimeout <= 0) {
-                this.idleAnimationTimeout = 60;
+                this.idleAnimationTimeout = 250;
                 this.idleAnimationState.start(this.tickCount);
             } else {
                 --this.idleAnimationTimeout;
@@ -99,29 +106,15 @@ public class Mellified extends Monster {
             this.setupAnimationStates();
         }
         super.tick();
-
-        if (this.level() == null || this.level().isClientSide) {
-            return;
-        }
-
-        if (isMoving()) {
-            walkAnimationState.startIfStopped(tickCount);
-            idleAnimationState.stop();
-        } else {
-            idleAnimationState.startIfStopped(tickCount);
-            walkAnimationState.stop();
-        }
     }
 
     @Override
-    public boolean hurt(@NotNull DamageSource source, float amount) {
-        boolean hurt = super.hurt(source, amount);
-        spawnHoneyParticles(this);
-        if (source.getEntity() != null) {
-            healZombies();
+    public void handleEntityEvent(byte state) {
+        if (state == 60){
+            this.attackAnimationState.stop();
+            this.attackAnimationState.startIfStopped(this.tickCount);
         }
-
-        return hurt;
+        else super.handleEntityEvent(state);
     }
 
     private void spawnHoneyParticles(LivingEntity entity) {
@@ -143,22 +136,6 @@ public class Mellified extends Monster {
         }
     }
 
-
-    private void healZombies() {
-        if (this.level() == null) {
-            return;
-        }
-
-        List<Monster> nearbyZombies = this.level().getEntitiesOfClass(
-                Monster.class, this.getBoundingBox().inflate(5));
-
-        for (Monster zombie : nearbyZombies) {
-            if (!zombie.equals(this)) {
-                zombie.addEffect(new MobEffectInstance(HominidEffects.HONEYED, 600, 10));
-            }
-        }
-    }
-
     @Override
     public float getWalkTargetValue(BlockPos pos, LevelReader level) {
         return level.getBlockState(pos).isAir() ? 10.0F : 0.0F;
@@ -168,65 +145,19 @@ public class Mellified extends Monster {
         return true;
     }
 
-
-    public class FollowPlayerGoal extends Goal {
-        private final Monster entity;
-        private final double speedModifier;
-        private final float minDistance;
-        private final float maxDistance;
-        private Player targetPlayer;
-
-        public FollowPlayerGoal(Monster entity, double speedModifier, float minDistance, float maxDistance) {
-            this.entity = entity;
-            this.speedModifier = speedModifier;
-            this.minDistance = minDistance;
-            this.maxDistance = maxDistance;
-            this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
+    class ZombieAttackTurtleEggGoal extends RemoveBlockGoal {
+        ZombieAttackTurtleEggGoal(PathfinderMob mob, double speedModifier, int verticalSearchRange) {
+            super(Blocks.TURTLE_EGG, mob, speedModifier, verticalSearchRange);
         }
 
         @Override
-        public boolean canUse() {
-
-            if (this.entity.level() == null || this.entity.level().isClientSide) {
-                return false;
-            }
-
-            this.targetPlayer = this.entity.level().getNearestPlayer(this.entity, maxDistance);
-
-            return this.targetPlayer != null && !targetPlayer.isCreative() && this.targetPlayer.distanceTo(this.entity) >= minDistance && this.targetPlayer.distanceTo(this.entity) <= maxDistance;
+        public void playDestroyProgressSound(LevelAccessor level, BlockPos pos) {
+            level.playSound(null, pos, SoundEvents.ZOMBIE_DESTROY_EGG, SoundSource.HOSTILE, 0.5F, 0.9F + this.mob.getRandom().nextFloat() * 0.2F);
         }
 
         @Override
-        public boolean canContinueToUse() {
-            return this.targetPlayer != null && this.targetPlayer.isAlive() && this.targetPlayer.distanceTo(this.entity) > minDistance && this.targetPlayer.distanceTo(this.entity) <= maxDistance;
-        }
-
-        @Override
-        public void start() {
-            if (this.targetPlayer != null) {
-                PathNavigation navigation = this.entity.getNavigation();
-                if (navigation != null) {
-                    navigation.moveTo(this.targetPlayer, this.speedModifier);
-                }
-            }
-        }
-
-        @Override
-        public void stop() {
-            this.targetPlayer = null;
-        }
-
-        @Override
-        public void tick() {
-            if (this.targetPlayer != null) {
-                double distance = this.targetPlayer.distanceTo(this.entity);
-                if (distance > minDistance && distance <= maxDistance) {
-                    PathNavigation navigation = this.entity.getNavigation();
-                    if (navigation != null) {
-                        navigation.moveTo(this.targetPlayer, this.speedModifier);
-                    }
-                }
-            }
+        public void playBreakSound(Level level, BlockPos pos) {
+            level.playSound(null, pos, SoundEvents.TURTLE_EGG_BREAK, SoundSource.BLOCKS, 0.7F, 0.9F + level.random.nextFloat() * 0.2F);
         }
     }
 }

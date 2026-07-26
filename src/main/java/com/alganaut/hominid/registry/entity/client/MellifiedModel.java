@@ -26,34 +26,34 @@ public class MellifiedModel<T extends Mellified> extends HierarchicalModel<T> {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
 
-        PartDefinition mellified = partdefinition.addOrReplaceChild("mellified", CubeListBuilder.create(), PartPose.offset(3.0F, 25.0F, -1.0F));
+        PartDefinition mellified = partdefinition.addOrReplaceChild("mellified", CubeListBuilder.create(), PartPose.offset(0.0F, 26.0F, 0.0F));
 
-        PartDefinition torso = mellified.addOrReplaceChild("torso", CubeListBuilder.create().texOffs(32, 0).addBox(-4.0F, -11.0F, -2.0F, 8.0F, 11.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-3.0F, -11.0F, 1.0F));
+        PartDefinition torso = mellified.addOrReplaceChild("torso", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-        PartDefinition body_honey = torso.addOrReplaceChild("body_honey", CubeListBuilder.create().texOffs(32, 15).addBox(-7.0F, -11.0F, -1.0F, 8.0F, 11.0F, 4.0F, new CubeDeformation(0.25F)), PartPose.offset(3.0F, 0.0F, -1.0F));
+        PartDefinition head = torso.addOrReplaceChild("head", CubeListBuilder.create(), PartPose.offset(0.0F, -22.0F, 0.0F));
 
-        PartDefinition head = torso.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 17).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F))
-                .texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 9.0F, 8.0F, new CubeDeformation(0.4F)), PartPose.offset(0.0F, -11.0F, 0.0F));
+        PartDefinition full = head.addOrReplaceChild("full", CubeListBuilder.create().texOffs(0, 20).addBox(-7.0F, -4.0F, -7.0F, 14.0F, 4.0F, 14.0F, new CubeDeformation(0.01F))
+                .texOffs(0, 0).addBox(-7.0F, -14.0F, -7.0F, 14.0F, 6.0F, 14.0F, new CubeDeformation(0.0F))
+                .texOffs(1, 39).addBox(-6.0F, -8.0F, -6.0F, 12.0F, 4.0F, 12.0F, new CubeDeformation(0.0F))
+                .texOffs(50, 38).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F))
+                .texOffs(56, 0).addBox(1.0F, -16.0F, -7.0F, 2.0F, 2.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(56, 0).mirror().addBox(-3.0F, -15.0F, -7.0F, 2.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-        PartDefinition head_honey = head.addOrReplaceChild("head_honey", CubeListBuilder.create().texOffs(0, 33).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.25F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+        PartDefinition squished = head.addOrReplaceChild("squished", CubeListBuilder.create().texOffs(82, 38).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F))
+                .texOffs(82, 54).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.25F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-        PartDefinition left_arm = torso.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(0, 49).mirror().addBox(0.0F, -2.0341F, -2.2588F, 3.0F, 11.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(4.0F, -9.0F, 0.0F, -1.1781F, 0.0F, 0.0F));
+        PartDefinition body = torso.addOrReplaceChild("body", CubeListBuilder.create().texOffs(50, 54).addBox(-4.0F, -11.0F, -2.0F, 8.0F, 11.0F, 4.0F, new CubeDeformation(0.0F))
+                .texOffs(56, 30).addBox(-4.0F, -6.0F, -4.0F, 8.0F, 6.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -11.0F, 0.0F));
 
-        PartDefinition left_arm_honey = left_arm.addOrReplaceChild("left_arm_honey", CubeListBuilder.create().texOffs(14, 49).mirror().addBox(-3.0F, -2.0341F, -2.2588F, 3.0F, 11.0F, 4.0F, new CubeDeformation(0.25F)).mirror(false), PartPose.offset(3.0F, 0.0F, 0.0F));
+        PartDefinition left_arm = torso.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(0, 55).addBox(0.0F, -2.0F, -2.0F, 3.0F, 11.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(4.0F, -20.0F, 0.0F));
 
-        PartDefinition right_arm = torso.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(0, 49).addBox(-3.0F, -2.0341F, -2.2588F, 3.0F, 11.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-4.0F, -9.0F, 0.0F, -1.1781F, 0.0F, 0.0F));
+        PartDefinition right_arm = torso.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(0, 55).mirror().addBox(-3.0F, -2.0F, -2.0F, 3.0F, 11.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-4.0F, -20.0F, 0.0F));
 
-        PartDefinition right_arm_honey = right_arm.addOrReplaceChild("right_arm_honey", CubeListBuilder.create().texOffs(14, 49).addBox(-3.0F, -2.0341F, -2.2588F, 3.0F, 11.0F, 4.0F, new CubeDeformation(0.25F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+        PartDefinition left_leg = mellified.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(14, 55).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 9.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, -11.0F, 0.0F));
 
-        PartDefinition left_leg = mellified.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(32, 50).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 10.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.0F, -11.0F, 1.0F));
+        PartDefinition left_leg2 = mellified.addOrReplaceChild("left_leg2", CubeListBuilder.create().texOffs(30, 55).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 9.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, -11.0F, 0.0F));
 
-        PartDefinition left_leg_honey = left_leg.addOrReplaceChild("left_leg_honey", CubeListBuilder.create().texOffs(48, 50).addBox(-3.0F, -10.0F, -1.0F, 4.0F, 10.0F, 4.0F, new CubeDeformation(0.239F)), PartPose.offset(1.0F, 10.0F, -1.0F));
-
-        PartDefinition right_leg = mellified.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(32, 36).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 10.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-5.0F, -11.0F, 1.0F));
-
-        PartDefinition right_leg_honey = right_leg.addOrReplaceChild("right_leg_honey", CubeListBuilder.create().texOffs(48, 36).addBox(-3.0F, -10.0F, -1.0F, 4.0F, 10.0F, 4.0F, new CubeDeformation(0.24F)), PartPose.offset(1.0F, 10.0F, -1.0F));
-
-        return LayerDefinition.create(meshdefinition, 64, 64);
+        return LayerDefinition.create(meshdefinition, 128, 128);
     }
 
 
