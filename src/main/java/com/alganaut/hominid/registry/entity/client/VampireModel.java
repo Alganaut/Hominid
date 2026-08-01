@@ -29,25 +29,31 @@ public class VampireModel<T extends Vampire> extends HierarchicalModel<T> {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
 
-        PartDefinition vampire = partdefinition.addOrReplaceChild("vampire", CubeListBuilder.create(), PartPose.offset(4.0F, 2.0F, 0.0F));
+        PartDefinition vampire = partdefinition.addOrReplaceChild("vampire", CubeListBuilder.create(), PartPose.offset(0.0F, 12.0F, -3.0F));
 
-        PartDefinition torso = vampire.addOrReplaceChild("torso", CubeListBuilder.create().texOffs(0, 16).addBox(-4.0F, -12.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-4.0F, 10.0F, 0.0F));
+        PartDefinition torso = vampire.addOrReplaceChild("torso", CubeListBuilder.create(), PartPose.offset(0.0F, -7.0F, 3.0F));
 
-        PartDefinition right_arm = torso.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(32, 0).addBox(-4.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F))
-                .texOffs(48, 0).addBox(-4.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)), PartPose.offsetAndRotation(-4.0F, -10.0F, 0.0F, -1.5708F, 0.0F, 0.0F));
+        PartDefinition head = torso.addOrReplaceChild("head", CubeListBuilder.create().texOffs(50, 19).addBox(-4.0F, -8.0F, -5.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 0).mirror().addBox(4.0F, -6.0F, -5.0F, 2.0F, 3.0F, 0.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(0.0F, -11.0F, -2.0F));
 
-        PartDefinition left_arm = torso.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(16, 32).addBox(0.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F))
-                .texOffs(32, 32).addBox(0.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)), PartPose.offsetAndRotation(4.0F, -10.0F, 0.0F, -1.5708F, 0.0F, 0.0F));
+        PartDefinition body = torso.addOrReplaceChild("body", CubeListBuilder.create().texOffs(50, 35).addBox(-5.0F, -20.0F, 0.0F, 10.0F, 13.0F, 5.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 3).addBox(-3.0F, -18.0F, 5.0F, 3.0F, 3.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 7.0F, -3.0F));
 
-        PartDefinition head = torso.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -12.0F, 0.0F));
+        PartDefinition left_arm = torso.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -2.0F, -20.0F, 3.0F, 4.0F, 22.0F, new CubeDeformation(0.0F))
+                .texOffs(-3, 10).addBox(3.0F, -2.0F, -18.0F, 2.0F, 0.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(5.0F, -11.0F, 0.0F));
 
-        PartDefinition right_leg = vampire.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(24, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F))
-                .texOffs(40, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)), PartPose.offset(-6.0F, 10.0F, 0.0F));
+        PartDefinition right_arm = torso.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(0, 26).addBox(-3.0F, -2.0F, -20.0F, 3.0F, 4.0F, 22.0F, new CubeDeformation(0.0F))
+                .texOffs(-2, 8).addBox(-5.0F, -1.0F, -5.0F, 2.0F, 0.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-5.0F, -11.0F, 0.0F));
 
-        PartDefinition left_leg = vampire.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(0, 32).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F))
-                .texOffs(0, 48).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)), PartPose.offset(-2.0F, 10.0F, 0.0F));
+        PartDefinition left_leg = vampire.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(0, 52).addBox(-1.0F, 0.0F, -2.0F, 3.0F, 19.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(24, 52).addBox(-2.0F, 0.0F, -3.0F, 5.0F, 7.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, -7.0F, 3.0F));
 
-        return LayerDefinition.create(meshdefinition, 64, 64);
+        PartDefinition right_leg = vampire.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(12, 52).addBox(-2.0F, 0.0F, -2.0F, 3.0F, 19.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(44, 53).addBox(-3.0F, 0.0F, -3.0F, 5.0F, 7.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, -7.0F, 3.0F));
+
+        PartDefinition torn_shirt = vampire.addOrReplaceChild("torn_shirt", CubeListBuilder.create().texOffs(50, 0).addBox(-5.0F, -9.0F, 0.0F, 10.0F, 14.0F, 5.0F, new CubeDeformation(0.25F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+        return LayerDefinition.create(meshdefinition, 128, 128);
     }
 
     @Override
