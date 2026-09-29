@@ -22,10 +22,6 @@ Hominid's mobs vary in rarity and behaviour, which means they can each provide d
 
  - Alganaut - Art and Programming
 
-- ItsHamza - Programming
-
 - Fishstacks - Art
 
-- Drodi - Art and Animation
-
-- Twisted - Art
+- Drodi - Animation
