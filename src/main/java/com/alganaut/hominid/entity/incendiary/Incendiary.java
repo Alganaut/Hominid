@@ -41,13 +41,18 @@ public class Incendiary extends Monster {
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState igniteAnimationState = new AnimationState();
     public final AnimationState attackAnimationState = new AnimationState();
-    private boolean isEnraged = false;
     private static final double NORMAL_SPEED = 0.2;
     private static final double ENRAGED_SPEED = 0.35;
     private static final int FIRE_DURATION = 500;
     private static final int IGNITION_DELAY = 60;
     private int ignitionTimer = 0;
     private final IdleAnimationController idleAnimationController = new IdleAnimationController(120);
+    private IncendiaryState state = IncendiaryState.IDLE;
+    private enum IncendiaryState {
+        IDLE,
+        IGNITING,
+        ENRAGED
+    }
 
     public Incendiary(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
@@ -67,19 +72,17 @@ public class Incendiary extends Monster {
         builder.define(IGNITING, false);
     }
 
-    public void setIgniting(boolean attacking) {
-        entityData.set(IGNITING, attacking);
-    }
 
     public boolean isIgniting() {
         return entityData.get(IGNITING);
     }
 
+    //todo fix goal pursuit  
     @Override
     protected void registerGoals() {
         goalSelector.addGoal(0, new FloatGoal(this));
         goalSelector.addGoal(4, new AttackTurtleEggGoal(this, 1.0, 3));
-        goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2, false));
+        goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2, true));
         goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0));
         goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0, 0.0F));
         goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
@@ -96,63 +99,75 @@ public class Incendiary extends Monster {
 
     @Override
     public void tick() {
-        LivingEntity target = getTarget();
         if (level().isClientSide()) {
             idleAnimationController.tick(this, idleAnimationState);
-        }
-
-        if (target != null) {
             if (!isIgniting()) {
-                igniteEntity();
-            }
-        } else {
-            if (isEnraged) {
-                cancelEnraged();
-            }
-            if (isIgniting()) {
-               cancelIgnition();
+                igniteAnimationState.stop();
             }
         }
-
-        if (isIgniting()) {
-            tickIgnitionState();
+        switch (state) {
+            case IDLE -> idling();
+            case IGNITING ->  igniting();
+            case ENRAGED -> raging();
         }
         igniteNearbyMobs();
         super.tick();
     }
 
-    private void cancelEnraged() {
-        getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(NORMAL_SPEED);
-        isEnraged = false;
-    }
-
-    private void cancelIgnition() {
-        setIgniting(false);
-        ignitionTimer = 0;
-    }
-
-    private void igniteEntity() {
-        ignitionTimer = IGNITION_DELAY;
-        setIgniting(true);
-        if(!level().isClientSide){
-            level().broadcastEntityEvent(this, IGNITE_ANIMATION_EVENT);
-        }
-    }
-
-    private void tickIgnitionState() {
-        if(!level().isClientSide){
-            level().broadcastEntityEvent(this, IGNITE_ANIMATION_EVENT);
-        }
-        if (ignitionTimer < 0) {
+    private void idling() {
+        LivingEntity target = getTarget();
+        if (target == null) {
             return;
         }
-        ignitionTimer--;
-        if (ignitionTimer == 0  && !isEnraged) {
-            isEnraged = true;
-            setRemainingFireTicks(FIRE_DURATION);
-            getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(ENRAGED_SPEED);
-            setIgniting(false);
+
+        setIgnition();
+        if(!level().isClientSide){
+            level().broadcastEntityEvent(this, IGNITE_ANIMATION_EVENT);
         }
+    }
+
+    private void igniting() {
+        if(!level().isClientSide){
+            level().broadcastEntityEvent(this, IGNITE_ANIMATION_EVENT);
+        }
+        if (getTarget() == null) {
+           setIdle();
+           return;
+        }
+        if (ignitionTimer != 0) {
+            ignitionTimer--;
+            return;
+        }
+        setEnraged();
+    }
+
+    private void raging() {
+        if (getTarget() != null) {
+              return;
+        }
+        setIdle();
+
+    }
+
+    private void setIdle() {
+        state = IncendiaryState.IDLE;
+        getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(NORMAL_SPEED);
+        ignitionTimer = 0;
+        entityData.set(IGNITING, false);
+    }
+
+    private void setIgnition() {
+        state = IncendiaryState.IGNITING;
+        ignitionTimer = IGNITION_DELAY;
+        // is attacking
+        entityData.set(IGNITING, true);
+    }
+
+    private void setEnraged() {
+        state = IncendiaryState.ENRAGED;
+        setRemainingFireTicks(FIRE_DURATION);
+        getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(ENRAGED_SPEED);
+        entityData.set(IGNITING, false);
     }
 
     private void igniteNearbyMobs() {

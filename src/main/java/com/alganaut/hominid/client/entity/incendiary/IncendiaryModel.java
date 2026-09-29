@@ -54,18 +54,18 @@ public class IncendiaryModel<T extends Incendiary> extends HierarchicalModel<T> 
     public void setupAnim(Incendiary entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
         ModelHeadRotation.apply(this.head, netHeadYaw, headPitch);
-        if(!entity.isIgniting()){
-            if(entity.getAttribute(Attributes.MOVEMENT_SPEED).getBaseValue() == 0.35){
-                this.animateWalk(IncendiaryAnimations.ANIM_INCENDIARY_AGGRO_WALK, limbSwing, limbSwingAmount, 2f, 54);
-                this.animate(entity.attackAnimationState,IncendiaryAnimations.ANIM_INCENDIARY_WALK,ageInTicks, 2f);
-                this.animate(entity.attackAnimationState,IncendiaryAnimations.ANIM_INCENDIARY_IDLE,ageInTicks, 2f);
-            }else{
-                this.animateWalk(IncendiaryAnimations.ANIM_INCENDIARY_WALK, limbSwing, limbSwingAmount, 2f, 54);
-                this.animate(entity.idleAnimationState,IncendiaryAnimations.ANIM_INCENDIARY_IDLE,ageInTicks, 1f);
-                this.animate(entity.attackAnimationState,IncendiaryAnimations.ANIM_INCENDIARY_ATTACK,ageInTicks, 2f);
-            }
+        if (entity.getAttribute(Attributes.MOVEMENT_SPEED).getBaseValue() == 0.35) {
+            this.animateWalk(IncendiaryAnimations.ANIM_INCENDIARY_AGGRO_WALK, limbSwing, limbSwingAmount, 2f, 54);
+            this.animate(entity.attackAnimationState, IncendiaryAnimations.ANIM_INCENDIARY_WALK, ageInTicks, 2f);
+            this.animate(entity.attackAnimationState, IncendiaryAnimations.ANIM_INCENDIARY_IDLE, ageInTicks, 2f);
+        } else {
+            this.animateWalk(IncendiaryAnimations.ANIM_INCENDIARY_WALK, limbSwing, limbSwingAmount, 2f, 54);
+            this.animate(entity.idleAnimationState, IncendiaryAnimations.ANIM_INCENDIARY_IDLE, ageInTicks, 1f);
+            this.animate(entity.attackAnimationState, IncendiaryAnimations.ANIM_INCENDIARY_ATTACK, ageInTicks, 2f);
         }
-        this.animate(entity.igniteAnimationState,IncendiaryAnimations.ANIM_INCENDIARY_IGNITING,ageInTicks, 1f);
+        if (entity.isIgniting()) {
+            this.animate(entity.igniteAnimationState, IncendiaryAnimations.ANIM_INCENDIARY_IGNITING, ageInTicks, 1f);
+        }
     }
 
     @Override

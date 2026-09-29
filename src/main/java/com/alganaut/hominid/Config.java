@@ -33,7 +33,7 @@ public class Config {
                     .map(BuiltInRegistries.ENTITY_TYPE::getOptional)
                     .flatMap(Optional::stream)
                     .distinct()
-                    .toArray(EntityType<?>[]::new)
+                    .toArray(EntityType<?>[]::new);
         }
         return bellmanSummons;
     }
