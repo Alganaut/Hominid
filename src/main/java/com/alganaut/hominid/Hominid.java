@@ -1,23 +1,23 @@
 package com.alganaut.hominid;
 
+import com.alganaut.hominid.registry.HominidEntityCreator;
 import com.alganaut.hominid.registry.block.HominidBlocks;
 import com.alganaut.hominid.registry.effect.HominidEffects;
-import com.alganaut.hominid.registry.entity.HominidEntityCreator;
 import com.alganaut.hominid.registry.event.HominidClientEvents;
 import com.alganaut.hominid.registry.item.HominidItems;
 import com.alganaut.hominid.registry.misc.HominidCreativeModeTab;
 import com.alganaut.hominid.registry.sound.HominidSounds;
 import com.google.common.collect.ImmutableList;
-import net.minecraft.resources.ResourceLocation;
-import org.slf4j.Logger;
-
 import com.mojang.logging.LogUtils;
-
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.slf4j.Logger;
+
+import java.util.List;
 
 @Mod(Hominid.MODID)
 public class Hominid {
@@ -25,7 +25,7 @@ public class Hominid {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     // Contains all the registries
-    private static final ImmutableList<DeferredRegister<?>> REGISTRIES = ImmutableList.of(
+    private static final List<DeferredRegister<?>> REGISTRIES = List.of(
             HominidItems.ITEMS,
             HominidBlocks.BLOCKS,
             HominidSounds.SOUND_EVENTS,
@@ -43,7 +43,6 @@ public class Hominid {
         HominidClientEvents.register();
         HominidCreativeModeTab.register(modEventBus);
         HominidEffects.register(modEventBus);
-
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);

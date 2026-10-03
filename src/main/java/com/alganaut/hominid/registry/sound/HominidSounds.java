@@ -8,7 +8,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.JukeboxSong;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
@@ -39,10 +38,4 @@ public class HominidSounds {
         SOUND_EVENTS.register(eventBus);
     }
 
-    public static DeferredHolder<SoundEvent, SoundEvent> createSound(String name) {
-        return SOUND_EVENTS.register(
-                name,
-                () -> SoundEvent.createVariableRangeEvent(Hominid.id(name))
-        );
-    }
 }

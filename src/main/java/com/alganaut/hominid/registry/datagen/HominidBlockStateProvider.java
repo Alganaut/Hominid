@@ -48,7 +48,4 @@ public class HominidBlockStateProvider extends BlockStateProvider {
     private void blockItem(DeferredBlock<?> deferredBlock) {
         simpleBlockItem(deferredBlock.get(), new ModelFile.UncheckedModelFile("hominid:block/" + deferredBlock.getId().getPath()));
     }
-    private void blockItem(DeferredBlock<?> deferredBlock, String appendix) {
-        simpleBlockItem(deferredBlock.get(), new ModelFile.UncheckedModelFile("hominid:block/" + deferredBlock.getId().getPath() + appendix));
-    }
 }

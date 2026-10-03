@@ -1,7 +1,6 @@
 package com.alganaut.hominid.registry.datagen;
 
 import com.alganaut.hominid.Hominid;
-import com.alganaut.hominid.registry.block.HominidBlocks;
 import com.alganaut.hominid.registry.item.HominidItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
