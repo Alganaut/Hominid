@@ -16,7 +16,7 @@ public class Config {
 
     private static final Supplier<ModConfigSpec.ConfigValue<List<? extends String>>> BELLMAN_SUMMONS = () -> BUILDER
             .comment("Entities the bellman can summon.")
-            .defineListAllowEmpty("Bellman Summons", Bellman.SUPPORTED_SUMMONS, Config::validateSummon);
+            .defineListAllowEmpty("summons", Bellman.SUPPORTED_SUMMONS, Config::validateSummon);
 
     // Should spawn?
     public static final ModConfigSpec.ConfigValue<Boolean> BELLMAN;
