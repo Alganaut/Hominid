@@ -2,6 +2,7 @@ package com.alganaut.hominid.entity.juggernaut;
 
 import com.alganaut.hominid.entity.animation.IdleAnimationController;
 import com.alganaut.hominid.entity.goal.AttackTurtleEggGoal;
+import com.alganaut.hominid.registry.HominidEntityCreator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -27,8 +28,8 @@ public class Juggernaut extends Monster {
     public final AnimationState idleAnimationState = new AnimationState();
     private final IdleAnimationController idleAnimationController = new IdleAnimationController(250);
 
-    public Juggernaut(EntityType<? extends Monster> entityType, Level level) {
-        super(entityType, level);
+    public Juggernaut(Level level) {
+        super(HominidEntityCreator.JUGGERNAUT.get(), level);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -43,16 +44,16 @@ public class Juggernaut extends Monster {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(4, new AttackTurtleEggGoal(this, 1.0, 3, 1.14));
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2, false));
-        this.goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0));
-        this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0, 0.0F));
-        this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
+        goalSelector.addGoal(0, new FloatGoal(this));
+        goalSelector.addGoal(4, new AttackTurtleEggGoal(this, 1.0, 3, 1.14));
+        goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2, false));
+        goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0));
+        goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0, 0.0F));
+        goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        goalSelector.addGoal(8, new RandomLookAroundGoal(this));
+        targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
     }
     protected boolean isSunSensitive() {
         return true;
@@ -60,8 +61,8 @@ public class Juggernaut extends Monster {
 
     @Override
     public void tick() {
-        if (this.level().isClientSide()) {
-            this.idleAnimationController.tick(this, this.idleAnimationState);
+        if (level().isClientSide()) {
+            idleAnimationController.tick(this, idleAnimationState);
         }
         super.tick();
     }
@@ -85,6 +86,7 @@ public class Juggernaut extends Monster {
         return level.getBlockState(pos).isAir() ? 10.0F : 0.0F;
     }
 
+    @Override
     public boolean isInvertedHealAndHarm() {
         return true;
     }
@@ -96,19 +98,21 @@ public class Juggernaut extends Monster {
         }
         return super.hurt(source, amount);
     }
+
     @Override
     public void handleEntityEvent(byte state) {
-        if (state == ATTACK_ANIMATION_EVENT){
-            this.attackAnimationState.stop();
-            this.attackAnimationState.startIfStopped(this.tickCount);
+        if (state == ATTACK_ANIMATION_EVENT) {
+            attackAnimationState.stop();
+            attackAnimationState.startIfStopped(tickCount);
+        } else {
+            super.handleEntityEvent(state);
         }
-        else super.handleEntityEvent(state);
     }
 
     @Override
     public boolean doHurtTarget(Entity entity) {
         if(!level().isClientSide){
-            this.level().broadcastEntityEvent(this, ATTACK_ANIMATION_EVENT);
+            level().broadcastEntityEvent(this, ATTACK_ANIMATION_EVENT);
         }
         return super.doHurtTarget(entity);
     }

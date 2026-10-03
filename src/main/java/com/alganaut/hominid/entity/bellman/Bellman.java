@@ -3,6 +3,7 @@ package com.alganaut.hominid.entity.bellman;
 import com.alganaut.hominid.entity.animation.IdleAnimationController;
 import com.alganaut.hominid.entity.behavior.SunlightBurning;
 import com.alganaut.hominid.entity.goal.AttackTurtleEggGoal;
+import com.alganaut.hominid.registry.HominidEntityCreator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -62,8 +63,8 @@ public class Bellman extends Monster {
 
     int summonCooldown;
 
-    public Bellman(EntityType<? extends Monster> entityType, Level level) {
-        super(entityType, level);
+    public Bellman(Level level) {
+        super(HominidEntityCreator.BELLMAN.get(), level);
     }
 
     public static AttributeSupplier.Builder createAttributes() {

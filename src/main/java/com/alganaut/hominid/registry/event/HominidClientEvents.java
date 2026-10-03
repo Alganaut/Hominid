@@ -3,9 +3,10 @@ package com.alganaut.hominid.registry.event;
 import com.alganaut.hominid.entity.bellman.Bellman;
 import com.alganaut.hominid.entity.juggernaut.Juggernaut;
 import com.alganaut.hominid.entity.vampire.Vampire;
-import com.alganaut.hominid.registry.HominidEntityCreator;
 import com.alganaut.hominid.registry.item.HominidItems;
+import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.AbstractIllager;
@@ -29,29 +30,41 @@ public class HominidClientEvents {
         NeoForge.EVENT_BUS.addListener(EventPriority.LOW, HominidClientEvents::onLivingDrops);
     }
 
+    private static final SimpleWeightedRandomList<String> REPLACEMENTS =
+            SimpleWeightedRandomList.<String>builder()
+                    .add("zombie", 80)
+                    .add("juggernaut", 10)
+                    .add("bellman", 10)
+                    .build();
+
+
     @SubscribeEvent
     public static void onEntityJoinWorld(FinalizeSpawnEvent event) {
-        if (event.getEntity().getClass() == Zombie.class && Math.random() < 0.1) {
-            Zombie wolf = (Zombie) event.getEntity();
-            event.getEntity().discard();
-
-            Juggernaut customMob = new Juggernaut(HominidEntityCreator.JUGGERNAUT.get(), wolf.level());
-            customMob.setPos(wolf.position().x, wolf.position().y, wolf.position().z);
-            wolf.level().addFreshEntity(customMob);
-
-        }
-        if (event.getEntity().getClass() == Zombie.class && Math.random() < 0.1) {
-            Zombie wolf = (Zombie) event.getEntity();
-            event.getEntity().discard();
-
-            Bellman customMob = new Bellman(HominidEntityCreator.BELLMAN.get(), wolf.level());
-            customMob.setPos(wolf.position().x, wolf.position().y, wolf.position().z);
-            wolf.level().addFreshEntity(customMob);
-
-        }
-        if (event.getEntity() != null && event.getEntity() instanceof AbstractIllager illager) {
+        if (event.getEntity() instanceof AbstractIllager illager) {
             illager.targetSelector.addGoal(3, new AvoidEntityGoal<>(illager, Vampire.class, 6.0F, 1.0D, 1.2D));
         }
+        if (event.isSpawnCancelled() || event.getEntity().getClass() != Zombie.class) {
+            return;
+        }
+        var level = event.getLevel().getLevel();
+        var random = event.getEntity().getRandom();
+        // No I did not overcomplicate this
+        REPLACEMENTS.getRandomValue(random).ifPresent(choice -> {
+            switch (choice) {
+                // leave the zombie alone
+                case "juggernaut" -> spawn(event, new Juggernaut(level));
+                case "bellman" -> spawn(event, new Bellman(level));
+            }
+        });
+    }
+
+    private static void spawn(FinalizeSpawnEvent event, Mob spawn) {
+        Mob mob = event.getEntity();
+        event.getEntity().discard();
+
+        spawn.setPos(mob.position().x, mob.position().y, mob.position().z);
+        mob.level().addFreshEntity(spawn);
+
     }
 
     private static void onLivingDrops(LivingDropsEvent event) {
