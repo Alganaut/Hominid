@@ -12,7 +12,7 @@ public class HominidEffects {
             DeferredRegister.create(BuiltInRegistries.MOB_EFFECT, Hominid.MODID);
 
     public static final Holder<MobEffect> ENDURANCE = MOB_EFFECTS.register("endurance",
-            () -> new EnduranceEffect());
+            EnduranceEffect::new);
 
     public static void register(IEventBus bus){
         MOB_EFFECTS.register(bus);
