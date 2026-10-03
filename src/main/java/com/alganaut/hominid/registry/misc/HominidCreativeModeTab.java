@@ -16,7 +16,7 @@ public class HominidCreativeModeTab {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Hominid.MODID);
 
-    private HominidCreativeModeTab() {
+    static {
         CREATIVE_MODE_TAB.register("hominid_tab",
                 () -> CreativeModeTab.builder()
                         .icon(() -> new ItemStack(HominidItems.GASOLINE_TANK.get()))
