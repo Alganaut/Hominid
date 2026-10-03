@@ -20,7 +20,7 @@ public class MellifiedRenderer  extends MobRenderer<Mellified, MellifiedModel<Me
     private static final ResourceLocation HONEY = ResourceLocation.fromNamespaceAndPath(Hominid.MODID, "textures/entity/mellified/mellified_overlay.png");
     public MellifiedRenderer(EntityRendererProvider.Context context) {
         super(context, new MellifiedModel<>(context.bakeLayer(HominidModelLayers.MELLIFIED)), 0.5f);
-        this.addLayer(new MellifiedHoneyLayer(this));
+        addLayer(new MellifiedHoneyLayer(this));
     }
 
     @Override
@@ -39,7 +39,7 @@ public class MellifiedRenderer  extends MobRenderer<Mellified, MellifiedModel<Me
         public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, T entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
             RenderType renderType = RenderType.entityTranslucent(layerTexture);
             VertexConsumer vertexConsumer = buffer.getBuffer(renderType);
-            this.getParentModel().renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
+           getParentModel().renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
         }
     }
 }

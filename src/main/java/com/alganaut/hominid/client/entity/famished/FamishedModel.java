@@ -48,16 +48,16 @@ public class FamishedModel<T extends Famished> extends HierarchicalModel<T> {
 
     @Override
     public void setupAnim(Famished entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.root().getAllParts().forEach(ModelPart::resetPose);
-        ModelHeadRotation.apply(this.head, netHeadYaw, headPitch);
+        root().getAllParts().forEach(ModelPart::resetPose);
+        ModelHeadRotation.apply(head, netHeadYaw, headPitch);
         if (entity.getAttributeValue(Attributes.MOVEMENT_SPEED) == 0.27 || (entity.isAggressive() && entity.getTarget() instanceof Animal)) {
-            this.animateWalk(FamishedAnimations.ANIM_FAMISHED_AGGRO_WALK, limbSwing, limbSwingAmount, 2f, 54);
-            this.animate(entity.idleAnimationState,FamishedAnimations.ANIM_FAMISHED_AGGRO_IDLE,ageInTicks, 1f);
-            this.animate(entity.attackAnimationState,FamishedAnimations.ANIM_FAMISHED_ATTACK,ageInTicks, 1f);
+            animateWalk(FamishedAnimations.ANIM_FAMISHED_AGGRO_WALK, limbSwing, limbSwingAmount, 2f, 54);
+            animate(entity.idleAnimationState,FamishedAnimations.ANIM_FAMISHED_AGGRO_IDLE,ageInTicks, 1f);
+            animate(entity.attackAnimationState,FamishedAnimations.ANIM_FAMISHED_ATTACK,ageInTicks, 1f);
         } else {
-            this.animateWalk(FamishedAnimations.ANIM_FAMISHED_WALK, limbSwing, limbSwingAmount, 3f, 54);
-            this.animate(entity.idleAnimationState,FamishedAnimations.ANIM_FAMISHED_IDLE,ageInTicks, 1f);
-            this.animate(entity.attackAnimationState,FamishedAnimations.ANIM_FAMISHED_ATTACK,ageInTicks, 1f);
+            animateWalk(FamishedAnimations.ANIM_FAMISHED_WALK, limbSwing, limbSwingAmount, 3f, 54);
+            animate(entity.idleAnimationState,FamishedAnimations.ANIM_FAMISHED_IDLE,ageInTicks, 1f);
+            animate(entity.attackAnimationState,FamishedAnimations.ANIM_FAMISHED_ATTACK,ageInTicks, 1f);
         }
     }
 

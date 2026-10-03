@@ -18,8 +18,8 @@ public class IncendiaryModel<T extends Incendiary> extends HierarchicalModel<T> 
 
     public IncendiaryModel(ModelPart root) {
         this.incendiary = root.getChild("incendiary");
-        this.torso = this.incendiary.getChild("torso");
-        this.head = this.torso.getChild("head");
+        this.torso = incendiary.getChild("torso");
+        this.head = torso.getChild("head");
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -52,19 +52,19 @@ public class IncendiaryModel<T extends Incendiary> extends HierarchicalModel<T> 
 
     @Override
     public void setupAnim(Incendiary entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.root().getAllParts().forEach(ModelPart::resetPose);
-        ModelHeadRotation.apply(this.head, netHeadYaw, headPitch);
+        root().getAllParts().forEach(ModelPart::resetPose);
+        ModelHeadRotation.apply(head, netHeadYaw, headPitch);
         if (entity.getAttribute(Attributes.MOVEMENT_SPEED).getBaseValue() == 0.35) {
-            this.animateWalk(IncendiaryAnimations.ANIM_INCENDIARY_AGGRO_WALK, limbSwing, limbSwingAmount, 2f, 54);
-            this.animate(entity.attackAnimationState, IncendiaryAnimations.ANIM_INCENDIARY_WALK, ageInTicks, 2f);
-            this.animate(entity.attackAnimationState, IncendiaryAnimations.ANIM_INCENDIARY_IDLE, ageInTicks, 2f);
+            animateWalk(IncendiaryAnimations.ANIM_INCENDIARY_AGGRO_WALK, limbSwing, limbSwingAmount, 2f, 54);
+            animate(entity.attackAnimationState, IncendiaryAnimations.ANIM_INCENDIARY_WALK, ageInTicks, 2f);
+            animate(entity.attackAnimationState, IncendiaryAnimations.ANIM_INCENDIARY_IDLE, ageInTicks, 2f);
         } else {
-            this.animateWalk(IncendiaryAnimations.ANIM_INCENDIARY_WALK, limbSwing, limbSwingAmount, 2f, 54);
-            this.animate(entity.idleAnimationState, IncendiaryAnimations.ANIM_INCENDIARY_IDLE, ageInTicks, 1f);
-            this.animate(entity.attackAnimationState, IncendiaryAnimations.ANIM_INCENDIARY_ATTACK, ageInTicks, 2f);
+            animateWalk(IncendiaryAnimations.ANIM_INCENDIARY_WALK, limbSwing, limbSwingAmount, 2f, 54);
+            animate(entity.idleAnimationState, IncendiaryAnimations.ANIM_INCENDIARY_IDLE, ageInTicks, 1f);
+            animate(entity.attackAnimationState, IncendiaryAnimations.ANIM_INCENDIARY_ATTACK, ageInTicks, 2f);
         }
         if (entity.isIgniting()) {
-            this.animate(entity.igniteAnimationState, IncendiaryAnimations.ANIM_INCENDIARY_IGNITING, ageInTicks, 1f);
+            animate(entity.igniteAnimationState, IncendiaryAnimations.ANIM_INCENDIARY_IGNITING, ageInTicks, 1f);
         }
     }
 

@@ -57,11 +57,11 @@ public class MellifiedModel<T extends Mellified> extends HierarchicalModel<T> {
 
     @Override
     public void setupAnim(Mellified entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.root().getAllParts().forEach(ModelPart::resetPose);
+        root().getAllParts().forEach(ModelPart::resetPose);
         ModelHeadRotation.apply(this.head, netHeadYaw, headPitch);
 
-        this.animateWalk(MellifiedAnimations.ANIM_MELLIFIED_WALK, limbSwing, limbSwingAmount, 4f, 54);
-        this.animate(entity.idleAnimationState,MellifiedAnimations.ANIM_MELLIFIED_IDLE,ageInTicks, 1f);
+        animateWalk(MellifiedAnimations.ANIM_MELLIFIED_WALK, limbSwing, limbSwingAmount, 4f, 54);
+        animate(entity.idleAnimationState,MellifiedAnimations.ANIM_MELLIFIED_IDLE,ageInTicks, 1f);
 
     }
 

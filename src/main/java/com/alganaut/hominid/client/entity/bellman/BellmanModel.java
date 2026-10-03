@@ -50,12 +50,12 @@ public class BellmanModel<T extends Bellman> extends HierarchicalModel<T> {
 
     @Override
     public void setupAnim(Bellman entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.root().getAllParts().forEach(ModelPart::resetPose);
+        root().getAllParts().forEach(ModelPart::resetPose);
 
 
-        this.animateWalk(BellmanAnimations.ANIM_BELLMAN_WALK, limbSwing, limbSwingAmount, 4f, 54);
-        this.animate(entity.idleAnimationState,BellmanAnimations.ANIM_BELLMAN_IDLE,ageInTicks, 1f);
-        this.animate(entity.attackAnimationState,BellmanAnimations.ANIM_BELLMAN_ATTACK,ageInTicks, 1f);
+        animateWalk(BellmanAnimations.ANIM_BELLMAN_WALK, limbSwing, limbSwingAmount, 4f, 54);
+        animate(entity.idleAnimationState,BellmanAnimations.ANIM_BELLMAN_IDLE,ageInTicks, 1f);
+        animate(entity.attackAnimationState,BellmanAnimations.ANIM_BELLMAN_ATTACK,ageInTicks, 1f);
 
     }
 
