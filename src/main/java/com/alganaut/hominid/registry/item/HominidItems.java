@@ -2,10 +2,12 @@ package com.alganaut.hominid.registry.item;
 
 
 import com.alganaut.hominid.Hominid;
-import com.alganaut.hominid.registry.entity.HominidEntityCreator;
+import com.alganaut.hominid.registry.HominidEntityCreator;
 import com.alganaut.hominid.registry.sound.HominidSounds;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.SmithingTemplateItem;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;

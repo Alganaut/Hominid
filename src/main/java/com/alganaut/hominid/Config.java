@@ -1,60 +1,73 @@
 package com.alganaut.hominid;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
+import java.util.function.Supplier;
 
+import com.alganaut.hominid.entity.bellman.Bellman;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.event.config.ModConfigEvent;
+import net.minecraft.world.entity.EntityType;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-@EventBusSubscriber(modid = Hominid.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class Config {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
-
-    private static final ModConfigSpec.BooleanValue LOG_DIRT_BLOCK = BUILDER
-            .comment("Whether to log the dirt block on common setup")
-            .define("logDirtBlock", true);
-
-    private static final ModConfigSpec.IntValue MAGIC_NUMBER = BUILDER
-            .comment("A magic number")
-            .defineInRange("magicNumber", 42, 0, Integer.MAX_VALUE);
-
-    public static final ModConfigSpec.ConfigValue<String> MAGIC_NUMBER_INTRODUCTION = BUILDER
-            .comment("What you want the introduction message to be for the magic number")
-            .define("magicNumberIntroduction", "The magic number is... ");
-
-    // a list of strings that are treated as resource locations for items
-    @SuppressWarnings("deprecation")
-    private static final ModConfigSpec.ConfigValue<List<? extends String>> ITEM_STRINGS = BUILDER
-            .comment("A list of items to log on common setup.")
-            .defineListAllowEmpty("items", List.of("minecraft:iron_ingot"), Config::validateItemName);
-
     static final ModConfigSpec SPEC = BUILDER.build();
+    private static EntityType<?>[] bellmanSummons;
 
-    public static boolean logDirtBlock;
-    public static int magicNumber;
-    public static String magicNumberIntroduction;
-    public static Set<Item> items;
+    private static final Supplier<ModConfigSpec.ConfigValue<List<? extends String>>> BELLMAN_SUMMONS = () -> BUILDER
+            .comment("Entities the bellman can summon.")
+            .defineListAllowEmpty("Bellman Summons", Bellman.SUPPORTED_SUMMONS, Config::validateSummon);
 
-    private static boolean validateItemName(final Object obj) {
-        return obj instanceof String itemName && BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse(itemName));
+    // Should spawn?
+    public static final ModConfigSpec.ConfigValue<Boolean> BELLMAN;
+    public static final ModConfigSpec.ConfigValue<Boolean> VAMPIRE;
+    public static final ModConfigSpec.ConfigValue<Boolean> FAMISHED;
+    public static final ModConfigSpec.ConfigValue<Boolean> FOSSILIZED;
+    public static final ModConfigSpec.ConfigValue<Boolean> INCENDIARY;
+    public static final ModConfigSpec.ConfigValue<Boolean> JUGGERNAUT;
+    public static final ModConfigSpec.ConfigValue<Boolean> MELLIFIED;
+
+    static {
+        BELLMAN = makeConfig("Bellman", BELLMAN_SUMMONS);
+        FAMISHED = makeConfig("Famished");
+        VAMPIRE = makeConfig("Vampire");
+        FOSSILIZED = makeConfig("Fossilized");
+        INCENDIARY = makeConfig("Incendiary");
+        JUGGERNAUT = makeConfig("Juggernaut");
+        MELLIFIED = makeConfig("Mellified");
     }
 
-    @SubscribeEvent
-    static void onLoad(final ModConfigEvent event) {
-        logDirtBlock = LOG_DIRT_BLOCK.get();
-        magicNumber = MAGIC_NUMBER.get();
-        magicNumberIntroduction = MAGIC_NUMBER_INTRODUCTION.get();
+    private static ModConfigSpec.ConfigValue<Boolean> makeConfig(String name) {
+        return makeConfig(name, null);
+    }
 
-        // convert the list of strings into a set of items
-        items = ITEM_STRINGS.get()
-                .stream()
-                .map(itemName -> BuiltInRegistries.ITEM.get(ResourceLocation.parse(itemName)))
-                .collect(Collectors.toSet());
+    private static ModConfigSpec.ConfigValue<Boolean> makeConfig(String name, Supplier<?> supplier) {
+        BUILDER.push(name);
+        var i = BUILDER.comment(getDescription(name)).define("enabled", true);
+        if (supplier != null) {
+            supplier.get();
+        }
+        BUILDER.pop();
+        return i;
+    }
+
+    private static String getDescription(String name) {
+        return "Whether " + name + "'s should spawn";
+    }
+
+    private static boolean validateSummon(final Object obj) {
+        return obj instanceof String entity && ResourceLocation.tryParse(entity) != null;
+    }
+    public static EntityType<?>[] getBellmanSummons() {
+        if (bellmanSummons == null) {
+            bellmanSummons = BELLMAN_SUMMONS.get().get().stream()
+                    .map(ResourceLocation::tryParse)
+                    .filter(Objects::nonNull)
+                    .map(BuiltInRegistries.ENTITY_TYPE::getOptional)
+                    .flatMap(Optional::stream)
+                    .distinct()
+                    .toArray(EntityType<?>[]::new);
+        }
+        return bellmanSummons;
     }
 }

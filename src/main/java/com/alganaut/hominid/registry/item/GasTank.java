@@ -1,15 +1,10 @@
 package com.alganaut.hominid.registry.item;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.neoforged.neoforge.event.level.NoteBlockEvent;
 
 import javax.annotation.Nullable;
-import java.util.function.Predicate;
 
 public class GasTank extends Item {
     private static final int MAX_USES = 3;

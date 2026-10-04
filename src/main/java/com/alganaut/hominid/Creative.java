@@ -10,86 +10,101 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = Hominid.MODID)
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+@EventBusSubscriber(modid = Hominid.MODID)
 public class Creative {
-    private final BuildCreativeModeTabContentsEvent event;
+    private Creative() {}
 
     @SubscribeEvent
-    public static void creativeTabs(BuildCreativeModeTabContentsEvent event) {
-        new Creative(event);
-    }
+    public static void buildCreativeTabs(BuildCreativeModeTabContentsEvent event) {
 
-    Creative(BuildCreativeModeTabContentsEvent event) {
-        this.event = event;
+        CreativeBuilder builder = new CreativeBuilder();
 
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
-            insertItems(
+            builder.put(
                     Items.MUSIC_DISC_PRECIPICE,
                     HominidItems.MUSIC_DISC_HEMATOMA
             );
-            insertItems(
+            builder.put(
                     Items.FLINT_AND_STEEL,
                     HominidItems.GASOLINE_TANK
             );
+            builder.build(event);
         }
 
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-            insertItems(
+            builder.put(
                     Items.BOLT_ARMOR_TRIM_SMITHING_TEMPLATE,
                     HominidItems.REMAINS_SMITHING_TEMPLATE
             );
+            builder.build(event);
         }
 
         if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
-            insertItems(
+            builder.put(
                     Items.ROTTEN_FLESH,
                     HominidItems.FAMISHED_STOMACH
             );
+            builder.build(event);
         }
 
         if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
-            insertItems(
+            builder.put(
                     Items.EVOKER_SPAWN_EGG,
                     HominidItems.FAMISHED_SPAWN_EGG
             );
-            insertItems(
+            builder.put(
                     Items.HUSK_SPAWN_EGG,
                     HominidItems.INCENDIARY_SPAWN_EGG
             );
-            insertItems(
+            builder.put(
                     Items.IRON_GOLEM_SPAWN_EGG,
                     HominidItems.JUGGERNAUT_SPAWN_EGG
             );
-            insertItems(
+            builder.put(
                     Items.MAGMA_CUBE_SPAWN_EGG,
                     HominidItems.MELLIFIED_SPAWN_EGG
             );
-            insertItems(
+            builder.put(
                     HominidItems.FAMISHED_SPAWN_EGG,
                     HominidItems.FOSSILIZED_SPAWN_EGG
             );
-            insertItems(
+            builder.put(
                     Items.TURTLE_SPAWN_EGG,
                     HominidItems.VAMPIRE_SPAWN_EGG
             );
-            insertItems(
+            builder.put(
                     Items.BEE_SPAWN_EGG,
                     HominidItems.BELLMAN_SPAWN_EGG
             );
+            builder.build(event);
         }
+
     }
 
-    private void insertItems(ItemLike start, ItemLike... items) {
-        var previous = start;
+    private static class CreativeBuilder {
+        private final Map<ItemLike, ItemLike[]> map = new LinkedHashMap<>();
 
-        for (var next : items) {
-            event.insertAfter(
-                    new ItemStack(previous),
-                    new ItemStack(next),
-                    CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
-            );
+        public void put(ItemLike item, ItemLike... items) {
+            map.put(item, items);
+        }
 
-            previous = next;
+        public void build(BuildCreativeModeTabContentsEvent event) {
+            for (var entry : map.entrySet()) {
+                ItemLike previous = entry.getKey();
+
+                for (var next : entry.getValue()) {
+                    event.insertAfter(
+                            new ItemStack(previous),
+                            new ItemStack(next),
+                            CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
+                    );
+
+                    previous = next;
+                }
+            }
         }
     }
 }
