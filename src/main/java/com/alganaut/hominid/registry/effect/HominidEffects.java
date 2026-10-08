@@ -15,9 +15,6 @@ public class HominidEffects {
     public static final DeferredRegister<MobEffect> MOB_EFFECTS =
             DeferredRegister.create(BuiltInRegistries.MOB_EFFECT, Hominid.MODID);
 
-    public static final Holder<MobEffect> HONEYED = MOB_EFFECTS.register("honeyed",
-            () -> new HoneyedEffect());
-
     public static final Holder<MobEffect> ENDURANCE = MOB_EFFECTS.register("endurance",
             () -> new EnduranceEffect());
 
