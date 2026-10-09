@@ -15,30 +15,30 @@ public class HominidItems {
     public static final DeferredRegister.Items  ITEMS = DeferredRegister.createItems(Hominid.MODID);
 
     public static final DeferredItem<Item> MELLIFIED_SPAWN_EGG = ITEMS.register("mellified_spawn_egg",
-            () -> new DeferredSpawnEggItem(HominidEntityCreator.MELLIFIED, 0xefe9d1, 0xf3b34a,
+            () -> new DeferredSpawnEggItem(HominidEntityCreator.MELLIFIED, 0xab781e, 0xfdefd0,
                     new Item.Properties()));
 
     public static final DeferredItem<Item> INCENDIARY_SPAWN_EGG = ITEMS.register("incendiary_spawn_egg",
-            () -> new DeferredSpawnEggItem(HominidEntityCreator.INCENDIARY, 0x624337, 0x862a25,
+            () -> new DeferredSpawnEggItem(HominidEntityCreator.INCENDIARY, 0x645633, 0x130407,
                     new Item.Properties()));
 
     public static final DeferredItem<Item> FAMISHED_SPAWN_EGG = ITEMS.register("famished_spawn_egg",
-            () -> new DeferredSpawnEggItem(HominidEntityCreator.FAMISHED, 0x7a725e, 0x413935,
+            () -> new DeferredSpawnEggItem(HominidEntityCreator.FAMISHED, 0x88381b, 0xc9a681,
                     new Item.Properties()));
 
     public static final DeferredItem<Item> JUGGERNAUT_SPAWN_EGG = ITEMS.register("juggernaut_spawn_egg",
-            () -> new DeferredSpawnEggItem(HominidEntityCreator.JUGGERNAUT, 0x6f625d, 0x541635,
+            () -> new DeferredSpawnEggItem(HominidEntityCreator.JUGGERNAUT, 0x673737, 0xb0b4a3,
                     new Item.Properties()));
 
     public static final DeferredItem<Item> BELLMAN_SPAWN_EGG = ITEMS.register("bellman_spawn_egg",
-            () -> new DeferredSpawnEggItem(HominidEntityCreator.BELLMAN, 0x211f1b, 0x898b82,
+            () -> new DeferredSpawnEggItem(HominidEntityCreator.BELLMAN, 0x554739, 0xb0b4a3,
                     new Item.Properties()));
 
     public static final DeferredItem<Item> FOSSILIZED_SPAWN_EGG = ITEMS.register("fossilized_spawn_egg",
-            () -> new DeferredSpawnEggItem(HominidEntityCreator.FOSSILIZED, 0x9a9c7a, 0x5b5344,
+            () -> new DeferredSpawnEggItem(HominidEntityCreator.FOSSILIZED, 0x7e7a56, 0x5b5344,
                     new Item.Properties()));
     public static final DeferredItem<Item> VAMPIRE_SPAWN_EGG = ITEMS.register("vampire_spawn_egg",
-            () -> new DeferredSpawnEggItem(HominidEntityCreator.VAMPIRE, 0x6e211f, 0x4d4129,
+            () -> new DeferredSpawnEggItem(HominidEntityCreator.VAMPIRE, 0xccc5ae, 0xdd563f,
                     new Item.Properties()));
 
     public static final DeferredItem<Item> FAMISHED_STOMACH = ITEMS.register("famished_stomach",
