@@ -26,8 +26,6 @@
     {"id": "quark:forgotten", "required": false},
     {"id": "undead_unleashed:wraith", "required": false},
     {"id": "undead_unleashed:dreadknight", "required": false},
-    {"id": "nomansland:buried", "required": false},
-    {"id": "nomansland:remnant", "required": false},
     {"id": "windswept:chilled", "required": false}
   ]
 }
