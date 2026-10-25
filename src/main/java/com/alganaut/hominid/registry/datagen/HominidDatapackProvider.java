@@ -1,8 +1,8 @@
 package com.alganaut.hominid.registry.datagen;
 
 import com.alganaut.hominid.Hominid;
-import com.alganaut.hominid.registry.trim.HominidTrimPatterns;
-import com.alganaut.hominid.registry.world.HominidBiomeModifiers;
+import com.alganaut.hominid.registry.HominidTrimPatterns;
+import com.alganaut.hominid.registry.HominidBiomeModifiers;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;

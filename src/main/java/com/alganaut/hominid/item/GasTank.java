@@ -1,4 +1,4 @@
-package com.alganaut.hominid.registry.item;
+package com.alganaut.hominid.item;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;

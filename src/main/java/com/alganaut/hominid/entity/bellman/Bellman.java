@@ -11,6 +11,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.LevelReader;
 import java.util.List;
 
 public class Bellman extends Monster {
+    public static final MobCategory CATEGORY = MobCategory.MONSTER;
     static final byte ATTACK_ANIMATION_EVENT = 100;
     public final AnimationState attackAnimationState = new AnimationState();
     public final AnimationState idleAnimationState = new AnimationState();
@@ -65,6 +67,10 @@ public class Bellman extends Monster {
 
     public Bellman(Level level) {
         super(HominidEntityCreator.BELLMAN.get(), level);
+    }
+
+    public static void properties(EntityType.Builder<Bellman> builder) {
+        builder.sized(1F, 2.4F);
     }
 
     public static AttributeSupplier.Builder createAttributes() {

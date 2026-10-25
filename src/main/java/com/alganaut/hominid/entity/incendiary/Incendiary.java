@@ -1,5 +1,6 @@
 package com.alganaut.hominid.entity.incendiary;
 
+import com.alganaut.hominid.registry.HominidEntityCreator;
 import com.alganaut.hominid.entity.animation.IdleAnimationController;
 import com.alganaut.hominid.entity.behavior.SunlightBurning;
 import com.alganaut.hominid.entity.goal.AttackTurtleEggGoal;
@@ -14,6 +15,7 @@ import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -33,6 +35,7 @@ import java.util.Set;
 import java.util.UUID;
 
 public class Incendiary extends Monster {
+    public static final MobCategory CATEGORY = MobCategory.MONSTER;
     private static final EntityDataAccessor<Boolean> IGNITING =
             SynchedEntityData.defineId(Incendiary.class, EntityDataSerializers.BOOLEAN);
     public final Set<UUID> ignitedCreepers = new HashSet<>();
@@ -54,8 +57,12 @@ public class Incendiary extends Monster {
         ENRAGED
     }
 
-    public Incendiary(EntityType<? extends Monster> entityType, Level level) {
-        super(entityType, level);
+    public Incendiary(Level level) {
+        super(HominidEntityCreator.INCENDIARY.get(), level);
+    }
+
+    public static void properties(EntityType.Builder<Incendiary> builder) {
+        builder.sized(0.6F, 1.99F);
     }
 
     public static AttributeSupplier.Builder createAttributes() {

@@ -1,20 +1,24 @@
-package com.alganaut.hominid.registry.effect;
+package com.alganaut.hominid.effect;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 
-public class EnduranceEffect extends MobEffect {
-    public EnduranceEffect() {
+public class HoneyedEffect extends MobEffect {
+    public HoneyedEffect() {
         super(MobEffectCategory.BENEFICIAL, 0xFFD700);
     }
 
     @Override
     public boolean applyEffectTick(LivingEntity entity, int amplifier) {
-        if(entity.hasEffect(MobEffects.HUNGER)){
-            entity.removeEffect(MobEffects.HUNGER);
-        }
+        entity.heal(1.0F * (amplifier + 1));
+
+        entity.getActiveEffects().stream()
+                .filter(effect -> effect.getEffect().value().getCategory() == MobEffectCategory.HARMFUL)
+                .map(effect -> effect.getEffect())
+                .toList()
+                .forEach(entity::removeEffect);
+
         super.applyEffectTick(entity, amplifier);
         return true;
     }

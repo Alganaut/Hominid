@@ -1,14 +1,17 @@
 package com.alganaut.hominid.entity.mellified;
 
+import com.alganaut.hominid.registry.HominidEntityCreator;
 import com.alganaut.hominid.entity.animation.IdleAnimationController;
 import com.alganaut.hominid.entity.goal.AttackTurtleEggGoal;
 
+import com.tterrag.registrate.builders.EntityBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -21,11 +24,18 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 
 public class Mellified extends Monster {
+    public static final MobCategory CATEGORY = MobCategory.MONSTER;
     private final IdleAnimationController idleAnimationController = new IdleAnimationController(250);
     public final AnimationState idleAnimationState = new AnimationState();
 
-    public Mellified(EntityType<? extends Monster> entityType, Level level) {
-        super(entityType, level);
+
+
+    public Mellified(Level level) {
+        super(HominidEntityCreator.MELLIFIED.get(), level);
+    }
+
+    public static void properties(EntityType.Builder<Mellified> builder) {
+        builder.sized(0.6F, 1.6F);
     }
 
     public static AttributeSupplier.Builder createAttributes() {

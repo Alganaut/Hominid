@@ -11,6 +11,7 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -23,6 +24,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 
 public class Juggernaut extends Monster {
+    public static final MobCategory CATEGORY = MobCategory.MONSTER;
     private static final byte ATTACK_ANIMATION_EVENT = 100;
     public final AnimationState attackAnimationState = new AnimationState();
     public final AnimationState idleAnimationState = new AnimationState();
@@ -30,6 +32,10 @@ public class Juggernaut extends Monster {
 
     public Juggernaut(Level level) {
         super(HominidEntityCreator.JUGGERNAUT.get(), level);
+    }
+
+    public static void properties(EntityType.Builder<Juggernaut> builder) {
+        builder.sized(1F, 2.4F);
     }
 
     public static AttributeSupplier.Builder createAttributes() {

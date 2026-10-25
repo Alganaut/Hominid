@@ -1,5 +1,6 @@
-package com.alganaut.hominid;
+package com.alganaut.hominid.registry;
 
+import com.alganaut.hominid.Hominid;
 import com.alganaut.hominid.registry.item.HominidItems;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -14,8 +15,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @EventBusSubscriber(modid = Hominid.MODID)
-public class Creative {
-    private Creative() {}
+public class HominidCreativeTab {
+    private HominidCreativeTab() {}
 
     @SubscribeEvent
     public static void buildCreativeTabs(BuildCreativeModeTabContentsEvent event) {

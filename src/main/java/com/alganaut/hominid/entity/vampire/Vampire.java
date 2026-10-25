@@ -1,7 +1,8 @@
 package com.alganaut.hominid.entity.vampire;
 
+import com.alganaut.hominid.registry.HominidEntityCreator;
 import com.alganaut.hominid.entity.animation.IdleAnimationController;
-import com.alganaut.hominid.registry.sound.HominidSounds;
+import com.alganaut.hominid.registry.HominidSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -10,6 +11,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -20,6 +22,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 
 public class Vampire extends Monster {
+    public static final MobCategory CATEGORY = MobCategory.MONSTER;
     private static final byte ATTACK_ANIMATION_EVENT = 100;
     static final byte DIE_ANIMATION_EVENT = 101;
     static final byte STOP_BURNING_ANIMATION_EVENT = 99;
@@ -28,8 +31,12 @@ public class Vampire extends Monster {
     public final AnimationState attackAnimationState = new AnimationState();
     public final AnimationState dieAnimationState = new AnimationState();
 
-    public Vampire(EntityType<? extends Monster> entityType, Level level) {
-        super(entityType, level);
+    public Vampire(Level level) {
+        super(HominidEntityCreator.VAMPIRE.get(), level);
+    }
+
+    public static void properties(EntityType.Builder<Vampire> builder) {
+        builder.sized(0.6F, 1.9F);
     }
 
     public static AttributeSupplier.Builder createAttributes() {

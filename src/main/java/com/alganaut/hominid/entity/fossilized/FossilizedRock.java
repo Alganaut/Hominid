@@ -5,6 +5,7 @@ import com.alganaut.hominid.registry.item.HominidItems;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
@@ -12,10 +13,15 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
 public class FossilizedRock extends ThrowableItemProjectile {
+    public static final MobCategory CATEGORY = MobCategory.MISC;
     private int lifetime;
     public FossilizedRock(EntityType<? extends FossilizedRock> entityType, Level level) {
         super(entityType, level);
         this.lifetime = 0;
+    }
+
+    public static void properties(EntityType.Builder<FossilizedRock> builder) {
+        builder.sized(0.8F, 0.3F);
     }
 
     public FossilizedRock(Level level, LivingEntity shooter) {

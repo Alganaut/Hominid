@@ -1,6 +1,13 @@
 package com.alganaut.hominid.registry;
 
 import com.alganaut.hominid.Hominid;
+import com.alganaut.hominid.client.entity.bellman.BellmanRenderer;
+import com.alganaut.hominid.client.entity.famished.FamishedRenderer;
+import com.alganaut.hominid.client.entity.fossilized.FossilizedRenderer;
+import com.alganaut.hominid.client.entity.incendiary.IncendiaryRenderer;
+import com.alganaut.hominid.client.entity.juggernaut.JuggernautRenderer;
+import com.alganaut.hominid.client.entity.mellified.MellifiedRenderer;
+import com.alganaut.hominid.client.entity.vampire.VampireRenderer;
 import com.alganaut.hominid.entity.bellman.Bellman;
 import com.alganaut.hominid.entity.famished.Famished;
 import com.alganaut.hominid.entity.fossilized.Fossilized;
@@ -9,89 +16,93 @@ import com.alganaut.hominid.entity.incendiary.Incendiary;
 import com.alganaut.hominid.entity.juggernaut.Juggernaut;
 import com.alganaut.hominid.entity.mellified.Mellified;
 import com.alganaut.hominid.entity.vampire.Vampire;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobCategory;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import com.alganaut.hominid.registry.misc.HominidEntityFactory;
+import com.tterrag.registrate.util.entry.EntityEntry;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.world.entity.SpawnPlacementTypes;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 
-import java.util.function.Supplier;
-
-@EventBusSubscriber(modid = Hominid.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class HominidEntityCreator {
-    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(
-            BuiltInRegistries.ENTITY_TYPE,
-           Hominid.MODID
-    );
 
-    public static final Supplier<EntityType<Mellified>> MELLIFIED = registerEntity(
-            "mellified",
-            EntityType.Builder.of(Mellified::new, MobCategory.MONSTER)
-                    .sized(0.6F, 1.6F)
-    );
+    public static final EntityEntry<Mellified> MELLIFIED = Hominid.REGISTRATE.get()
+            .entity("mellified", HominidEntityFactory.make(Mellified.class), Mellified.CATEGORY)
+            .properties(Mellified::properties)
+            .attributes(Mellified::createAttributes)
+            .renderer(() -> MellifiedRenderer::new)
+            .spawnPlacement(SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING,
+                    Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE)
+            .spawnEgg(0xefe9d1, 0xf3b34a).build()
+            .register();
 
-    public static final Supplier<EntityType<Incendiary>> INCENDIARY = registerEntity(
-            "incendiary",
-            EntityType.Builder.of(Incendiary::new, MobCategory.MONSTER)
-                    .sized(0.6F, 1.99F)
-    );
+    public static final EntityEntry<Incendiary> INCENDIARY = Hominid.REGISTRATE.get()
+            .entity("incendiary", HominidEntityFactory.make(Incendiary.class), Incendiary.CATEGORY)
+            .properties(Incendiary::properties)
+            .attributes(Incendiary::createAttributes)
+            .renderer(() -> IncendiaryRenderer::new)
+            .spawnPlacement(SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING,
+                    Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND)
+            .spawnEgg(0x624337, 0x862a25).build()
+            .register();
 
-    public static final Supplier<EntityType<Famished>> FAMISHED = registerEntity(
-            "famished",
-            EntityType.Builder.of(Famished::new, MobCategory.MONSTER)
-                    .sized(0.6F, 1.99F)
-    );
+    public static final EntityEntry<Famished> FAMISHED = Hominid.REGISTRATE.get()
+            .entity("famished", HominidEntityFactory.make(Famished.class), Famished.CATEGORY)
+            .properties(Famished::properties)
+            .attributes(Famished::createAttributes)
+            .renderer(() -> FamishedRenderer::new)
+            .spawnPlacement(SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING,
+                    Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND)
+            .spawnEgg(0x7a725e, 0x413935).build()
+            .register();
 
-    public static final Supplier<EntityType<Juggernaut>> JUGGERNAUT = registerEntity(
-            "juggernaut",
-            EntityType.Builder.of(Juggernaut::new, MobCategory.MONSTER)
-                    .sized(1F, 2.4F)
-    );
+    public static final EntityEntry<Juggernaut> JUGGERNAUT = Hominid.REGISTRATE.get()
+            .entity("juggernaut", HominidEntityFactory.make(Juggernaut.class), Juggernaut.CATEGORY)
+            .properties(Juggernaut::properties)
+            .attributes(Juggernaut::createAttributes)
+            .renderer(() -> JuggernautRenderer::new)
+            .spawnPlacement(SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING,
+                    Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND)
+            .spawnEgg(0x6f625d, 0x541635).build()
+            .register();
 
-    public static final Supplier<EntityType<Bellman>> BELLMAN = registerEntity(
-            "bellman",
-            EntityType.Builder.of(Bellman::new, MobCategory.MONSTER)
-                    .sized(1F, 2.4F)
-    );
+    public static final EntityEntry<Bellman> BELLMAN = Hominid.REGISTRATE.get()
+            .entity("bellman", HominidEntityFactory.make(Bellman.class), Bellman.CATEGORY)
+            .properties(Bellman::properties)
+            .attributes(Bellman::createAttributes)
+            .renderer(() -> BellmanRenderer::new)
+            .spawnPlacement(SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING,
+                    Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND)
+            .spawnEgg(0x211f1b, 0x898b82).build()
+            .register();
 
-    public static final Supplier<EntityType<Fossilized>> FOSSILIZED = registerEntity(
-            "fossilized",
-            EntityType.Builder.of(Fossilized::new, MobCategory.MONSTER)
-                    .sized(0.65F, 2.3F)
-    );
+    public static final EntityEntry<Fossilized> FOSSILIZED = Hominid.REGISTRATE.get()
+            .entity("fossilized", HominidEntityFactory.make(Fossilized.class), Fossilized.CATEGORY)
+            .properties(Fossilized::properties)
+            .attributes(Fossilized::createAttributes)
+            .renderer(() -> FossilizedRenderer::new)
+            .spawnPlacement(SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING,
+                    Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND)
+            .spawnEgg(0x9a9c7a, 0x5b5344).build()
+            .register();
 
-    public static final Supplier<EntityType<FossilizedRock>> ROCK = registerEntity(
-            "rock",
-            EntityType.Builder.<FossilizedRock>of(FossilizedRock::new, MobCategory.MISC)
-                    .sized(0.8F, 0.3F)
-    );
+    public static final EntityEntry<FossilizedRock> ROCK = Hominid.REGISTRATE.get()
+            .<FossilizedRock>entity("rock", FossilizedRock::new, FossilizedRock.CATEGORY)
+            .properties(FossilizedRock::properties)
+            .renderer(() -> ThrownItemRenderer::new)
+            .register();
 
-    public static final Supplier<EntityType<Vampire>> VAMPIRE = registerEntity(
-            "vampire",
-            EntityType.Builder.of(Vampire::new, MobCategory.MONSTER)
-                    .sized(0.6F, 1.9F)
-    );
+    public static final EntityEntry<Vampire> VAMPIRE = Hominid.REGISTRATE.get()
+            .entity("vampire", HominidEntityFactory.make(Vampire.class), Vampire.CATEGORY)
+            .properties(Vampire::properties)
+            .attributes(Vampire::createAttributes)
+            .renderer(() -> VampireRenderer::new)
+            .spawnPlacement(SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING,
+                    Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND)
+            .spawnEgg(0x6e211f, 0x4d4129).build()
+            .register();
 
-    private static <T extends Entity> Supplier<EntityType<T>> registerEntity(String name, EntityType.Builder<T> builder) {
-        return ENTITY_TYPES.register(
-                name,
-                () -> builder.build(name)
-        );
-    }
-
-    // ATTRIBUTES
-
-    @SubscribeEvent
-    public static void registerAttributes(EntityAttributeCreationEvent event) {
-        event.put(HominidEntityCreator.MELLIFIED.get(), Mellified.createAttributes().build());
-        event.put(HominidEntityCreator.INCENDIARY.get(), Incendiary.createAttributes().build());
-        event.put(HominidEntityCreator.FAMISHED.get(), Famished.createAttributes().build());
-        event.put(HominidEntityCreator.JUGGERNAUT.get(), Juggernaut.createAttributes().build());
-        event.put(HominidEntityCreator.BELLMAN.get(), Bellman.createAttributes().build());
-        event.put(HominidEntityCreator.FOSSILIZED.get(), Fossilized.createAttributes().build());
-        event.put(HominidEntityCreator.VAMPIRE.get(), Vampire.createAttributes().build());
+    // Loads this class so we can registrate it.
+    public static void register() {
     }
 }

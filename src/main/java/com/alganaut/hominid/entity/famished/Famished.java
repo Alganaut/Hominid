@@ -1,5 +1,6 @@
 package com.alganaut.hominid.entity.famished;
 
+import com.alganaut.hominid.registry.HominidEntityCreator;
 import com.alganaut.hominid.entity.animation.IdleAnimationController;
 import com.alganaut.hominid.entity.behavior.SunlightBurning;
 import com.alganaut.hominid.entity.goal.AttackTurtleEggGoal;
@@ -11,6 +12,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -24,13 +26,18 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 
 public class Famished extends Monster {
+    public static final MobCategory CATEGORY = MobCategory.MONSTER;
     private static final byte ATTACK_ANIMATION_EVENT = 100;
     public final AnimationState attackAnimationState = new AnimationState();
     public final AnimationState idleAnimationState = new AnimationState();
     private final IdleAnimationController idleAnimationController = new IdleAnimationController(40);
 
-    public Famished(EntityType<? extends Monster> entityType, Level level) {
-        super(entityType, level);
+    public Famished(Level level) {
+        super(HominidEntityCreator.FAMISHED.get(), level);
+    }
+
+    public static void properties(EntityType.Builder<Famished> builder) {
+        builder.sized(0.6F, 1.99F);
     }
 
     public static AttributeSupplier.Builder createAttributes() {

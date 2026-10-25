@@ -1,5 +1,6 @@
 package com.alganaut.hominid.entity.fossilized;
 
+import com.alganaut.hominid.registry.HominidEntityCreator;
 import com.alganaut.hominid.entity.animation.IdleAnimationController;
 import com.alganaut.hominid.registry.item.HominidItems;
 import net.minecraft.core.BlockPos;
@@ -13,6 +14,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -27,6 +29,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.neoforge.common.ItemAbilities;
 
 public class Fossilized extends Monster {
+    public static final MobCategory CATEGORY = MobCategory.MONSTER;
     static final byte THROW_ANIMATION_EVENT = 70;
     static final byte STOP_THROW_ANIMATION_EVENT = 90;
     public enum AttackState {
@@ -42,8 +45,12 @@ public class Fossilized extends Monster {
     public AttackState attackState = AttackState.IDLE;
     private static final EntityDataAccessor<Boolean> HAS_BEEN_BRUSHED = SynchedEntityData.defineId(Fossilized.class, EntityDataSerializers.BOOLEAN);
 
-    public Fossilized(EntityType<? extends Monster> entityType, Level level) {
-        super(entityType, level);
+    public Fossilized(Level level) {
+        super(HominidEntityCreator.FOSSILIZED.get(), level);
+    }
+
+    public static void properties(EntityType.Builder<Fossilized> builder) {
+        builder.sized(0.65F, 2.3F);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
