@@ -35,6 +35,10 @@ repositories {
         name = "BlameJared maven"
         url = uri("https://maven.blamejared.com/")
     }
+    maven {
+        name = "Registrate"
+        url "https://maven.gegy.dev/releases"
+    }
 }
 
 base {
@@ -129,6 +133,13 @@ configurations {
 }
 
 dependencies {
+    jarJar(implementation("com.tterrag.registrate:Registrate")) {
+        version {
+            strictly "[MC1.21.1-1.4.0+25,MC1.21.2)"
+            prefer "MC1.21.1-1.4.0+25"
+        }
+    }
+
     jarJar(implementation("team.lodestar.lodestone:lodestone")) {
         version {
             prefer lodestone_version

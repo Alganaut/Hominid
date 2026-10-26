@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:adventure",
+  "parent": "minecraft:adventure/root",
   "criteria": {
     "hematoma": {
       "conditions": {

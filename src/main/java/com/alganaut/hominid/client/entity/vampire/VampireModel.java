@@ -1,0 +1,76 @@
+package com.alganaut.hominid.client.entity.vampire;
+
+import com.alganaut.hominid.client.entity.ModelHeadRotation;
+import com.alganaut.hominid.entity.vampire.Vampire;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.*;
+
+public class VampireModel<T extends Vampire> extends HierarchicalModel<T> {
+
+    private final ModelPart vampire;
+    private final ModelPart head;
+    private final ModelPart torso;
+
+    public VampireModel(ModelPart root) {
+        this.vampire = root.getChild("vampire");
+        this.torso = this.vampire.getChild("torso");
+        this.head = this.torso.getChild("head");
+    }
+
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+
+        PartDefinition vampire = partdefinition.addOrReplaceChild("vampire", CubeListBuilder.create(), PartPose.offset(0.0F, 12.0F, -3.0F));
+
+        PartDefinition torso = vampire.addOrReplaceChild("torso", CubeListBuilder.create(), PartPose.offset(0.0F, -7.0F, 3.0F));
+
+        PartDefinition head = torso.addOrReplaceChild("head", CubeListBuilder.create().texOffs(50, 19).addBox(-4.0F, -8.0F, -5.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 0).mirror().addBox(4.0F, -6.0F, -5.0F, 2.0F, 3.0F, 0.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(0.0F, -11.0F, -2.0F));
+
+        PartDefinition body = torso.addOrReplaceChild("body", CubeListBuilder.create().texOffs(50, 35).addBox(-5.0F, -20.0F, 0.0F, 10.0F, 13.0F, 5.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 3).addBox(-3.0F, -18.0F, 5.0F, 3.0F, 3.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 7.0F, -3.0F));
+
+        PartDefinition left_arm = torso.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -2.0F, -20.0F, 3.0F, 4.0F, 22.0F, new CubeDeformation(0.0F))
+                .texOffs(-3, 10).addBox(3.0F, -2.0F, -18.0F, 2.0F, 0.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(5.0F, -11.0F, 0.0F));
+
+        PartDefinition right_arm = torso.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(0, 26).addBox(-3.0F, -2.0F, -20.0F, 3.0F, 4.0F, 22.0F, new CubeDeformation(0.0F))
+                .texOffs(-2, 8).addBox(-5.0F, -1.0F, -5.0F, 2.0F, 0.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-5.0F, -11.0F, 0.0F));
+
+        PartDefinition left_leg = vampire.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(0, 52).addBox(-1.0F, 0.0F, -2.0F, 3.0F, 19.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(24, 52).addBox(-2.0F, 0.0F, -3.0F, 5.0F, 7.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, -7.0F, 3.0F));
+
+        PartDefinition right_leg = vampire.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(12, 52).addBox(-2.0F, 0.0F, -2.0F, 3.0F, 19.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(44, 53).addBox(-3.0F, 0.0F, -3.0F, 5.0F, 7.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, -7.0F, 3.0F));
+
+        PartDefinition torn_shirt = vampire.addOrReplaceChild("torn_shirt", CubeListBuilder.create().texOffs(50, 0).addBox(-5.0F, -9.0F, 0.0F, 10.0F, 14.0F, 5.0F, new CubeDeformation(0.25F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+        return LayerDefinition.create(meshdefinition, 128, 128);
+    }
+
+    @Override
+    public void setupAnim(Vampire entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        this.root().getAllParts().forEach(ModelPart::resetPose);
+        ModelHeadRotation.apply(this.head, netHeadYaw, headPitch);
+
+        this.animateWalk(VampireAnimations.ANIM_VAMPIRE_WALK, limbSwing, limbSwingAmount, 4f, 54);
+        this.animate(entity.idleAnimationState,VampireAnimations.ANIM_VAMPIRE_IDLE,ageInTicks, 1f);
+        this.animate(entity.attackAnimationState,VampireAnimations.ANIM_VAMPIRE_ATTACK,ageInTicks, 1f);
+        this.animate(entity.dieAnimationState,VampireAnimations.ANIM_VAMPIRE_SCREAM,ageInTicks, 1f);
+
+    }
+
+    @Override
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
+        vampire.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+    }
+
+    @Override
+    public ModelPart root() {
+        return vampire;
+    }
+}

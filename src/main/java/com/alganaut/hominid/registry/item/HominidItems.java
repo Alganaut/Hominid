@@ -2,44 +2,30 @@ package com.alganaut.hominid.registry.item;
 
 
 import com.alganaut.hominid.Hominid;
-import com.alganaut.hominid.registry.entity.HominidEntityCreator;
-import com.alganaut.hominid.registry.sound.HominidSounds;
+import com.alganaut.hominid.item.GasTank;
+import com.alganaut.hominid.registry.HominidEntityCreator;
+import com.alganaut.hominid.registry.HominidSounds;
+import com.tterrag.registrate.util.entry.EntityEntry;
+import com.tterrag.registrate.util.entry.ItemEntry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.SmithingTemplateItem;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class HominidItems {
     public static final DeferredRegister.Items  ITEMS = DeferredRegister.createItems(Hominid.MODID);
 
-    public static final DeferredItem<Item> MELLIFIED_SPAWN_EGG = ITEMS.register("mellified_spawn_egg",
-            () -> new DeferredSpawnEggItem(HominidEntityCreator.MELLIFIED, 0xab781e, 0xfdefd0,
-                    new Item.Properties()));
-
-    public static final DeferredItem<Item> INCENDIARY_SPAWN_EGG = ITEMS.register("incendiary_spawn_egg",
-            () -> new DeferredSpawnEggItem(HominidEntityCreator.INCENDIARY, 0x645633, 0x130407,
-                    new Item.Properties()));
-
-    public static final DeferredItem<Item> FAMISHED_SPAWN_EGG = ITEMS.register("famished_spawn_egg",
-            () -> new DeferredSpawnEggItem(HominidEntityCreator.FAMISHED, 0x88381b, 0xc9a681,
-                    new Item.Properties()));
-
-    public static final DeferredItem<Item> JUGGERNAUT_SPAWN_EGG = ITEMS.register("juggernaut_spawn_egg",
-            () -> new DeferredSpawnEggItem(HominidEntityCreator.JUGGERNAUT, 0x673737, 0xb0b4a3,
-                    new Item.Properties()));
-
-    public static final DeferredItem<Item> BELLMAN_SPAWN_EGG = ITEMS.register("bellman_spawn_egg",
-            () -> new DeferredSpawnEggItem(HominidEntityCreator.BELLMAN, 0x554739, 0xb0b4a3,
-                    new Item.Properties()));
-
-    public static final DeferredItem<Item> FOSSILIZED_SPAWN_EGG = ITEMS.register("fossilized_spawn_egg",
-            () -> new DeferredSpawnEggItem(HominidEntityCreator.FOSSILIZED, 0x7e7a56, 0x5b5344,
-                    new Item.Properties()));
-    public static final DeferredItem<Item> VAMPIRE_SPAWN_EGG = ITEMS.register("vampire_spawn_egg",
-            () -> new DeferredSpawnEggItem(HominidEntityCreator.VAMPIRE, 0xccc5ae, 0xdd563f,
-                    new Item.Properties()));
+    public static final ItemEntry<Item> MELLIFIED_SPAWN_EGG = spawnEggOf(HominidEntityCreator.MELLIFIED);
+    public static final ItemEntry<Item> INCENDIARY_SPAWN_EGG = spawnEggOf(HominidEntityCreator.INCENDIARY);
+    public static final ItemEntry<Item> FAMISHED_SPAWN_EGG = spawnEggOf(HominidEntityCreator.FAMISHED);
+    public static final ItemEntry<Item> JUGGERNAUT_SPAWN_EGG = spawnEggOf(HominidEntityCreator.JUGGERNAUT);
+    public static final ItemEntry<Item> BELLMAN_SPAWN_EGG = spawnEggOf(HominidEntityCreator.BELLMAN);
+    public static final ItemEntry<Item> FOSSILIZED_SPAWN_EGG = spawnEggOf(HominidEntityCreator.FOSSILIZED);
+    public static final ItemEntry<Item> VAMPIRE_SPAWN_EGG = spawnEggOf(HominidEntityCreator.VAMPIRE);
 
     public static final DeferredItem<Item> FAMISHED_STOMACH = ITEMS.register("famished_stomach",
             () -> new Item(new Item.Properties().food(HominidFoodItems.FAMISHED_STOMACH)));
@@ -61,5 +47,10 @@ public class HominidItems {
 
     public static void register (IEventBus eventBus) {
         ITEMS.register(eventBus);
+    }
+
+    // Egg itself is registered by .spawnEgg() in HominidEntityCreator
+    private static ItemEntry<Item> spawnEggOf(EntityEntry<?> entity) {
+        return ItemEntry.cast(Hominid.REGISTRATE.get().get(entity.getId().getPath() + "_spawn_egg", Registries.ITEM));
     }
 }
