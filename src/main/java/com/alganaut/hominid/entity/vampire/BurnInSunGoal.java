@@ -19,13 +19,22 @@ class BurnInSunGoal extends Goal {
     }
 
     @Override
+    public void start() {
+        entity.setBurningInSun(true);
+    }
+
+    @Override
+    public void stop() {
+        entity.setBurningInSun(false);
+    }
+
+    @Override
     public void tick() {
         if (!isInDirectSunlight()) {
             return;
         }
 
         if (sunTimer == 0) {
-            entity.level().broadcastEntityEvent(entity, Vampire.DIE_ANIMATION_EVENT);
             entity.setRemainingFireTicks(100);
             triggerEvent();
         }

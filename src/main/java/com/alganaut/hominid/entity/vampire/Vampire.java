@@ -5,6 +5,9 @@ import com.alganaut.hominid.entity.animation.IdleAnimationController;
 import com.alganaut.hominid.registry.HominidSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
@@ -24,8 +27,7 @@ import net.minecraft.world.level.LevelReader;
 public class Vampire extends Monster {
     public static final MobCategory CATEGORY = MobCategory.MONSTER;
     private static final byte ATTACK_ANIMATION_EVENT = 100;
-    static final byte DIE_ANIMATION_EVENT = 101;
-    static final byte STOP_BURNING_ANIMATION_EVENT = 99;
+    private static final EntityDataAccessor<Boolean> BURNING_IN_SUN = SynchedEntityData.defineId(Vampire.class, EntityDataSerializers.BOOLEAN);
     private final IdleAnimationController idleAnimationController = new IdleAnimationController(120);
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState attackAnimationState = new AnimationState();
@@ -87,6 +89,25 @@ public class Vampire extends Monster {
     }
 
     @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(BURNING_IN_SUN, false);
+    }
+
+    @Override
+    public void onSyncedDataUpdated(EntityDataAccessor<?> accessor) {
+        super.onSyncedDataUpdated(accessor);
+        if (!level().isClientSide() || accessor != BURNING_IN_SUN) {
+            return;
+        }
+        if (entityData.get(BURNING_IN_SUN)) {
+            dieAnimationState.start(tickCount);
+        } else {
+            dieAnimationState.stop();
+        }
+    }
+
+    @Override
     public void tick() {
         if (level().isClientSide()) {
             idleAnimationController.tick(this, idleAnimationState);
@@ -108,17 +129,14 @@ public class Vampire extends Monster {
     }
 
     @Override
-    public void setRemainingFireTicks(int remainingFireTicks) {
-        if (remainingFireTicks == 0 && !level().isClientSide) {
-            level().broadcastEntityEvent(this, STOP_BURNING_ANIMATION_EVENT);
-        }
-        super.setRemainingFireTicks(remainingFireTicks);
-    }
-
-    @Override
     public boolean isInvertedHealAndHarm() {
         return true;
     }
+
+    void setBurningInSun(boolean burningInSun) {
+        entityData.set(BURNING_IN_SUN, burningInSun);
+    }
+
 
     void dieAndPerish() {
         if (!isAlive()) {
@@ -136,13 +154,6 @@ public class Vampire extends Monster {
         if (state == ATTACK_ANIMATION_EVENT) {
             attackAnimationState.stop();
             attackAnimationState.startIfStopped(tickCount);
-        }
-        if (state == DIE_ANIMATION_EVENT) {
-            dieAnimationState.stop();
-            dieAnimationState.startIfStopped(tickCount);
-        }
-        if (state == STOP_BURNING_ANIMATION_EVENT) {
-            dieAnimationState.stop();
         }
         super.handleEntityEvent(state);
     }
