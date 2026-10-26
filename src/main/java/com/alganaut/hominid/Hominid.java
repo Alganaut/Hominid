@@ -10,7 +10,9 @@ import com.alganaut.hominid.registry.HominidSounds;
 import com.mojang.logging.LogUtils;
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.ModContainer;
@@ -24,7 +26,10 @@ import java.util.List;
 public class Hominid {
     public static final String MODID = "hominid";
 
-    public static final NonNullSupplier<Registrate> REGISTRATE = NonNullSupplier.lazy(() -> Registrate.create(MODID));
+    private static final ResourceKey<CreativeModeTab> NO_DEFAULT_CREATIVE_TAB = null;
+
+    public static final NonNullSupplier<Registrate> REGISTRATE = NonNullSupplier.lazy(
+            () -> Registrate.create(MODID).defaultCreativeTab(NO_DEFAULT_CREATIVE_TAB));
 
     public static final Logger LOGGER = LogUtils.getLogger();
 
