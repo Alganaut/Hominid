@@ -20,6 +20,7 @@ import com.alganaut.hominid.registry.misc.HominidEntityFactory;
 import com.tterrag.registrate.util.entry.EntityEntry;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.entity.SpawnPlacementTypes;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
@@ -33,7 +34,7 @@ public class HominidEntityCreator {
             .renderer(() -> MellifiedRenderer::new)
             .spawnPlacement(SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING,
                     Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE)
-            .spawnEgg(0xab781e, 0xfdefd0).build()
+            .spawnEgg(0xab781e, 0xfdefd0).removeTab(CreativeModeTabs.SPAWN_EGGS).build()
             .register();
 
     public static final EntityEntry<Incendiary> INCENDIARY = Hominid.REGISTRATE.get()
@@ -43,7 +44,7 @@ public class HominidEntityCreator {
             .renderer(() -> IncendiaryRenderer::new)
             .spawnPlacement(SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING,
                     Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND)
-            .spawnEgg(0x645633, 0x130407).build()
+            .spawnEgg(0x645633, 0x130407).removeTab(CreativeModeTabs.SPAWN_EGGS).build()
             .register();
 
     public static final EntityEntry<Famished> FAMISHED = Hominid.REGISTRATE.get()
@@ -53,7 +54,7 @@ public class HominidEntityCreator {
             .renderer(() -> FamishedRenderer::new)
             .spawnPlacement(SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING,
                     Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND)
-            .spawnEgg(0x88381b, 0xc9a681).build()
+            .spawnEgg(0x88381b, 0xc9a681).removeTab(CreativeModeTabs.SPAWN_EGGS).build()
             .register();
 
     public static final EntityEntry<Juggernaut> JUGGERNAUT = Hominid.REGISTRATE.get()
@@ -63,7 +64,7 @@ public class HominidEntityCreator {
             .renderer(() -> JuggernautRenderer::new)
             .spawnPlacement(SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING,
                     Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND)
-            .spawnEgg(0x673737, 0xb0b4a3).build()
+            .spawnEgg(0x673737, 0xb0b4a3).removeTab(CreativeModeTabs.SPAWN_EGGS).build()
             .register();
 
     public static final EntityEntry<Bellman> BELLMAN = Hominid.REGISTRATE.get()
@@ -73,7 +74,7 @@ public class HominidEntityCreator {
             .renderer(() -> BellmanRenderer::new)
             .spawnPlacement(SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING,
                     Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND)
-            .spawnEgg(0x554739, 0xb0b4a3).build()
+            .spawnEgg(0x554739, 0xb0b4a3).removeTab(CreativeModeTabs.SPAWN_EGGS).build()
             .register();
 
     public static final EntityEntry<Fossilized> FOSSILIZED = Hominid.REGISTRATE.get()
@@ -83,7 +84,7 @@ public class HominidEntityCreator {
             .renderer(() -> FossilizedRenderer::new)
             .spawnPlacement(SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING,
                     Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND)
-            .spawnEgg(0x7e7a56, 0x5b5344).build()
+            .spawnEgg(0x7e7a56, 0x5b5344).removeTab(CreativeModeTabs.SPAWN_EGGS).build()
             .register();
 
     public static final EntityEntry<FossilizedRock> ROCK = Hominid.REGISTRATE.get()
@@ -99,7 +100,7 @@ public class HominidEntityCreator {
             .renderer(() -> VampireRenderer::new)
             .spawnPlacement(SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING,
                     Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND)
-            .spawnEgg(0xccc5ae, 0xdd563f).build()
+            .spawnEgg(0xccc5ae, 0xdd563f).removeTab(CreativeModeTabs.SPAWN_EGGS).build()
             .register();
 
     // Loads this class so we can registrate it.
