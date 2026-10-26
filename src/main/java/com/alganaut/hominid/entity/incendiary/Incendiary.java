@@ -5,6 +5,7 @@ import com.alganaut.hominid.entity.animation.IdleAnimationController;
 import com.alganaut.hominid.entity.behavior.SunlightBurning;
 import com.alganaut.hominid.entity.goal.AttackTurtleEggGoal;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -40,7 +41,6 @@ public class Incendiary extends Monster {
             SynchedEntityData.defineId(Incendiary.class, EntityDataSerializers.BOOLEAN);
     public final Set<UUID> ignitedCreepers = new HashSet<>();
     private static final byte ATTACK_ANIMATION_EVENT = 100;
-    private static final byte IGNITE_ANIMATION_EVENT = 70;
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState igniteAnimationState = new AnimationState();
     public final AnimationState attackAnimationState = new AnimationState();
@@ -48,10 +48,11 @@ public class Incendiary extends Monster {
     private static final double ENRAGED_SPEED = 0.35;
     private static final int FIRE_DURATION = 500;
     private static final int IGNITION_DELAY = 60;
+    private static final String STATE_TAG = "State";
     private int ignitionTimer = 0;
     private final IdleAnimationController idleAnimationController = new IdleAnimationController(120);
-    private IncendiaryState state = IncendiaryState.IDLE;
-    private enum IncendiaryState {
+    public IncendiaryState state = IncendiaryState.IDLE;
+    public enum IncendiaryState {
         IDLE,
         IGNITING,
         ENRAGED
@@ -84,7 +85,6 @@ public class Incendiary extends Monster {
         return entityData.get(IGNITING);
     }
 
-    //todo fix goal pursuit  
     @Override
     protected void registerGoals() {
         goalSelector.addGoal(4, new AttackTurtleEggGoal(this, 1.0, 3));
@@ -104,12 +104,46 @@ public class Incendiary extends Monster {
     }
 
     @Override
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putString(STATE_TAG, state.name());
+    }
+
+    @Override
+    public void onSyncedDataUpdated(EntityDataAccessor<?> accessor) {
+        super.onSyncedDataUpdated(accessor);
+        if (!level().isClientSide() || accessor != IGNITING) {
+            return;
+        }
+        if (isIgniting()) {
+            igniteAnimationState.start(tickCount);
+        } else {
+            igniteAnimationState.stop();
+        }
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        switch (loadState(tag)) {
+            case IncendiaryState.IGNITING -> setIgnition();
+            case IncendiaryState.ENRAGED -> setEnraged();
+            default -> setIdle();
+        }
+    }
+
+    private static IncendiaryState loadState(CompoundTag tag) {
+        try {
+            return IncendiaryState.valueOf(tag.getString(STATE_TAG));
+        } catch (IllegalArgumentException unknownOrMissing) {
+            return IncendiaryState.IDLE;
+        }
+    }
+
+    @Override
     public void tick() {
         if (level().isClientSide()) {
             idleAnimationController.tick(this, idleAnimationState);
-            if (!isIgniting()) {
-                igniteAnimationState.stop();
-            }
         }
         switch (state) {
             case IDLE -> idling();
@@ -127,15 +161,9 @@ public class Incendiary extends Monster {
         }
 
         setIgnition();
-        if(!level().isClientSide){
-            level().broadcastEntityEvent(this, IGNITE_ANIMATION_EVENT);
-        }
     }
 
     private void igniting() {
-        if(!level().isClientSide){
-            level().broadcastEntityEvent(this, IGNITE_ANIMATION_EVENT);
-        }
         if (getTarget() == null) {
            setIdle();
            return;
@@ -222,9 +250,6 @@ public class Incendiary extends Monster {
 
     @Override
     public void handleEntityEvent(byte state) {
-        if (state == IGNITE_ANIMATION_EVENT){
-            igniteAnimationState.startIfStopped(tickCount);
-        }
         if (state == ATTACK_ANIMATION_EVENT){
             attackAnimationState.stop();
             attackAnimationState.startIfStopped(tickCount);

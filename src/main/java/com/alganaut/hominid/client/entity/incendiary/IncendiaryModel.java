@@ -54,7 +54,7 @@ public class IncendiaryModel<T extends Incendiary> extends HierarchicalModel<T> 
     public void setupAnim(Incendiary entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         root().getAllParts().forEach(ModelPart::resetPose);
         ModelHeadRotation.apply(head, netHeadYaw, headPitch);
-        if (entity.getAttribute(Attributes.MOVEMENT_SPEED).getBaseValue() == 0.35) {
+        if (entity.state == Incendiary.IncendiaryState.ENRAGED) {
             animateWalk(IncendiaryAnimations.ANIM_INCENDIARY_AGGRO_WALK, limbSwing, limbSwingAmount, 2f, 54);
             animate(entity.attackAnimationState, IncendiaryAnimations.ANIM_INCENDIARY_WALK, ageInTicks, 2f);
             animate(entity.attackAnimationState, IncendiaryAnimations.ANIM_INCENDIARY_IDLE, ageInTicks, 2f);
