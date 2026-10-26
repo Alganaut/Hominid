@@ -58,8 +58,6 @@ public class Bellman extends Monster {
             "quark:forgotten",
             "undead_unleashed:wraith",
             "undead_unleashed:dreadknight",
-            "nomansland:buried",
-            "nomansland:remnant",
             "windswept:chilled"
     );
 

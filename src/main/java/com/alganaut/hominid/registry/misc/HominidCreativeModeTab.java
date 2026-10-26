@@ -17,7 +17,7 @@ public class HominidCreativeModeTab {
     static {
         CREATIVE_MODE_TAB.register("hominid_tab",
                 () -> CreativeModeTab.builder()
-                        .icon(() -> new ItemStack(HominidItems.GASOLINE_TANK.get()))
+                        .icon(() -> new ItemStack(HominidItems.FAMISHED_STOMACH.get()))
                         .title(Component.translatable("creativetab.hominid.hominid"))
                         .displayItems((displayParameters, output) -> {
                             Hominid.REGISTRATE.get().getAll(Registries.ITEM).stream()

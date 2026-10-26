@@ -33,7 +33,7 @@ public class HominidEntityCreator {
             .renderer(() -> MellifiedRenderer::new)
             .spawnPlacement(SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING,
                     Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE)
-            .spawnEgg(0xefe9d1, 0xf3b34a).build()
+            .spawnEgg(0xab781e, 0xfdefd0).build()
             .register();
 
     public static final EntityEntry<Incendiary> INCENDIARY = Hominid.REGISTRATE.get()
@@ -43,7 +43,7 @@ public class HominidEntityCreator {
             .renderer(() -> IncendiaryRenderer::new)
             .spawnPlacement(SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING,
                     Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND)
-            .spawnEgg(0x624337, 0x862a25).build()
+            .spawnEgg(0x645633, 0x130407).build()
             .register();
 
     public static final EntityEntry<Famished> FAMISHED = Hominid.REGISTRATE.get()
@@ -53,7 +53,7 @@ public class HominidEntityCreator {
             .renderer(() -> FamishedRenderer::new)
             .spawnPlacement(SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING,
                     Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND)
-            .spawnEgg(0x7a725e, 0x413935).build()
+            .spawnEgg(0x88381b, 0xc9a681).build()
             .register();
 
     public static final EntityEntry<Juggernaut> JUGGERNAUT = Hominid.REGISTRATE.get()
@@ -63,7 +63,7 @@ public class HominidEntityCreator {
             .renderer(() -> JuggernautRenderer::new)
             .spawnPlacement(SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING,
                     Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND)
-            .spawnEgg(0x6f625d, 0x541635).build()
+            .spawnEgg(0x673737, 0xb0b4a3).build()
             .register();
 
     public static final EntityEntry<Bellman> BELLMAN = Hominid.REGISTRATE.get()
@@ -73,7 +73,7 @@ public class HominidEntityCreator {
             .renderer(() -> BellmanRenderer::new)
             .spawnPlacement(SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING,
                     Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND)
-            .spawnEgg(0x211f1b, 0x898b82).build()
+            .spawnEgg(0x554739, 0xb0b4a3).build()
             .register();
 
     public static final EntityEntry<Fossilized> FOSSILIZED = Hominid.REGISTRATE.get()
@@ -83,7 +83,7 @@ public class HominidEntityCreator {
             .renderer(() -> FossilizedRenderer::new)
             .spawnPlacement(SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING,
                     Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND)
-            .spawnEgg(0x9a9c7a, 0x5b5344).build()
+            .spawnEgg(0x7e7a56, 0x5b5344).build()
             .register();
 
     public static final EntityEntry<FossilizedRock> ROCK = Hominid.REGISTRATE.get()
@@ -99,7 +99,7 @@ public class HominidEntityCreator {
             .renderer(() -> VampireRenderer::new)
             .spawnPlacement(SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING,
                     Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND)
-            .spawnEgg(0x6e211f, 0x4d4129).build()
+            .spawnEgg(0xccc5ae, 0xdd563f).build()
             .register();
 
     // Loads this class so we can registrate it.
