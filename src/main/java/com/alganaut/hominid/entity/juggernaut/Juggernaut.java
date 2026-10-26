@@ -50,7 +50,6 @@ public class Juggernaut extends Monster {
 
     @Override
     protected void registerGoals() {
-        goalSelector.addGoal(0, new FloatGoal(this));
         goalSelector.addGoal(4, new AttackTurtleEggGoal(this, 1.0, 3, 1.14));
         goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2, false));
         goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0));

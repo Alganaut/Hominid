@@ -78,7 +78,6 @@ public class Fossilized extends Monster {
 
     @Override
     protected void registerGoals() {
-        goalSelector.addGoal(0, new FloatGoal(this));
         goalSelector.addGoal(1, new FossilizedRangedAttackGoal(this));
         goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0));
         goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0, 0.0F));

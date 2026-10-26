@@ -50,7 +50,6 @@ public class Famished extends Monster {
 
     @Override
     protected void registerGoals() {
-        goalSelector.addGoal(0, new FloatGoal(this));
         goalSelector.addGoal(2, new AttackAnimalGoal(this, 1.2, false));
         goalSelector.addGoal(3, new MeleeAttackGoal(this, 1.2, false));
         goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0));

@@ -64,7 +64,6 @@ public class Vampire extends Monster {
 
     @Override
     protected void registerGoals() {
-        goalSelector.addGoal(0, new FloatGoal(this));
         goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0));
         goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0, 0.0F));
         goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
