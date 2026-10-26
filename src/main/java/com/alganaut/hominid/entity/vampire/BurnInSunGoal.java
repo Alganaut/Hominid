@@ -44,8 +44,6 @@ class BurnInSunGoal extends Goal {
         } else {
             this.entity.remove(Entity.RemovalReason.DISCARDED);
         }
-
-
     }
 
     private boolean isInDirectSunlight() {
