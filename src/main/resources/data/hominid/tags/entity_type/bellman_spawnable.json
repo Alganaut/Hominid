@@ -18,7 +18,6 @@
     {"id": "alexscaves:caniac", "required": false},
     {"id": "alexscaves:brainiac", "required": false},
     {"id": "netherexp:vessel", "required": false},
-    {"id": "caverns_and_chasms:mime", "required": false},
     {"id": "spawn:barbed", "required": false},
     {"id": "species:quake", "required": false},
     {"id": "opposing_force:frowzy", "required": false},
