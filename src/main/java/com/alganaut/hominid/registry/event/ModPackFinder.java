@@ -1,32 +1,20 @@
 package com.alganaut.hominid.registry.event;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.packs.PackLocationInfo;
-import net.minecraft.server.packs.PackResources;
-import net.minecraft.server.packs.PackSelectionConfig;
-import net.minecraft.server.packs.PathPackResources;
+import net.minecraft.server.packs.*;
 import net.minecraft.server.packs.repository.Pack;
-import net.minecraft.server.packs.repository.PackRepository;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.server.packs.repository.RepositorySource;
-import net.minecraft.server.packs.resources.IoSupplier;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Optional;
-import java.util.function.Consumer;
-import net.minecraft.server.packs.PackType;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.moddiscovery.ModFile;
 import net.neoforged.fml.loading.moddiscovery.ModFileInfo;
 
-public class ModPackFinder implements RepositorySource {
-    private final String modId;
+import java.nio.file.Path;
+import java.util.Optional;
+import java.util.function.Consumer;
 
-    public ModPackFinder(String modId) {
-        this.modId = modId;
+public class ModPackFinder implements RepositorySource {
+    public ModPackFinder() {
     }
     @Override
     public void loadPacks(Consumer<Pack> consumer) {
