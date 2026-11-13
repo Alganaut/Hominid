@@ -1,30 +1,10 @@
 {
   "values": [
     "minecraft:zombie",
-    "minecraft:husk",
-    "minecraft:drowned",
     "minecraft:skeleton",
-    "minecraft:stray",
-    "minecraft:bogged",
-    "hominid:incendiary",
-    "hominid:mellified",
     "hominid:famished",
     "hominid:juggernaut",
     "hominid:fossilized",
-    "hominid:vampire",
-    {"id": "galosphere:preserved", "required": false},
-    {"id": "minecraft:parched", "required": false},
-    {"id": "alexscaves:boundroid", "required": false},
-    {"id": "alexscaves:caniac", "required": false},
-    {"id": "alexscaves:brainiac", "required": false},
-    {"id": "netherexp:vessel", "required": false},
-    {"id": "spawn:barbed", "required": false},
-    {"id": "species:quake", "required": false},
-    {"id": "opposing_force:frowzy", "required": false},
-    {"id": "opposing_force:rambler", "required": false},
-    {"id": "quark:forgotten", "required": false},
-    {"id": "undead_unleashed:wraith", "required": false},
-    {"id": "undead_unleashed:dreadknight", "required": false},
-    {"id": "windswept:chilled", "required": false}
+    {"id": "quark:forgotten", "required": false}
   ]
 }
