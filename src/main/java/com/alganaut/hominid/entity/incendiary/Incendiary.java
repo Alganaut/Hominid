@@ -51,6 +51,7 @@ public class Incendiary extends Monster {
     private static final String STATE_TAG = "State";
     private int ignitionTimer = 0;
     private final IdleAnimationController idleAnimationController = new IdleAnimationController(120);
+    // todo state is server-only, so the client always sees IDLE and IncendiaryModel/IncendiaryRenderer never show ENRAGED. sync it like IGNITING
     public IncendiaryState state = IncendiaryState.IDLE;
     public enum IncendiaryState {
         IDLE,
