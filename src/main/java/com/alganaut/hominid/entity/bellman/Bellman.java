@@ -31,6 +31,7 @@ public class Bellman extends Monster {
     public final AnimationState attackAnimationState = new AnimationState();
     public final AnimationState idleAnimationState = new AnimationState();
     private final IdleAnimationController idleAnimationController = new IdleAnimationController(250);
+    // todo only the default for new configs, existing hominid configs keep the old long list
     public static final List<String> SUPPORTED_SUMMONS = List.of(
             "minecraft:zombie",
             "minecraft:skeleton",

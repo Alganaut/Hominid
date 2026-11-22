@@ -6,6 +6,7 @@ import net.minecraft.world.entity.ai.goal.Goal;
 
 class BurnInSunGoal extends Goal {
     private final Vampire entity;
+    // todo never reset, so after leaving sun early the next burn skips the sunTimer == 0 fire/dieAndPerish step. reset in start()
     private int sunTimer = 0;
     private static final int SUN_VANISH_TIME = 20;
 

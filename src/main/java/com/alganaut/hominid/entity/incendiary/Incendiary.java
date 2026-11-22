@@ -123,6 +123,7 @@ public class Incendiary extends Monster {
         }
     }
 
+    // todo reload re-runs setEnraged/setIgnition, so fire resets to FIRE_DURATION and ignitionTimer restarts. save and restore them instead
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
