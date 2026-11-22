@@ -28,9 +28,12 @@ public class BellmanModel<T extends Bellman> extends HierarchicalModel<T> {
         PartDefinition torso = bellman.addOrReplaceChild("torso", CubeListBuilder.create().texOffs(48, 0).addBox(-8.0F, -24.25F, -3.0F, 16.0F, 24.0F, 8.0F, new CubeDeformation(0.0F))
                 .texOffs(0, 0).addBox(-8.0F, -24.25F, -3.0F, 16.0F, 26.0F, 8.0F, new CubeDeformation(0.55F)), PartPose.offset(-1.0F, -11.75F, 0.0F));
 
-        PartDefinition left_arm = torso.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(28, 34).mirror().addBox(-1.5F, -3.5001F, -3.0F, 6.0F, 24.0F, 6.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(9.5F, -21.25F, 1.0F));
+        PartDefinition left_arm = torso.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(28, 34).mirror().addBox(-1.5F, -3.5001F, -3.0F, 6.0F, 24.0F, 6.0F, new CubeDeformation(0.0F)).mirror(false)
+                .texOffs(28, 66).mirror().addBox(-1.35F, 12.4999F, -3.0F, 6.0F, 3.0F, 6.0F, new CubeDeformation(0.25F)).mirror(false), PartPose.offset(9.5F, -21.25F, 1.0F));
 
         PartDefinition right_arm = torso.addOrReplaceChild("right_arm", CubeListBuilder.create(), PartPose.offsetAndRotation(-9.5F, -21.25F, 1.0F, -1.5708F, 0.0F, 0.0F));
+
+        PartDefinition sleeve_r1 = right_arm.addOrReplaceChild("sleeve_r1", CubeListBuilder.create().texOffs(28, 66).addBox(-3.0F, -3.0501F, -3.0F, 6.0F, 3.0F, 6.0F, new CubeDeformation(0.25F)), PartPose.offsetAndRotation(-1.35F, 15.55F, 0.0F, 0.0F, -1.5708F, 0.0F));
 
         PartDefinition right_arm_r1 = right_arm.addOrReplaceChild("right_arm_r1", CubeListBuilder.create().texOffs(28, 34).addBox(-3.0F, -12.0F, -3.0F, 6.0F, 24.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.5F, 8.4999F, 0.0F, 0.0F, -1.5708F, 0.0F));
 

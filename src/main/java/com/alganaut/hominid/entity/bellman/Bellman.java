@@ -33,32 +33,11 @@ public class Bellman extends Monster {
     private final IdleAnimationController idleAnimationController = new IdleAnimationController(250);
     public static final List<String> SUPPORTED_SUMMONS = List.of(
             "minecraft:zombie",
-            "minecraft:husk",
-            "minecraft:drowned",
             "minecraft:skeleton",
-            "minecraft:stray",
-            "minecraft:bogged",
-            "hominid:incendiary",
-            "hominid:mellified",
             "hominid:famished",
             "hominid:juggernaut",
             "hominid:fossilized",
-            "hominid:vampire",
-            "galosphere:preserved",
-            "minecraft:parched",
-            "alexscaves:boundroid",
-            "alexscaves:caniac",
-            "alexscaves:brainiac",
-            "netherexp:vessel",
-            "caverns_and_chasms:mime",
-            "spawn:barbed",
-            "species:quake",
-            "opposing_force:frowzy",
-            "opposing_force:rambler",
-            "quark:forgotten",
-            "undead_unleashed:wraith",
-            "undead_unleashed:dreadknight",
-            "windswept:chilled"
+            "quark:forgotten"
     );
 
     int summonCooldown;
