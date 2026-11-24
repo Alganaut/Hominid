@@ -30,5 +30,23 @@
     "sounds": [
       "hominid:vampire_scream"
     ]
+  },
+  "juggernaut_idle": {
+    "subtitle": "sounds.hominid.juggernaut_idle",
+    "sounds": [
+      "hominid:juggernaut_idle"
+    ]
+  },
+  "juggernaut_hurt": {
+    "subtitle": "sounds.hominid.juggernaut_hurt",
+    "sounds": [
+      "hominid:juggernaut_hurt"
+    ]
+  },
+  "juggernaut_death": {
+    "subtitle": "sounds.hominid.juggernaut_death",
+    "sounds": [
+      "hominid:juggernaut_death"
+    ]
   }
 }

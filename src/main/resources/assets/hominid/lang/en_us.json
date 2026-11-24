@@ -71,5 +71,9 @@
   "sounds.hominid.vampire_idle": "Vampire Groans",
   "sounds.hominid.vampire_hurt": "Vampire Hurts",
   "sounds.hominid.vampire_death": "Vampire Dies",
-  "sounds.hominid.vampire_scream": "Vampire Screams"
+  "sounds.hominid.vampire_scream": "Vampire Screams",
+
+  "sounds.hominid.juggernaut_idle": "Juggernaut Groans",
+  "sounds.hominid.juggernaut_hurt": "Juggernaut Hurts",
+  "sounds.hominid.juggernaut_death": "Juggernaut Dies"
 }

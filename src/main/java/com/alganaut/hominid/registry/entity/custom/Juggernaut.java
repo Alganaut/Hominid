@@ -1,5 +1,6 @@
 package com.alganaut.hominid.registry.entity.custom;
 
+import com.alganaut.hominid.registry.sound.HominidSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
@@ -83,18 +84,19 @@ public class Juggernaut extends Monster {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.ZOMBIE_AMBIENT;
+        return HominidSounds.JUGGERNAUT_IDLE.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
-        return SoundEvents.ZOMBIE_HURT;
+        return HominidSounds.JUGGERNAUT_HURT.get();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ZOMBIE_DEATH;
+        return HominidSounds.JUGGERNAUT_DEATH.get();
     }
+
     @Override
     public float getWalkTargetValue(BlockPos pos, LevelReader level) {
         return level.getBlockState(pos).isAir() ? 10.0F : 0.0F;

@@ -29,7 +29,10 @@ public class HominidSounds {
     public static final Supplier<SoundEvent> VAMPIRE_HURT = registerSoundEvent("vampire_hurt");
     public static final Supplier<SoundEvent> VAMPIRE_DEATH = registerSoundEvent("vampire_death");
     public static final Supplier<SoundEvent> VAMPIRE_SCREAM = registerSoundEvent("vampire_scream");
-    public static final Supplier<SoundEvent> PARANOIA = registerSoundEvent("paranoia");
+
+    public static final Supplier<SoundEvent> JUGGERNAUT_IDLE = registerSoundEvent("juggernaut_idle");
+    public static final Supplier<SoundEvent> JUGGERNAUT_HURT = registerSoundEvent("juggernaut_hurt");
+    public static final Supplier<SoundEvent> JUGGERNAUT_DEATH = registerSoundEvent("juggernaut_death");
 
     private static ResourceKey<JukeboxSong> createSong (String name) {
         return ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.fromNamespaceAndPath(Hominid.MODID, name));
