@@ -29,7 +29,7 @@ public class JuggernautModel<T extends Juggernaut> extends HierarchicalModel<T> 
 
         PartDefinition juggernaut = partdefinition.addOrReplaceChild("juggernaut", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-        PartDefinition body = juggernaut.addOrReplaceChild("body", CubeListBuilder.create().texOffs(36, 18).addBox(-5.0F, 0.0F, -3.0F, 10.0F, 3.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -16.0F, 0.0F));
+        PartDefinition body = juggernaut.addOrReplaceChild("body", CubeListBuilder.create().texOffs(36, 18).addBox(-5.0F, 0.0F, -3.0F, 10.0F, 3.0F, 6.0F, new CubeDeformation(0.01F)), PartPose.offset(0.0F, -16.0F, 0.0F));
 
         PartDefinition upper_body = body.addOrReplaceChild("upper_body", CubeListBuilder.create().texOffs(0, 0).addBox(-6.0F, -10.0F, -4.0F, 12.0F, 10.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 

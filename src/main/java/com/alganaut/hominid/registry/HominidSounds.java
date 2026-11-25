@@ -20,7 +20,9 @@ public class HominidSounds {
     public static final RegistryEntry<SoundEvent,?> VAMPIRE_HURT = registerSound("vampire_hurt");
     public static final RegistryEntry<SoundEvent,?> VAMPIRE_DEATH = registerSound("vampire_death");
     public static final RegistryEntry<SoundEvent,?> VAMPIRE_SCREAM = registerSound("vampire_scream");
-    public static final RegistryEntry<SoundEvent,?> PARANOIA = registerSound("paranoia");
+    public static final RegistryEntry<SoundEvent,?> JUGGERNAUT_IDLE = registerSound("juggernaut_idle");
+    public static final RegistryEntry<SoundEvent,?> JUGGERNAUT_HURT = registerSound("juggernaut_hurt");
+    public static final RegistryEntry<SoundEvent,?> JUGGERNAUT_DEATH = registerSound("juggernaut_death");
 
     public static final ResourceKey<JukeboxSong> HEMATOMA_KEY =  ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.fromNamespaceAndPath(Hominid.MODID, "hematoma"));
 
