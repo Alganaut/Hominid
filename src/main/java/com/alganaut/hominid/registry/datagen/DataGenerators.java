@@ -41,20 +41,6 @@ public class DataGenerators {
                 )
         );
 
-        var blockTagsProvider = new HominidBlockTagProvider(output, provider, helper);
-
-        generator.addProvider(event.includeServer(), blockTagsProvider);
-
-        generator.addProvider(
-                event.includeServer(),
-                new HominidItemTagProvider(
-                        output,
-                        provider,
-                        blockTagsProvider.contentsGetter(),
-                        helper
-                )
-        );
-
         generator.addProvider(
                 event.includeClient(),
                 new HominidItemModelProvider(output, helper)
